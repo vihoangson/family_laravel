@@ -17,14 +17,17 @@
     <![endif]-->
 </head>
 <body>
+
 <div class="container">
-    {{ csrf_token() }}
-    @foreach($all as $k => $m)
-        <div class="message-item" data-step = "{{$k}}">
-            <h2>{{$m->kyniem_title}}</h2>
-            <div>{!! $m->kyniem_content !!}</div>
+
+    <div class="container" id='wallmessages'>
+        <div class="message-item" data-step = "-1">
+            <h2 class="block-title"></h2>
+            <div  class="block-content"></div>
         </div>
-    @endforeach
+    </div>
+    <button class="loadmore">Load more</button>
+
 </div>
 
 <!-- jQuery -->

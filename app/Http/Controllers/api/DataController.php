@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -22,7 +23,19 @@ class DataController extends BaseController {
         //return response([1,2,3,4,5]);
     }
 
+
     public function get_ky_niem(Request $request){
-        echo $request->input('step');
+        $kyniem = new Kyniem();
+
+        Session::flash('current_year', 2018);
+        $year = Session::flash('current_year');
+        $data   = $kyniem->where('kyniem_create', 'like', '%'.$year.'%')
+                         ->orderBy('id')
+                         ->limit(10)
+                         ->offset($request->input('step'))
+                         ->get();
+        $return = $data->toArray();
+
+        return response($return);
     }
 }
