@@ -15,6 +15,9 @@ Route::get('/', 'KyniemController@index');
 Route::get('/api/data', 'api\DataController@index');
 Route::get('/api/getkyniem', 'api\DataController@get_ky_niem');
 
+Route::get('/api/box_add', function () {
+    return view('welcome');
+});
 Route::get('/welcome', function () {
     return view('welcome');
 });
