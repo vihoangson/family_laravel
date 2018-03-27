@@ -5,17 +5,19 @@ namespace App\Http\Controllers;
 use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
+use App\Models\Options;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller as Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\View\View;
 
-class KyniemController extends BaseController {
+class KyniemController extends Controller {
 
 
-    public function __construct() { }
+    public function __construct() { parent::__construct();}
 
     public function index() {
 
@@ -23,14 +25,17 @@ class KyniemController extends BaseController {
     }
 
     public function overview() {
+
         return view('kyniem.overview');
     }
 
     public function store(Request $request){
+
         $kyniem = new Kyniem();
         $kyniem->kyniem_content = $request->input('content');
         $kyniem->kyniem_title = ($request->input('title')?$request->input('title'):'Happy Family');
         $kyniem->save();
+        View::share('name', 'Steve');
         return redirect()->route('homepage');
     }
 }

@@ -4043,8 +4043,18 @@ html.boxed .body {
 		background: none !important;
 	}
 }
-
-
 .block-content img {
+	max-width: 100%;
+}
+#input-content {
+	background: #f9f9f9;
+	padding: 8px;
+	margin-bottom: 15px;
+}
+
+#input-content textarea{
+	min-height: 100px;
+}
+.modal-body img{
 	max-width: 100%;
 }

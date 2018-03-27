@@ -3,16 +3,27 @@
 @section('title_body','Trang chủ')
 
 @section('body')
+    <div id="input-content">
+        <form action='/kyniem/store' method="post" id="form-insert-kyniem">
+            {{ csrf_field() }}
 
-    <form action='/kyniem/store' method="post">
-        {{ csrf_field() }}
-        <textarea class="form-control" id="content" name="content"></textarea>
-        <label for="fileupload" class="btn btn-default">Choose a file</label>
-        <input class="hidden" id="fileupload" type="file" name="userfile" multiple="" data-url="/ajax_up_files" accept="image/x-png,image/gif,image/jpeg" >
-        <button class="btn btn-primary">Submit</button>
-    </form>
+            <input class="form-control" id="title" name="title" placeholder="Tiêu đề" style="margin-bottom: 5px;">
 
+            <textarea class="form-control" id="content" name="content" placeholder="Nội dung"></textarea>
 
+            <div class="text-left " style="margin-top:10px;" id="box-typing-auto">
+                <a href="" class="typewrite" data-period="5000" data-type='[ "Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào" ]'>
+                    <span class="wrap"></span>
+                </a>
+            </div>
+
+            <div class="text-right " style="margin-top:10px;" id="box-button-submit">
+                <label for="fileupload" class="btn btn-default">Choose a file</label>
+                <input class="hidden" id="fileupload" type="file" name="userfile" multiple="" data-url="/ajax_up_files" accept="image/x-png,image/gif,image/jpeg">
+                <button class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
 
     <div id='wallmessages'>
         <div class="message-item hidden well" data-step="-1">
@@ -23,37 +34,32 @@
         </div>
     </div>
     <button class="loadmore btn btn-primary">Load more</button>
+
+
+    <img src="{{$options_popup}}" class="hidden" id="img-popup">
 @endsection
 
 @section('custom_js')
-    <script src="/assets/js/autoload_homepage.js"></script>
+
     <script src="http://family.vn/asset/js/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
     <script src="/assets/bower_components/jquery-form/jquery.form.js"></script>
     <script src="/assets/bower_components/bootstrap-sweetalert/dist/sweetalert.min.js"></script>
     <script src="/assets/bower_components/Snarl/dist/snarl.min.js"></script>
     <script src="/assets/bower_components/jquery-ui/jquery-ui.min.js"></script>
     <script src="/assets/bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
-    <script src="/assets/bower_components/bootstrap-datepicker\dist\js\bootstrap-datepicker.min.js"></script>
+    <script src="/assets/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 
+    <script src="/assets/js/autoload_homepage.js"></script>
+    <script src="/assets/js/typing.js"></script>
+    <script src="/assets/js/script_box_insert_kyniem.js"></script>
 <script>
     $(document).ready(function(){
-        // Upload ảnh ở trang chủ
-        if($('#fileupload').length){
-            $('#fileupload').fileupload({
-                dataType: 'json',
-                add: function (e, data) {
-                    data.context = $('<p/>').text('Uploading...').appendTo(document.body);
-                    data.submit();
-                },
-                done: function (e, data) {
-                    console.log(data.result);
-                    data.context.text('Upload finished.');
-                    $("#content").val($("#content").val() + data.result.markdown);
-                }
-            });
-        }
+        img_popup = $('<img>').attr('src',$("#img-popup").attr('src'));
+        $('.modal-title').html('Popup');
+        $('.modal-body').addClass('text-center');
+        $('.modal-body').html(img_popup);
+        $("#modal-id22").modal();
     })
-
 </script>
 @endsection
 
