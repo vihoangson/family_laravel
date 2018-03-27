@@ -8,7 +8,14 @@ var loadKyniem = function () {
                 $.each(data, function (k, v) {
                     var mmm = $(".message-item").last().clone();
                     mmm.attr('data-step', parseInt(step) + parseInt(k));
-                    mmm.find('.block-title').html(v.kyniem_title);
+
+                    if(v.kyniem_title != ''){
+                        mmm.find('.block-title').html(v.kyniem_title);
+                    }else{
+                        mmm.find('.block-title').html('Happy Family');
+                    }
+
+                    mmm.find('.block-datetime').html(v.kyniem_create);
                     mmm.find('.block-content').html(v.kyniem_content);
                     mmm.removeClass('hidden');
                     mmm.appendTo('#wallmessages');

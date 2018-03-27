@@ -15,8 +15,9 @@
 
 
     <div id='wallmessages'>
-        <div class="message-item hidden" data-step="-1">
+        <div class="message-item hidden well" data-step="-1">
             <h2 class="block-title"></h2>
+            <i class="block-datetime"></i>
             <div class="block-content"></div>
             <hr>
         </div>
