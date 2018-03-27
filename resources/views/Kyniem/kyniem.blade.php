@@ -54,11 +54,14 @@
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
 <script>
     $(document).ready(function(){
-        img_popup = $('<img>').attr('src',$("#img-popup").attr('src'));
-        $('.modal-title').html('Popup');
-        $('.modal-body').addClass('text-center');
-        $('.modal-body').html(img_popup);
-        $("#modal-id22").modal();
+        if(window.sessionStorage.getItem('flag_popup') != 1){
+            window.sessionStorage.setItem('flag_popup',1);
+            img_popup = $('<img>').attr('src',$("#img-popup").attr('src'));
+            $('.modal-title').html('Popup');
+            $('.modal-body').addClass('text-center');
+            $('.modal-body').html(img_popup);
+            $("#modal-id22").modal();
+        }
     })
 </script>
 @endsection

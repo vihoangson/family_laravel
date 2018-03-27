@@ -12,7 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\View;
 
 class KyniemController extends Controller {
 

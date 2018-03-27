@@ -3,15 +3,19 @@
 namespace App\Http\Controllers\api;
 
 use App\Libraries\Markdown;
+use App\Models\Files_model;
 use App\Models\Kyniem;
 
+use Faker\Provider\File;
 use Illuminate\Contracts\Session\Session;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Storage;
 
 class DataController extends BaseController {
 
@@ -40,8 +44,14 @@ class DataController extends BaseController {
                         ->store(('public/images'));
 
         $link     = '/' . str_replace('public', 'storage', $path);
+
         $markdown = "![Img Family]($link)";
         $return   = ['markdown' => $markdown];
+
+        $file = new Files_model();
+        $file->files_name = basename($link);
+        $file->files_path = '/storage/images/';
+        $file->save();
 
         return $return;
     }
