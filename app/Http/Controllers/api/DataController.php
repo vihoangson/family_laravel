@@ -34,4 +34,15 @@ class DataController extends BaseController {
 
         return response($return);
     }
+
+    public function ajax_up_files(Request $request) {
+        $path = $request->file('userfile')
+                        ->store(('public/images'));
+
+        $link     = '/' . str_replace('public', 'storage', $path);
+        $markdown = "![Img Family]($link)";
+        $return   = ['markdown' => $markdown];
+
+        return $return;
+    }
 }

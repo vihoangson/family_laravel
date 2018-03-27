@@ -18,6 +18,7 @@ class KyniemController extends BaseController {
     public function __construct() { }
 
     public function index() {
+
         return view('kyniem.kyniem');
     }
 
@@ -25,4 +26,11 @@ class KyniemController extends BaseController {
         return view('kyniem.overview');
     }
 
+    public function store(Request $request){
+        $kyniem = new Kyniem();
+        $kyniem->kyniem_content = $request->input('content');
+        $kyniem->kyniem_title = ($request->input('title')?$request->input('title'):'Happy Family');
+        $kyniem->save();
+        return redirect()->route('homepage');
+    }
 }

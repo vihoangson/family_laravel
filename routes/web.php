@@ -10,11 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', 'KyniemController@index');
-Route::get('/overview', 'KyniemController@overview');
+Route::get('/', 'KyniemController@index')->name('homepage');
+Route::get('/overview', 'KyniemController@overview')->name('overview');
+Route::post('/kyniem/store', 'KyniemController@store')->name('kyniem_store');
 
-Route::get('/api/data', 'api\DataController@index');
-Route::get('/api/getkyniem', 'api\DataController@get_ky_niem');
+Route::get('/api/data', 'api\DataController@index')->name('api_data');
+Route::get('/api/getkyniem', 'api\DataController@get_ky_niem')->name('api_getkyniem');
+Route::post('/ajax_up_files', 'api\DataController@ajax_up_files')->name('api_ajaxupfiles');
 
 Route::get('/api/box_add', function () {
     return view('welcome');

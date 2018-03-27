@@ -1,0 +1,37 @@
+{
+  "name": "family",
+  "homepage": "https://github.com/vihoangson/Family",
+  "authors": [
+    "vihoangson@gmail.com"
+  ],
+  "description": "blog cua gia dinh",
+  "main": "",
+  "keywords": [
+    "family"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.6",
+    "font-awesome": "font-awsome#^4.6.1",
+    "jquery-form": "^3.46.0",
+    "moment": "^2.18.1",
+    "summernote": "^0.8.1",
+    "bLazy": "blazy#^1.6.2",
+    "bootstrap-sweetalert": "^1.0.0",
+    "bootstrap-touchspin": "^3.1.1",
+    "animate.css": "^3.5.2",
+    "Snarl": "^0.3.2",
+    "masonry": "^4.1.0",
+    "jquery-ui": "^1.12.1",
+    "blueimp-file-upload": "^9.19.0",
+    "bootstrap-datepicker": "^1.7.1"
+  }
+}

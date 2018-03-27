@@ -10,6 +10,9 @@ class Kyniem extends Model {
     protected $table   = 'kyniem';
     protected $guarded = [];
 
+    const CREATED_AT = 'kyniem_create';
+    const UPDATED_AT = 'kyniem_modifie';
+
     public function getKyniemContentAttribute($value) {
         return Markdown::defaultTransform($value);
     }

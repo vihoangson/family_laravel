@@ -10,7 +10,6 @@
     <meta name="keywords" content="HTML5 Template"/>
     <meta name="description" content="">
     <meta name="author" content="vihoangson.com">
-
     <base href="/tempates/porto/">
 
     <!-- Favicon -->
