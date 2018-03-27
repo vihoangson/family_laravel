@@ -16,7 +16,6 @@ class Kyniem extends Model {
 
     public function getHomepage() {
         return $this->orderBy('id', 'desc')
-                    ->where('id', '>', '300')
                     ->limit(10)
                     ->get();
     }

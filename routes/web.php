@@ -11,6 +11,7 @@
 |
 */
 Route::get('/', 'KyniemController@index');
+Route::get('/overview', 'KyniemController@overview');
 
 Route::get('/api/data', 'api\DataController@index');
 Route::get('/api/getkyniem', 'api\DataController@get_ky_niem');

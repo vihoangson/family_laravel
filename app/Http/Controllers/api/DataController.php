@@ -26,12 +26,7 @@ class DataController extends BaseController {
 
     public function get_ky_niem(Request $request){
         $kyniem = new Kyniem();
-
-        //Session::flash('current_year', 2018);
-        //$year = Session::flash('current_year');
-        $year = 2018;
-        $data   = $kyniem->where('kyniem_create', 'like', '%'.$year.'%')
-                         ->orderBy('id')
+        $data   = $kyniem->orderBy('id', 'desc')
                          ->limit(10)
                          ->offset($request->input('step'))
                          ->get();

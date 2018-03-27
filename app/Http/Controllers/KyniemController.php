@@ -18,10 +18,11 @@ class KyniemController extends BaseController {
     public function __construct() { }
 
     public function index() {
-        $m          = new Kyniem();
-        $data_first = $m->getHomepage();
+        return view('kyniem.kyniem');
+    }
 
-        return view('kyniem.kyniem', ['all' => $data_first]);
+    public function overview() {
+        return view('kyniem.overview');
     }
 
 }

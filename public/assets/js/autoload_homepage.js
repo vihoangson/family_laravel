@@ -1,7 +1,7 @@
 var loadKyniem = function () {
     var step = $(".message-item").last().data("step")+1;
     if ($(".fa-spin").length == 0) {
-        $("#wallmessages").append('<div class="text-center"><i style="color:#828282;" class="fa fa-refresh fa-spin fa-3x">Loading</i></div>');
+        $("#wallmessages").append('<div class="text-center"><i style="color:#828282;" class="fa fa-refresh fa-spin fa-3x"></i></div>');
         $.get('/api/getkyniem?step=' + step, function (data) {
             $(".fa-spin").remove();
             if (data.length > 0) {
@@ -10,6 +10,7 @@ var loadKyniem = function () {
                     mmm.attr('data-step', parseInt(step) + parseInt(k));
                     mmm.find('.block-title').html(v.kyniem_title);
                     mmm.find('.block-content').html(v.kyniem_content);
+                    mmm.removeClass('hidden');
                     mmm.appendTo('#wallmessages');
                 })
             } else {
