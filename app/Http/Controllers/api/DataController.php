@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 class DataController extends BaseController {
 
@@ -40,10 +41,28 @@ class DataController extends BaseController {
     }
 
     public function ajax_up_files(Request $request) {
-        $path = $request->file('userfile')
-                        ->store(('public/images'));
 
-        $link     = '/' . str_replace('public', 'storage', $path);
+        $name =  date('Ymd_Hmi')."_".($request->file('userfile')->getClientOriginalName());
+        $path = $request->file('userfile')
+                        ->storeAS('public/images',$name);
+        $link_public = str_replace('public', 'storage', $path);
+
+        //<editor-fold desc="resize img">
+        $manager = new ImageManager();
+        $m = $manager->make(public_path($link_public));
+
+        $max_size = 600;
+        if($m->mime() != 'image/gif'){
+            if($m->width()>$max_size){
+                $m->resize($max_size, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                });
+                $m->save();
+            }
+        }
+        //</editor-fold>
+
+        $link     = '/' . $link_public;
 
         $markdown = "![Img Family]($link)";
         $return   = ['markdown' => $markdown];
