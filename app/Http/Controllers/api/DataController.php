@@ -6,6 +6,7 @@ use App\Libraries\Markdown;
 use App\Models\Files_model;
 use App\Models\Kyniem;
 
+use App\Models\Options;
 use Faker\Provider\File;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Filesystem\Filesystem;
@@ -51,7 +52,7 @@ class DataController extends BaseController {
         $manager = new ImageManager();
         $m = $manager->make(public_path($link_public));
 
-        $max_size = 600;
+        $max_size = Options::where('option_key','max_size_img')->get()->first()->option_content;
         if($m->mime() != 'image/gif'){
             if($m->width()>$max_size){
                 $m->resize($max_size, null, function ($constraint) {
@@ -69,7 +70,7 @@ class DataController extends BaseController {
 
         $file = new Files_model();
         $file->files_name = basename($link);
-        $file->files_path = '/storage/images/';
+        $file->files_path = $link;
         $file->save();
 
         return $return;
