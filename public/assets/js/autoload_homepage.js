@@ -6,6 +6,7 @@ var loadKyniem = function () {
             $(".fa-spin").remove();
             if (data.length > 0) {
                 $.each(data, function (k, v) {
+                    console.log(data);
                     var mmm = $(".message-item").last().clone();
                     mmm.attr('data-step', parseInt(step) + parseInt(k));
 
@@ -14,6 +15,9 @@ var loadKyniem = function () {
                     }else{
                         mmm.find('.block-title').html('Happy Family');
                     }
+
+                    mmm.find('.toolb .b-edit').attr('href', '/kyniem/edit?id=' + v.id);
+                    mmm.find('.toolb .b-delete').attr('href', '/kyniem/delete?id=' + v.id);
 
                     mmm.find('.block-datetime').html(v.kyniem_create);
                     mmm.find('.block-content').html(v.kyniem_content);
@@ -29,6 +33,12 @@ var loadKyniem = function () {
 
 // Load init
 loadKyniem();
+$(document).ready(function(){
+    $('.b-edit').click(function(e){
+        console.log(1234123);
+        e.preventDefault();
+    });
+});
 
 // Scroll to ending of page
 $(window).scroll(function () {

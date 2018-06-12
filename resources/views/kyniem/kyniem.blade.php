@@ -27,6 +27,12 @@
 
     <div id='wallmessages'>
         <div class="message-item hidden well" data-step="-1">
+            <div class="b-toolb">
+                <ul class="toolb">
+                    <li><a class="b-edit" href="">Edit</a></li>
+                    <li><a class="b-delete" href="">Delete</a></li>
+                </ul>
+            </div>
             <h2 class="block-title"></h2>
             <i class="block-datetime"></i>
             <div class="block-content"></div>

@@ -24,15 +24,23 @@ class DataController extends BaseController {
 
     public function __construct() { }
 
+    /**
+     * @param Request $request
+     */
     public function index(Request $request) {
-        echo $request->input('sss');
-        //return response([1,2,3,4,5]);
     }
 
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function get_ky_niem(Request $request){
         $kyniem = new Kyniem();
-        $data   = $kyniem->orderBy('id', 'desc')
+        $data   = $kyniem->where('delete_flg', 0)
+                         ->where('show_flg', 1)
+                         ->orderBy('id', 'desc')
                          ->limit(10)
                          ->offset($request->input('step'))
                          ->get();
@@ -41,6 +49,11 @@ class DataController extends BaseController {
         return response($return);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return array
+     */
     public function ajax_up_files(Request $request) {
 
         $name =  date('Ymd_Hmi')."_".($request->file('userfile')->getClientOriginalName());

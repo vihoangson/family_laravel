@@ -4058,3 +4058,32 @@ html.boxed .body {
 .modal-body img{
 	max-width: 100%;
 }
+
+.message-item.well {
+	position: relative;
+}
+
+.b-toolb {
+	/*background: red;*/
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	border: none;
+	width: 30px;
+	height: 30px;
+}
+.b-toolb:hover ul.toolb{
+	display:block;
+}
+
+ul.toolb {
+	 display:none;
+	position: absolute;
+	top: 27px;
+	right: 0px;
+	text-align: right;
+	list-style: none;
+}
+
+button.b-toolb {
+}

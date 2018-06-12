@@ -20,11 +20,6 @@ class OptionsController extends Controller {
     public function __construct() { parent::__construct(); }
 
     public function index() {
-        echo $this->draw_grid([
-            "2018-03-16"=>'1',
-            "2018-03-17"=>'1',
-        ]);
-        die;
         $array_options = [
             'popup'                => [
                 'type'=>'text',
@@ -56,15 +51,11 @@ class OptionsController extends Controller {
             'size-video'           => [
                 'type'=>'text',
             ],
-            'custom_css'           => [
-                'type'=>'text',
-            ],
+
             'theme_name'           => [
                 'type'=>'text',
             ],
-            'custom_css_archive'   => [
-                'type'=>'text',
-            ],
+
             'typing_homepage'      => [
                 'type'=>'text',
             ],
@@ -77,10 +68,12 @@ class OptionsController extends Controller {
 
         return view('admin.options');
     }
+
+
     public function draw_grid($data) {
-        $max_value = max($data);
-        var_dump(end(array_keys($data)));
-        die;
+        // $max_value = max($data);
+        // var_dump(end(array_keys($data)));
+//        die;
         $m         = new \DateTime(end(array_keys($data)));
         $date_left = ($m->format("N") % 7) + 6;
         for ($i = 0; $i < $date_left; $i++) {

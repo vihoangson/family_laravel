@@ -17,7 +17,7 @@ class Controller extends BaseController
      * Controller constructor.
      */
     public function __construct() {
-        $data_options =   Options::where('option_key', 'not like','%cache%')->get()->toArray();
+        $data_options =   Options::where('option_key', 'not like','"%cache%e"')->get()->toArray();
 
         foreach ($data_options as $key => $value){
             View::share("options_".$value['option_key'], $value['option_content']);
