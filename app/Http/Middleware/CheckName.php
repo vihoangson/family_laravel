@@ -7,20 +7,23 @@ use Closure;
 
 class CheckName {
 
+    /**
+     * @param         $request
+     * @param Closure $next
+     *
+     * @return mixed
+     */
     public function handle($request, Closure $next) {
-
         $reponse = $this->process($next($request));
-
-        /** @var Request $request */
-        var_dump($request->server());
-        var_dump($request->header());
-        die;
-
         return $reponse;
     }
 
+    /**
+     * @param $param
+     *
+     * @return mixed
+     */
     private function process($param) {
-
         return $param;
     }
 
