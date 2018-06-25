@@ -20,7 +20,7 @@ var loadKyniem = function () {
                     mmm.find('.toolb .b-delete').attr('href', '/kyniem/delete?id=' + v.id);
 
                     mmm.find('.block-datetime').html(v.kyniem_create);
-                    mmm.find('.block-content').html(v.kyniem_content);
+                    mmm.find('.block-content').html(v.kyniem_content_markdown);
                     mmm.removeClass('hidden');
                     mmm.appendTo('#wallmessages');
                 })

@@ -32,10 +32,8 @@ class KyniemController extends Controller {
     public function edit(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
-        $kyniem->find($id)
-               ->update(['delete_flg' => 1]);
-
-        return redirect()->route('homepage');
+        $data = $kyniem->find($id);
+        return view('kyniem.edit',['data'=>$data]);
     }
 
 
