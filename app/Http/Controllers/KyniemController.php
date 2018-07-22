@@ -15,14 +15,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
 
-class KyniemController extends Controller
-{
+class KyniemController extends Controller {
 
 
     public function __construct() { parent::__construct(); }
 
-    public function index()
-    {
+    public function index() {
 
         return view('kyniem.kyniem');
     }
@@ -30,22 +28,17 @@ class KyniemController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function overview()
-    {
+    public function overview() {
         $m = new UserReponsitory();
         $n = $m->get_all_ky_niem();
-        dd($n);
-
         return view('kyniem.overview');
     }
 
-    public function edit(Request $request)
-    {
+    public function edit(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
-        $data   = $kyniem->find($id);
-
-        return view('kyniem.edit', ['data' => $data]);
+        $data = $kyniem->find($id);
+        return view('kyniem.edit',['data'=>$data]);
     }
 
 
@@ -55,8 +48,7 @@ class KyniemController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function delete(Request $request)
-    {
+    public function delete(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
@@ -70,8 +62,7 @@ class KyniemController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         $kyniem                 = new Kyniem();
         $kyniem->kyniem_content = $request->input('content');

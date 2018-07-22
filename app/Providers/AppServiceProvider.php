@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Collective\Html\FormFacade;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->register(RepositoryServiceProvider::class);
         //
     }
 }
