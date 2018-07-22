@@ -19,7 +19,8 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
-class DataController extends BaseController {
+class DataController extends BaseController
+{
 
 
     public function __construct() { }
@@ -27,7 +28,8 @@ class DataController extends BaseController {
     /**
      * @param Request $request
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
     }
 
 
@@ -36,7 +38,8 @@ class DataController extends BaseController {
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function get_ky_niem(Request $request){
+    public function get_ky_niem(Request $request)
+    {
         $kyniem = new Kyniem();
         $data   = $kyniem->where('delete_flg', 0)
                          ->where('show_flg', 1)
@@ -54,20 +57,24 @@ class DataController extends BaseController {
      *
      * @return array
      */
-    public function ajax_up_files(Request $request) {
+    public function ajax_up_files(Request $request)
+    {
 
-        $name =  date('Ymd_Hmi')."_".($request->file('userfile')->getClientOriginalName());
-        $path = $request->file('userfile')
-                        ->storeAS('public/images',$name);
+        $name        = date('Ymd_Hmi') . "_" . ($request->file('userfile')
+                                                        ->getClientOriginalName());
+        $path        = $request->file('userfile')
+                               ->storeAS('public/images', $name);
         $link_public = str_replace('public', 'storage', $path);
 
         //<editor-fold desc="resize img">
         $manager = new ImageManager();
-        $m = $manager->make(public_path($link_public));
+        $m       = $manager->make(public_path($link_public));
 
-        $max_size = Options::where('option_key','max_size_img')->get()->first()->option_content;
-        if($m->mime() != 'image/gif'){
-            if($m->width()>$max_size){
+        $max_size = Options::where('option_key', 'max_size_img')
+                           ->get()
+                           ->first()->option_content;
+        if ($m->mime() != 'image/gif') {
+            if ($m->width() > $max_size) {
                 $m->resize($max_size, null, function ($constraint) {
                     $constraint->aspectRatio();
                 });
@@ -76,12 +83,12 @@ class DataController extends BaseController {
         }
         //</editor-fold>
 
-        $link     = '/' . $link_public;
+        $link = '/' . $link_public;
 
         $markdown = "![Img Family]($link)";
         $return   = ['markdown' => $markdown];
 
-        $file = new Files_model();
+        $file             = new Files_model();
         $file->files_name = basename($link);
         $file->files_path = $link;
         $file->save();

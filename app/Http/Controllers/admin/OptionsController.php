@@ -14,54 +14,58 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
 
-class OptionsController extends Controller {
+class OptionsController extends Controller
+{
 
 
     public function __construct() { parent::__construct(); }
 
-    public function index() {
+    public function index()
+    {
         $array_options = [
             'popup'                => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'popup_flag'           => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'popup_session'        => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'instant_img'          => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'custom_banner'        => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'custom_banner_top'    => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'custom_banner_bottom' => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'custom_banner_'       => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'max_size_img'         => [
-                'type'=>'text',
+                'type' => 'text',
             ],
             'size-video'           => [
-                'type'=>'text',
+                'type' => 'text',
             ],
 
-            'theme_name'           => [
-                'type'=>'text',
+            'theme_name' => [
+                'type' => 'text',
             ],
 
-            'typing_homepage'      => [
-                'type'=>'text',
+            'typing_homepage' => [
+                'type' => 'text',
             ],
         ];
-        foreach ($array_options as $k => &$v){
-            $v['value'] = Options::where('option_key',$k)->get()->first()->option_content;
+        foreach ($array_options as $k => &$v) {
+            $v['value'] = Options::where('option_key', $k)
+                                 ->get()
+                                 ->first()->option_content;
         }
         unset($v);
         View::share('array_options', $array_options);
@@ -70,10 +74,11 @@ class OptionsController extends Controller {
     }
 
 
-    public function draw_grid($data) {
+    public function draw_grid($data)
+    {
         // $max_value = max($data);
         // var_dump(end(array_keys($data)));
-//        die;
+        //        die;
         $m         = new \DateTime(end(array_keys($data)));
         $date_left = ($m->format("N") % 7) + 6;
         for ($i = 0; $i < $date_left; $i++) {
