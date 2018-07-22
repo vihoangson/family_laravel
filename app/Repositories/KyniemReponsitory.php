@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 
-class KyniemRepository extends BaseRepository
+class KyniemRepository extends BaseRepository implements KyniemReponsitoryInterface
 {
 
     /**

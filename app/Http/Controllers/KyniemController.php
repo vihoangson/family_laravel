@@ -6,6 +6,8 @@ use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
 use App\Models\Options;
+use App\Repositories\KyniemReponsitoryInterface;
+use App\Repositories\KyniemRepository;
 use App\Repositories\UserReponsitory;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Http\Controllers\Controller as Controller;
@@ -19,7 +21,11 @@ class KyniemController extends Controller
 {
 
 
-    public function __construct() { parent::__construct(); }
+    public function __construct(KyniemReponsitoryInterface $k) {
+        parent::__construct();
+        $n = $k->all();
+        dd($n);
+    }
 
     public function index()
     {
