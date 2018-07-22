@@ -11,16 +11,20 @@ use Illuminate\Support\Facades\View;
 
 class Controller extends BaseController
 {
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
      * Controller constructor.
      */
-    public function __construct() {
-        $data_options =   Options::where('option_key', 'not like','"%cache%e"')->get()->toArray();
+    public function __construct()
+    {
+        $data_options = Options::where('option_key', 'not like', '"%cache%e"')
+                               ->get()
+                               ->toArray();
 
-        foreach ($data_options as $key => $value){
-            View::share("options_".$value['option_key'], $value['option_content']);
+        foreach ($data_options as $key => $value) {
+            View::share("options_" . $value['option_key'], $value['option_content']);
         }
         //dd(get_defined_vars());
     }
