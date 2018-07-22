@@ -6,6 +6,7 @@ use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
 use App\Models\Options;
+use App\Repositories\UserReponsitory;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Http\Controllers\Controller as Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -24,8 +25,13 @@ class KyniemController extends Controller {
         return view('kyniem.kyniem');
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function overview() {
-
+        $m = new UserReponsitory();
+        $m->get_all_ky_niem();
+        print_r($m);
         return view('kyniem.overview');
     }
 
