@@ -18,6 +18,10 @@ Route::get('/overview', 'KyniemController@overview')->name('overview');
 Route::post('/kyniem/store', 'KyniemController@store')->name('kyniem_store');
 
 Route::resource('post','PostsController');
+Route::resource('celebration','CelebrationsController');
+
+
+
 
 Route::get('/admin/options', 'admin\OptionsController@index')->name('option_index');
 Route::get('/', 'KyniemController@index')->name('homepage');
