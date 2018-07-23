@@ -21,8 +21,10 @@ class KyniemController extends Controller
 
 
     public function __construct(KyniemRepository $repository) {
-        dd($repository);
+
         parent::__construct(); }
+        $this->repository = $repository;
+    }
 
     public function index()
     {
@@ -35,9 +37,9 @@ class KyniemController extends Controller
      */
     public function overview()
     {
-        $n=222;
-        dd($n);
 
+        return response()->json([1,2,3,4,4]);
+        $n = $this->repository->getAllKyniemByDay();
         return view('kyniem.overview');
     }
 

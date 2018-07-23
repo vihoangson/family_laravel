@@ -9,6 +9,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ExampleTest extends TestCase
 {
+
     /**
      * A basic test example.
      *
@@ -19,5 +20,13 @@ class ExampleTest extends TestCase
         $response = $this->get('/');
 
         $response->assertStatus(200);
+    }
+
+    public function testController()
+    {
+        //$response = $this->call($method, $uri, $parameters, $cookies, $files, $server, $content);
+        $response = $this->call('GET', 'overview');
+        $response->assertStatus(200);
+        $response->assertJsonStructure();
     }
 }
