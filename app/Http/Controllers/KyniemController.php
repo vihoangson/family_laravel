@@ -6,6 +6,7 @@ use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
 use App\Models\Options;
+use App\Repositories\KyniemRepository;
 use App\Repositories\UserReponsitory;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Http\Controllers\Controller as Controller;
@@ -19,7 +20,9 @@ class KyniemController extends Controller
 {
 
 
-    public function __construct() { parent::__construct(); }
+    public function __construct(KyniemRepository $repository) {
+        dd($repository);
+        parent::__construct(); }
 
     public function index()
     {
@@ -32,8 +35,7 @@ class KyniemController extends Controller
      */
     public function overview()
     {
-        $m = new UserReponsitory();
-        $n = $m->get_all_ky_niem();
+        $n=222;
         dd($n);
 
         return view('kyniem.overview');
