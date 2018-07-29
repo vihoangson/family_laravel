@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Libraries\Markdown;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Kyniem extends Model
@@ -10,7 +11,7 @@ class Kyniem extends Model
 
     protected $table   = 'kyniem';
     protected $guarded = [];
-    protected $appends = ['kyniem_content_markdown'];
+    protected $appends = ['kyniem_content_markdown','date_format'];
 
     const CREATED_AT = 'kyniem_create';
     const UPDATED_AT = 'kyniem_modifie';
@@ -22,8 +23,12 @@ class Kyniem extends Model
 
     public function getKyniemContentMarkdownAttribute()
     {
-
         return Markdown::defaultTransform($this->kyniem_content);
+    }
+
+    public function getDateFormatAttribute(){
+
+        return Carbon::createFromTimeString($this->kyniem_create);
     }
 
     public function getHomepage()

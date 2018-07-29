@@ -7,6 +7,8 @@
     <div id="input-content">
         <form action='/kyniem/store' method="post" id="form-insert-kyniem">
             {{ csrf_field() }}
+            <input type="hidden" name="id" value="{{$data->id}}"/>
+            <input class="datepicker" name="date_create" value="{{$data->date_format->format('d/m/Y')}}"/>
             <input class="form-control" id="title" name="title" placeholder="Tiêu đề" style="margin-bottom: 5px;" value="{{$data->kyniem_title}}">
 
             <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{$data->kyniem_content}}</textarea>
@@ -41,10 +43,16 @@
     <script src="/assets/js/autoload_homepage.js"></script>
     <script src="/assets/js/typing.js"></script>
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
-<script>
+    <script>
+        $(document).ready(function(){
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+            });
+        });
 
-</script>
+    </script>
 @endsection
 
 @section('custom_css')
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 @endsection

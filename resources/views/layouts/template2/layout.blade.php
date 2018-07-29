@@ -48,7 +48,7 @@
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.min.js"></script>
-
+    @yield('custom_css')
 </head>
 <body>
 

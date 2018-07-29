@@ -6,7 +6,9 @@ use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
 use App\Models\Options;
-use App\Repositories\UserReponsitory;
+use App\Repositories\KyniemRepository;
+use Carbon\Carbon;
+
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Http\Controllers\Controller as Controller;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,7 +21,10 @@ class KyniemController extends Controller
 {
 
 
-    public function __construct() { parent::__construct(); }
+    public function __construct(KyniemRepository $kyniem_repository)
+    {
+        parent::__construct();
+    }
 
     public function index()
     {
@@ -32,7 +37,7 @@ class KyniemController extends Controller
      */
     public function overview()
     {
-        $m = new UserReponsitory();
+        $m = new Carbon();
         $n = $m->get_all_ky_niem();
         dd($n);
 
@@ -72,12 +77,20 @@ class KyniemController extends Controller
      */
     public function store(Request $request)
     {
-
-        $kyniem                 = new Kyniem();
+        $mm = $this->kyniem_repository->all();
+        dd($mm);
+        $id = ($request->input('id'));
+        if (!empty($id)) {
+            $kyniem                = Kyniem::find($request->input('id'));
+            $kyniem->kyniem_create = Carbon::createFromFormat('d/m/Y', $request->input('date_create'))
+                                           ->format('Y-m-d H:i:s');
+        } else {
+            $kyniem = new Kyniem();
+        }
         $kyniem->kyniem_content = $request->input('content');
         $kyniem->kyniem_title   = ($request->input('title') ? $request->input('title') : 'Happy Family');
+
         $kyniem->save();
-        View::share('name', 'Steve');
 
         return redirect()->route('homepage');
     }
