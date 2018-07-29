@@ -9,7 +9,7 @@
             {{ csrf_field() }}
             <input class="form-control" id="title" name="title" placeholder="Tiêu đề" style="margin-bottom: 5px;" value="{{$data->kyniem_title}}">
 
-            <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{$data->kyniems}}</textarea>
+            <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{$data->kyniem_content}}</textarea>
 
             <div class="text-left " style="margin-top:10px;" id="box-typing-auto">
                 <a href="" class="typewrite" data-period="5000" data-type='[ "Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào" ]'>
