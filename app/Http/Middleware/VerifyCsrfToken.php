@@ -14,6 +14,7 @@ class VerifyCsrfToken extends BaseVerifier
     protected $except = [
         //
         '/api/*',
+        '/get_calendar',
         '/ajax_up_files'
     ];
 }

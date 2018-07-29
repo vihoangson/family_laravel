@@ -10,6 +10,11 @@
                 Gia đình mình
             </a>
         </li>
+        <li>
+            <a href="/kyniem/calendar">
+                Calendar
+            </a>
+        </li>
         <li class="dropdown hidden">
             <a class="dropdown-toggle" href="/">
                 Trang chủ
@@ -18,6 +23,11 @@
                 <li>
                     <a href="/overview">
                         Gia đình mình
+                    </a>
+                </li>
+                <li>
+                    <a href="/kyniem/calendar">
+                        Calendar
                     </a>
                 </li>
                 <li class="hidden">

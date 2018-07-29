@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="css/theme-shop.css">
     <link rel="stylesheet" href="css/theme-animate.css">
 
+
     <!-- Skin CSS -->
     <link rel="stylesheet" href="css/skins/default.css">
     <script src="master/style-switcher/style.switcher.localstorage.js"></script>
@@ -48,6 +49,8 @@
 
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.min.js"></script>
+
+
     @yield('custom_css')
 </head>
 <body>
@@ -59,7 +62,7 @@
                 <div class="header-row">
                     <div class="header-column">
                         <div class="header-logo">
-                            <a href="#">
+                            <a href="/">
                                 <img alt="Porto" width="111" height="54" data-sticky-width="82" data-sticky-height="40" data-sticky-top="33" src="img/logo.png">
                             </a>
                         </div>
@@ -173,8 +176,8 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <h4  class="hidden" >Latest Tweets</h4>
-                    <div  id="tweet" class="twitter hidden" data-plugin-tweets data-plugin-options='{"username": "oklerthemes", "count": 2}'>
+                    <h4 class="hidden">Latest Tweets</h4>
+                    <div id="tweet" class="twitter hidden" data-plugin-tweets data-plugin-options='{"username": "oklerthemes", "count": 2}'>
                         <p>Please wait...</p>
                     </div>
                 </div>
@@ -267,6 +270,8 @@
 <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
 <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 <script src="vendor/vide/vide.min.js"></script>
+
+
 
 <!-- Theme Base, Components and Settings -->
 <script src="js/theme.js"></script>

@@ -32,6 +32,7 @@
     "masonry": "^4.1.0",
     "jquery-ui": "^1.12.1",
     "blueimp-file-upload": "^9.19.0",
-    "bootstrap-datepicker": "^1.7.1"
+    "bootstrap-datepicker": "^1.7.1",
+    "bootstrap-year-calendar": "^1.1.0"
   }
 }

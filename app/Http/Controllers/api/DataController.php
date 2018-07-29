@@ -95,4 +95,30 @@ class DataController extends BaseController
 
         return $return;
     }
+
+    public function get_calendar()
+    {
+        // {
+        //     id: 0,
+        //     name: 'Google I/O',
+        //     location: 'San Francisco, CA',
+        //     startDate: new Date(2018, 4, 21),
+        //     endDate: new Date(2018, 4, 28)
+        // }
+        $kn = Kyniem::all();
+        foreach ($kn as $v) {
+            $json[] = [
+                'id'       => $v->id,
+                'name'=> $v->kyniem_title,
+                'location' =>  $v->kyniem_content,
+                // 'name'     => "1",
+                // 'location' => "1",
+                'year'     => $v->kyniem_create->format('Y'),
+                'month'    => $v->kyniem_create->format('m'),
+                'date'     => $v->kyniem_create->format('d'),
+            ];
+        }
+
+        return response()->json($json);
+    }
 }

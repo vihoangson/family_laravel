@@ -10,7 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/kyniem/calendar', 'KyniemController@calendar')
+     ->name('kyniem_calendar');
 Route::get('/kyniem/edit', 'KyniemController@edit')
      ->name('kyniem_edit');
 
@@ -32,6 +33,8 @@ Route::get('/api/getkyniem', 'api\DataController@get_ky_niem')
      ->name('api_getkyniem');
 Route::post('/ajax_up_files', 'api\DataController@ajax_up_files')
      ->name('api_ajaxupfiles');
+Route::post('/get_calendar', 'api\DataController@get_calendar')
+     ->name('api_get_calendar');
 
 Route::get('/api/box_add', function () {
     return view('welcome');

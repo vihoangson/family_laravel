@@ -6,7 +6,6 @@ var loadKyniem = function () {
             $(".fa-spin").remove();
             if (data.length > 0) {
                 $.each(data, function (k, v) {
-                    console.log(data);
                     var mmm = $(".message-item").last().clone();
                     mmm.attr('data-step', parseInt(step) + parseInt(k));
 

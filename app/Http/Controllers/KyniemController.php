@@ -92,4 +92,10 @@ class KyniemController extends Controller
 
         return redirect()->route('homepage');
     }
+
+    public function calendar()
+    {
+        return view('kyniem.calendar');
+
+    }
 }
