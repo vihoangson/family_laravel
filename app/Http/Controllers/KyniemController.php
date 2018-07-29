@@ -21,7 +21,7 @@ class KyniemController extends Controller
 {
 
 
-    public function __construct(KyniemRepository $kyniem_repository)
+    public function __construct()
     {
         parent::__construct();
     }
@@ -77,8 +77,6 @@ class KyniemController extends Controller
      */
     public function store(Request $request)
     {
-        $mm = $this->kyniem_repository->all();
-        dd($mm);
         $id = ($request->input('id'));
         if (!empty($id)) {
             $kyniem                = Kyniem::find($request->input('id'));
