@@ -21,8 +21,11 @@ class KyniemController extends Controller
 {
 
 
-    public function __construct()
+    private $kyniem_repository;
+
+    public function __construct(KyniemRepository $kyniem_repository)
     {
+        $this->kyniem_repository = $kyniem_repository;
         parent::__construct();
     }
 
