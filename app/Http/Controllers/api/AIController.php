@@ -101,7 +101,7 @@ class AIController extends BaseController
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ["X-ChatWorkToken: 6598c5b05c7c3a1508f35fe465474caf"]);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ["X-ChatWorkToken: ".env('key_chatwork')]);
         $result = curl_exec($ch);
 
         return;
