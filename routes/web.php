@@ -27,8 +27,7 @@ Route::get('/admin/options', 'admin\OptionsController@index')
 Route::get('/', 'KyniemController@index')
      ->name('homepage');
 
-
-Route::get('/api/hookchatwork', 'api\AIController@hookchatwork')
+Route::post('/api/hookchatwork', 'api\AIController@hookchatwork')
      ->name('api_hookchatwork');
 
 Route::get('/api/data', 'api\DataController@index')

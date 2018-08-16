@@ -24,12 +24,34 @@ class AIController extends BaseController
 
     public function __construct() { }
 
-    public function hookchatwork()
+    /**
+     * @param Request $request
+     *
+     * @author hoang_son
+     */
+    public function hookchatwork(Request $request)
     {
-        $ask = "Lâu chưa ?";
-        $msg = $this->talkToSimsimi($ask);
-        $say = '[Hỏi]:' . $ask . " [Trả lời]:" . $msg;
-        $this->say_in_chatwork(120011984, $say);
+
+        $msg  = '';
+        $post = $request->all();
+
+        \Log::alert(json_encode($post));
+        if ($post['webhook_event_type'] == 'mention_to_me') {
+            $ask = $post['webhook_event']['body'];
+
+            $pattern = '/(\[.+\]) Chicken\n/';
+            $ask     = preg_replace($pattern, '', $ask);
+
+            $pattern = '/\n/';
+            $ask     = preg_replace($pattern, '', $ask);
+
+            $msg = $this->talkToSimsimi($ask);
+
+            $say = $msg;
+
+            $this->say_in_chatwork($post['webhook_event']['room_id'], $say);
+        }
+        exit;
     }
 
     function curl($url)
