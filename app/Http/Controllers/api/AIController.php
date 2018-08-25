@@ -35,7 +35,73 @@ class AIController extends BaseController
         $msg  = '';
         $post = $request->all();
 
-        \Log::alert(json_encode($post));
+        // Kiểm tra status của bot chat
+        if($post['webhook_event']['body'] == 'status_ga' ){
+            if(\Cache::store('file')->get('on_chat')=='false' || !\Cache::store('file')->has('on_chat')){
+                //$say =
+            }
+            $say = "Trạng thái của gà: " . \Cache::store('file')->get('on_chat') == 'false' ?:'đang ở ngoài';
+            $this->say_in_chatwork($post['webhook_event']['room_id'], $say);
+            return;
+        }
+
+        if($post['webhook_event']['body'] == 'open_chat' ){
+            \Cache::store('file')->put('on_chat', 'true', 20);
+        }
+
+        if($post['webhook_event']['body'] == 'close_chat' ){
+            \Cache::store('file')->put('on_chat', 'false', 20);
+        }
+
+        // Tắt chat
+        if(\Cache::store('file')->get('on_chat')=='false' || !\Cache::store('file')->has('on_chat')){
+            $say_array = ['Gà ngủ rồi...'];
+            $say = $say_array[rand(0,count($say_array)-1)];
+            $this->say_in_chatwork($post['webhook_event']['room_id'], $say);
+            return;
+        }
+
+
+        // case thanh lâu
+        if(false)
+            if($post['webhook_event']['room_id'] != '120012135'){
+                $say_array = [
+                    'Không trả lời đâu, ahihi đồ ngốc',
+                    'Đi ra ngoài shopping roài',
+                    'Lát rảnh nói nghe',
+                    'Khùng quá má',
+                    'Rảnh hơm',
+                    'Ừ',"Ok cưng",
+                    '(h)',
+                    'Mơ đi cưng',
+                    'Không phải',
+                    'Phải',
+                    'Anh Chí đẹp trai nhứt',
+                    'Vân và Vy đều mập',
+                    'Hôm nay có ăn sáng chưa ?',
+                    'Ngày mai có đi làm không chế',
+                    'Đói quá',
+                    'Rảnh',
+                    'Mai là ngày mấy vậy',
+                    'Vân có bồ chưa',
+                    'Vy chừng nào hết ế',
+                    'Lễ mập',
+                    'Mai tao đi chơi rồi, mày đi hơm',
+                    'Trà sữa đê, tao bao.',
+                    'Lạnh quá cho cái mền đê',
+                    'Mấy tuổi rồi',
+                    'Ngu thật',
+                    'Hơm phải đâu',
+                    'Gà xinh đẹp',
+                    'Gà biết gà đẹp',
+                    'Gà chưa có trứng nên đừng có hỏi gà',
+                ];
+
+                $say = $say_array[rand(0,count($say_array)-1)];
+                $this->say_in_chatwork($post['webhook_event']['room_id'], $say);
+                return;
+            }
+
         if ($post['webhook_event_type'] == 'mention_to_me') {
             $ask = $post['webhook_event']['body'];
 
@@ -51,7 +117,6 @@ class AIController extends BaseController
 
             $this->say_in_chatwork($post['webhook_event']['room_id'], $say);
         }
-        exit;
     }
 
     function curl($url)
@@ -84,12 +149,14 @@ class AIController extends BaseController
             ]
         ];
 
-        $json = $this->curl($config['simsimi']['endpoint'] . "?key=" . $config['simsimi']['token'] . "&lc=" . $config['simsimi']['locale'] . "&ft=1.0&text=" . urlencode($text));
+        $json = $this->curl($config['simsimi']['endpoint'] . "?key=" . $config['simsimi']['token'] . "&lc=" . $config['simsimi']['locale'] . "&ft=0.7&text=" . urlencode($text));
         $arr  = json_decode($json, true);
         if (empty($arr['response'])) {
             // This trial api will have less db. Use paid key for full db. I don't try so I don't know it worth or not?
             $arr['response'] = "[Simsimi not response.]";
         }
+
+        \Log::alert(json_encode([$text,$arr['response']]));
 
         return $arr['response'];
     }
