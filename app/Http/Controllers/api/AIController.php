@@ -39,7 +39,6 @@ class AIController extends BaseController
      */
     public function hookchatwork(Request $request)
     {
-        die;
         if (!$this->filter_delay_request()) {
             return;
         }
