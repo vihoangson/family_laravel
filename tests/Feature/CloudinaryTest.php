@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use Cloudinary\Api;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -11,15 +12,48 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class CloudinaryTest extends TestCase
 {
 
+    /**
+     * @author hoang_son
+     */
+    public function test_movetocloud()
+    {
+        return;
+        \Cloudinary::config([
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+
+        $files              = Storage::allFiles();
+        $random_name_folder = time();
+        foreach ($files as $k => $v) {
+            if ($k > 30) {
+                continue;
+            }
+            if (preg_match('/\.png$/', $v)) {
+                $path = storage_path('app/' . $v);
+                if (file_exists($path)) {
+                    \Cloudinary\Uploader::upload($path, [
+                        "folder"           => $random_name_folder . "/",
+                        "public_id"        => basename($path),
+                        "overwrite"        => true,
+                        "notification_url" => "https://requestb.in/12345abcd",
+                        "resource_type"    => "image"
+                    ]);
+
+                }
+            }
+        }
+    }
+
     public function test_uploadimg()
     {
         \Cloudinary::config([
-                'api_key'    => env('api_key'),
-                'api_secret' => env('api_secret'),
-                'cloud_name' => env('cloud_name'),
-            ]);
-        \Cloudinary\Uploader::upload(base_path("/public/tempates/porto/img/benefits/benefits-2.jpg"),
-            [
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+        \Cloudinary\Uploader::upload(base_path("/public/tempates/porto/img/benefits/benefits-2.jpg"), [
                 "folder"           => "my_folder/",
                 "public_id"        => "my_dog" . time(),
                 "overwrite"        => true,
@@ -32,10 +66,10 @@ class CloudinaryTest extends TestCase
     public function test_searchimg()
     {
         \Cloudinary::config([
-                'api_key'    => env('api_key'),
-                'api_secret' => env('api_secret'),
-                'cloud_name' => env('cloud_name'),
-            ]);
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
         $searching = new \Cloudinary\Search;
         $result    = $searching->expression('resource_type:image  AND uploaded_at>1d AND bytes>1m')
                                ->sort_by('public_id', 'desc')
@@ -48,10 +82,10 @@ class CloudinaryTest extends TestCase
     public function test_ListInFolder()
     {
         \Cloudinary::config([
-                'api_key'    => env('api_key'),
-                'api_secret' => env('api_secret'),
-                'cloud_name' => env('cloud_name'),
-            ]);
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
         $api    = new Api;
         $result = $api->resources(["type" => "upload", "prefix" => ""]);
 
