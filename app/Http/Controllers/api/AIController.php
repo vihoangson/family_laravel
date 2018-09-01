@@ -49,7 +49,7 @@ class AIController extends BaseController
         $post = $request->all();
 
         if ($post == []) {
-            return response('');
+            return response('',404);
         }
         $this->room_id = $post['webhook_event']['room_id'];
 
