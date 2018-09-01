@@ -24,6 +24,7 @@ class AIControllerTest extends TestCase
 
     public function test_chatnham()
     {
+        /** @method \App\Http\Controllers\api\AIController@chatnham */
         $response = $this->post('/api/chatnham');
         $response->assertStatus(200);
     }
@@ -44,7 +45,7 @@ class AIControllerTest extends TestCase
     public function testPutRequestOK(){
         $data=[];
         $data['webhook_event']['room_id']= 119727315;
-        $data['webhook_event']['body']= 1;
+        $data['webhook_event']['body']= 'Gì đó gà';
         $data['webhook_event_type']= 'mention_to_me';
         $data['webhook_event']['from_account_id']= 1819944;
 
