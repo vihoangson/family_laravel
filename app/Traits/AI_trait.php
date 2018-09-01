@@ -2,6 +2,8 @@
 
 namespace App\Traits;
 
+use Illuminate\Support\Facades\Log;
+
 trait AI_trait
 {
 
@@ -9,9 +11,10 @@ trait AI_trait
     private $room_id;
     private $config_ai;
 
-    private function ai_init(){
+    private function ai_init()
+    {
 
-        $this->config_ai    = [
+        $this->config_ai = [
             'config.common' => [
                 'config_ai'     => config('AI.config_ai'),
                 'define_member' => config('AI.define_member'),
@@ -100,7 +103,27 @@ trait AI_trait
         curl_setopt($ch, CURLOPT_HTTPHEADER, ["X-ChatWorkToken: " . env('key_chatwork')]);
         $result = curl_exec($ch);
 
-        return;
+        return $result;
+
+
+    }
+
+    public function sendResponseChatWork($room_id = '', $msg = '')
+    {
+        $result   = $this->say_in_chatwork($room_id, $msg);
+        $response = json_decode($result);
+
+        // Log response
+        if (isset($response->errors)) {
+            Log::error('Send to chatwork: ' . $result);
+
+            return response($result, 404);
+
+        } else {
+            Log::info('Send to chatwork: ' . $result);
+
+            return response($result);
+        }
     }
 
     /**
@@ -109,9 +132,11 @@ trait AI_trait
      * @return string
      * @author hoang_son
      */
-    private function stupid_answer() {
-        $say_array = config('AI.answers.commons');
-        $stupid_answer = '[Đang trả lời ngu]: '.$say_array[rand(0, count($say_array) - 1)]." !!";
+    private function stupid_answer()
+    {
+        $say_array     = config('AI.answers.commons');
+        $stupid_answer = '[Đang trả lời ngu]: ' . $say_array[rand(0, count($say_array) - 1)] . " !!";
+
         return $stupid_answer . ", Hỏi gì hoài vậy ?? ";
     }
 }
