@@ -7,6 +7,7 @@ use App\Models\Files_model;
 use App\Models\Kyniem;
 
 use App\Models\Options;
+use App\Traits\Cloudinary_trait;
 use Faker\Provider\File;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Filesystem\Filesystem;
@@ -16,12 +17,13 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
 class DataController extends BaseController
 {
-
+    use Cloudinary_trait;
 
     public function __construct() { }
 
@@ -92,7 +94,10 @@ class DataController extends BaseController
         $file->files_name = basename($link);
         $file->files_path = $link;
         $file->save();
-
+        if(file_exists(public_path($link))){
+            $this->CloudinaryUploadImg(public_path($link));
+            Log::info($link);
+        }
         return $return;
     }
 

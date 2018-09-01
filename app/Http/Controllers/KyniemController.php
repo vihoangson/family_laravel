@@ -7,6 +7,7 @@ use App\Models\Kyniem;
 
 use App\Models\Options;
 use App\Repositories\KyniemRepository;
+use App\Traits\Cloudinary_trait;
 use Carbon\Carbon;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\View;
 
 class KyniemController extends Controller
 {
-
+    use Cloudinary_trait;
 
     private $kyniem_repository;
 
