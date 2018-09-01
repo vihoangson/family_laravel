@@ -17,7 +17,6 @@ class CloudinaryTest extends TestCase
      */
     public function test_movetocloud()
     {
-        return;
         \Cloudinary::config([
             'api_key'    => env('api_key'),
             'api_secret' => env('api_secret'),
@@ -27,10 +26,10 @@ class CloudinaryTest extends TestCase
         $files              = Storage::allFiles();
         $random_name_folder = time();
         foreach ($files as $k => $v) {
-            if ($k > 30) {
+            if ($k > env('limit_up_to_cloud',3)) {
                 continue;
             }
-            if (preg_match('/\.png$/', $v)) {
+            if (preg_match('/(\.jpg|\.png)$/', $v)) {
                 $path = storage_path('app/' . $v);
                 if (file_exists($path)) {
                     \Cloudinary\Uploader::upload($path, [
@@ -54,12 +53,12 @@ class CloudinaryTest extends TestCase
             'cloud_name' => env('cloud_name'),
         ]);
         \Cloudinary\Uploader::upload(base_path("/public/tempates/porto/img/benefits/benefits-2.jpg"), [
-                "folder"           => "my_folder/",
-                "public_id"        => "my_dog" . time(),
-                "overwrite"        => true,
-                "notification_url" => "https://requestb.in/12345abcd",
-                "resource_type"    => "image"
-            ]);
+            "folder"           => "my_folder/",
+            "public_id"        => "my_dog" . time(),
+            "overwrite"        => true,
+            "notification_url" => "https://requestb.in/12345abcd",
+            "resource_type"    => "image"
+        ]);
 
     }
 
