@@ -59,9 +59,17 @@ class AIController extends BaseController
                 break;
                 case "close_chat":
                 break;
+                case "deploy cho tao":
+                    $request = new Request();
+                    $request->initialize(['option'=>'deploy']);
+                    $this->flag_deploy($request);
+                    \Cache::put('deploy_frontend', '1', 1440);
+                    $this->msg = 'Tuân lệnh xếp';
+                    $this->say_in_chatwork();
+                    return;
+                break;
                 case "status":
                     $this->msg = '[code]' . json_encode($this->config_ai) . '[/code]';
-                    return;
                     $this->say_in_chatwork();
                     return;
                 break;
@@ -84,22 +92,17 @@ class AIController extends BaseController
         if ($post['webhook_event_type'] == 'mention_to_me') {
 
             // Gán câu hỏi
-            $ask = $post['webhook_event']['body'];
-
-            // Bỏ task to tới gà
-            $pattern = '/(\[.+\]) Chicken\n/';
-            $ask     = preg_replace($pattern, '', $ask);
-
-            // Bỏ xuống dòng
-            $pattern = '/\n/';
-            $ask     = preg_replace($pattern, '', $ask);
+            $ask = $this->filter_request_ask($post['webhook_event']['body']);
 
             // Lấy câu trả lời từ api
             if (config('AI.config_ai.answer_smarty')) {
-                $this->msg = $this->talkToSimsimi($ask);
+                $this->msg =  $this->talkToSimsimi($ask);
             } else {
-                $this->msg = $this->stupid_answer();
+                $this->msg = $this->stupid_answer() ;
             }
+
+            $prefix_msg = "[To:".$post['webhook_event']['from_account_id']."] \n ";
+            $this->msg = $prefix_msg.$this->msg;
 
             // Gửi lên chatwork theo giá trị room
             $this->room_id = $post['webhook_event']['room_id'];
@@ -109,6 +112,26 @@ class AIController extends BaseController
             return;
         }
         //</editor-fold>
+
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @author hoang_son
+     */
+    public function chatNham(Request $request)
+    {
+        if (!$this->filter_delay_request()) {
+            return;
+        }
+
+        $post          = $request->all();
+        $this->room_id = $post['webhook_event']['room_id'];
+
+        // Hàm khởi tạo ai
+        $this->ai_init();
+
 
     }
 
@@ -130,5 +153,39 @@ class AIController extends BaseController
         }
     }
 
+    public function flag_deploy(Request $request){
+        // Set bật cờ deploy
+        if(!$request->input('option')){
+            return response(\Cache::get('deploy_frontend'), 200);
+        }
+
+        // Truy cập xem cờ
+        if($request->input('option')=='deploy'){
+            \Cache::put('deploy_frontend', '1', 1440);
+            return response('Chuẩn bị deploy', 200);
+        }
+    }
+
+    /**
+     * Truy cập để tắt cờ
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     * @author hoang_son
+     */
+    public function deploy_done(){
+        \Cache::forget('deploy_frontend');
+        return response('done', 200);
+    }
+
+    public function filter_request_ask($ask) {
+        // Bỏ task to tới gà
+        $pattern = '/(\[.+\]) Chicken\n/';
+        $ask     = preg_replace($pattern, '', $ask);
+
+        // Bỏ xuống dòng
+        $pattern = '/\n/';
+        $ask     = preg_replace($pattern, '', $ask);
+        return $ask;
+    }
 
 }

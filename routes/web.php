@@ -29,6 +29,12 @@ Route::get('/', 'KyniemController@index')
 
 Route::post('/api/hookchatwork', 'api\AIController@hookchatwork')
      ->name('api_hookchatwork');
+Route::post('/api/chatnham', 'api\AIController@chatNham')
+     ->name('api_chatnham');
+Route::get('/api/flag_deploy', 'api\AIController@flag_deploy')
+     ->name('api_flag_deploy');
+Route::get('/api/deploy_done', 'api\AIController@deploy_done')
+     ->name('api_deploy_done');
 
 Route::get('/api/data', 'api\DataController@index')
      ->name('api_data');

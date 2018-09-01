@@ -112,6 +112,6 @@ trait AI_trait
     private function stupid_answer() {
         $say_array = config('AI.answers.commons');
         $stupid_answer = '[Đang trả lời ngu]: '.$say_array[rand(0, count($say_array) - 1)]." !!";
-        return $stupid_answer;
+        return $stupid_answer . ", Hỏi gì hoài vậy ?? ";
     }
 }
