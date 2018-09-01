@@ -18,7 +18,7 @@ class CloudinaryTest extends TestCase
                 'api_secret' => env('api_secret'),
                 'cloud_name' => env('cloud_name'),
             ]);
-        \Cloudinary\Uploader::upload("D:/xampp7/htdocs/vhosts/family/public/tempates/porto/img/benefits/benefits-2.jpg",
+        \Cloudinary\Uploader::upload(base_path("/public/tempates/porto/img/benefits/benefits-2.jpg"),
             [
                 "folder"           => "my_folder/",
                 "public_id"        => "my_dog" . time(),
