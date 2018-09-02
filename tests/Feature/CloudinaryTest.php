@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Libraries\CloudinaryLib;
 use Cloudinary\Api;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
@@ -89,5 +90,22 @@ class CloudinaryTest extends TestCase
         $result = $api->resources(["type" => "upload", "prefix" => ""]);
 
 
+    }
+
+    public function test_CloudinaryLib_upload_img_ok(){
+        $path = base_path("/public/tempates/porto/img/benefits/benefits-2.jpg");
+        $result = CloudinaryLib::uploadImg($path,'testing');
+        echo (json_encode($result));
+
+
+    }
+
+    /**
+     * @author hoang_son
+     */
+    public function test_CloudinaryLib_upload_img_false(){
+        $path = base_path("");
+        $result = CloudinaryLib::uploadImg($path,'testing');
+        $this->assertFalse($result);
     }
 }

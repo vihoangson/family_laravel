@@ -4,8 +4,10 @@ namespace App\Http\Controllers\api;
 
 use App\Libraries\Markdown;
 use App\Models\Files_model;
+use App\Models\Img_cloudinary_model;
 use App\Models\Kyniem;
 
+use App\Models\Media_model;
 use App\Models\Options;
 use App\Traits\Cloudinary_trait;
 use Faker\Provider\File;
@@ -23,6 +25,7 @@ use Intervention\Image\ImageManager;
 
 class DataController extends BaseController
 {
+
     use Cloudinary_trait;
 
     public function __construct() { }
@@ -87,17 +90,24 @@ class DataController extends BaseController
 
         $link = '/' . $link_public;
 
-        $markdown = "![Img Family]($link)";
-        $return   = ['markdown' => $markdown];
-
         $file             = new Files_model();
         $file->files_name = basename($link);
         $file->files_path = $link;
         $file->save();
-        if(file_exists(public_path($link))){
-            $this->CloudinaryUploadImg(public_path($link));
-            Log::info($link);
+        if (file_exists(public_path($link))) {
+            if ($response = $this->CloudinaryUploadImg(public_path($link))) {
+                $media_id = Media_model::saveCloud($response);
+                Img_cloudinary_model::saveCloud(['media_id' => $media_id, 'data' => json_encode($response)]);
+
+                Log::info('Uploaded to cloud: ' . json_encode($response));
+            } else {
+                Log::error('Can\'t upload to cloud: ' . public_path($link . "sss"));
+            }
         }
+
+        $markdown = "![Img Family]($link)";
+        $return   = ['markdown' => $markdown];
+
         return $return;
     }
 
@@ -114,8 +124,8 @@ class DataController extends BaseController
         foreach ($kn as $v) {
             $json[] = [
                 'id'       => $v->id,
-                'name'=> $v->kyniem_title,
-                'location' =>  $v->kyniem_content,
+                'name'     => $v->kyniem_title,
+                'location' => $v->kyniem_content,
                 // 'name'     => "1",
                 // 'location' => "1",
                 'year'     => $v->kyniem_create->format('Y'),
