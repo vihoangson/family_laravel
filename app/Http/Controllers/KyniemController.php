@@ -16,10 +16,12 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class KyniemController extends Controller
 {
+
     use Cloudinary_trait;
 
     private $kyniem_repository;
@@ -57,7 +59,6 @@ class KyniemController extends Controller
         return view('kyniem.edit', ['data' => $data]);
     }
 
-
     /**
      * @param Request $request
      *
@@ -69,7 +70,10 @@ class KyniemController extends Controller
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
-               ->update(['delete_flg' => 1]);
+               ->update(['delete_flg' => 0]);
+
+        // Log lại nếu có access
+        Log::info('[My Log] Delete kyniem ' . $id);
 
         return redirect()->route('homepage');
     }
