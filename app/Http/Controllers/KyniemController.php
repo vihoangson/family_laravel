@@ -16,6 +16,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
 class KyniemController extends Controller {
@@ -46,11 +47,25 @@ class KyniemController extends Controller {
     }
 
     public function gyazo(Request $request) {
+<<<<<<< HEAD
         $name        = date('Ymd_Hmi') . "_" . time() .".png";
         $path        = $request->file('imagedata')
                                ->storeAS('public/images/Gyazo', $name);
         $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/'. $name,'Gyazo'));
         echo 'http://family.vihoangson.com/upload?file='.$name;
+=======
+        $name = date('Ymd_Hmi') . "_" . time() . ".png";
+        $path = $request->file('imagedata')
+                        ->storeAS('public/images/Gyazo', $name);
+
+        if (file_exists(public_path('/storage/images/Gyazo/' . $name))) {
+            $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/' . $name, 'Gyazo'));
+            echo 'http://family.vihoangson.com/upload?file=' . $name;
+        }else{
+            echo "Can't update file";
+        }
+
+>>>>>>> 9d83c8d967f2c0a05844116a5c116a57c5568337
         die;
     }
 
@@ -62,7 +77,6 @@ class KyniemController extends Controller {
         return view('kyniem.edit', ['data' => $data]);
     }
 
-
     /**
      * @param Request $request
      *
@@ -73,7 +87,10 @@ class KyniemController extends Controller {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
-               ->update(['delete_flg' => 1]);
+               ->update(['delete_flg' => 0]);
+
+        // Log lại nếu có access
+        Log::info('[My Log] Delete kyniem ' . $id);
 
         return redirect()->route('homepage');
     }
