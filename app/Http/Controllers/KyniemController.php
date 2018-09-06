@@ -47,13 +47,6 @@ class KyniemController extends Controller {
     }
 
     public function gyazo(Request $request) {
-<<<<<<< HEAD
-        $name        = date('Ymd_Hmi') . "_" . time() .".png";
-        $path        = $request->file('imagedata')
-                               ->storeAS('public/images/Gyazo', $name);
-        $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/'. $name,'Gyazo'));
-        echo 'http://family.vihoangson.com/upload?file='.$name;
-=======
         $name = date('Ymd_Hmi') . "_" . time() . ".png";
         $path = $request->file('imagedata')
                         ->storeAS('public/images/Gyazo', $name);
@@ -61,11 +54,9 @@ class KyniemController extends Controller {
         if (file_exists(public_path('/storage/images/Gyazo/' . $name))) {
             $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/' . $name, 'Gyazo'));
             echo 'http://family.vihoangson.com/upload?file=' . $name;
-        }else{
+        } else {
             echo "Can't update file";
         }
-
->>>>>>> 9d83c8d967f2c0a05844116a5c116a57c5568337
         die;
     }
 
