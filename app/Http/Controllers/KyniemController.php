@@ -26,14 +26,12 @@ class KyniemController extends Controller
 
     private $kyniem_repository;
 
-    public function __construct(KyniemRepository $kyniem_repository)
-    {
+    public function __construct(KyniemRepository $kyniem_repository) {
         $this->kyniem_repository = $kyniem_repository;
         parent::__construct();
     }
 
-    public function index()
-    {
+    public function index() {
 
         return view('kyniem.kyniem');
     }
@@ -41,8 +39,7 @@ class KyniemController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function overview()
-    {
+    public function overview() {
         $m = new Carbon();
         $n = $m->get_all_ky_niem();
         dd($n);
@@ -50,8 +47,16 @@ class KyniemController extends Controller
         return view('kyniem.overview');
     }
 
-    public function edit(Request $request)
-    {
+    public function gyazo(Request $request) {
+        $name        = date('Ymd_Hmi') . "_" . time() .".png";
+        $path        = $request->file('imagedata')
+                               ->storeAS('public/images/Gyazo', $name);
+        $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/'. $name,'Gyazo'));
+        echo 'http://family.vihoangson.com/upload?file='.$name;
+        die;
+    }
+
+    public function edit(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $data   = $kyniem->find($id);
@@ -65,8 +70,7 @@ class KyniemController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function delete(Request $request)
-    {
+    public function delete(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
@@ -83,8 +87,7 @@ class KyniemController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $id = ($request->input('id'));
         if (!empty($id)) {
             $kyniem                = Kyniem::find($request->input('id'));
@@ -101,8 +104,7 @@ class KyniemController extends Controller
         return redirect()->route('homepage');
     }
 
-    public function calendar()
-    {
+    public function calendar() {
         return view('kyniem.calendar');
 
     }
