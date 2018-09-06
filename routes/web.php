@@ -25,8 +25,12 @@ Route::get('/admin/options', 'admin\OptionsController@index')
      ->name('option_index');
 Route::get('/', 'KyniemController@index')
      ->name('homepage');
-
-
+Route::post('/upload', 'KyniemController@gyazo')
+     ->name('upload');
+Route::get('/upload', function(){
+    return '<img src="/storage/images/Gyazo/'.$_GET['file'].'">';
+})
+     ->name('uploadg');
 
 Route::group(['middleware' => 'App\Http\Middleware\CheckApi'], function () {
     Route::group(['prefix' => 'api'], function () {
