@@ -53,7 +53,7 @@ class KyniemController extends Controller {
 
         if (file_exists(public_path('/storage/images/Gyazo/' . $name))) {
             $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/' . $name, 'Gyazo'));
-            echo 'http://family.vihoangson.com/upload?file=' . $name;
+            echo 'http://family.vihoangson.com/upload?file=' . base64_encode($name);
         } else {
             echo "Can't update file";
         }

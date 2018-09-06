@@ -28,7 +28,7 @@ Route::get('/', 'KyniemController@index')
 Route::post('/upload', 'KyniemController@gyazo')
      ->name('upload');
 Route::get('/upload', function(){
-    return '<img src="/storage/images/Gyazo/'.$_GET['file'].'">';
+    return '<img src="/storage/images/Gyazo/'.base64_decode($_GET['file']).'">';
 })
      ->name('uploadg');
 
