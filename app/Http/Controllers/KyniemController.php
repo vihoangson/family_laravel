@@ -19,8 +19,7 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
-class KyniemController extends Controller
-{
+class KyniemController extends Controller {
 
     use Cloudinary_trait;
 
@@ -48,11 +47,17 @@ class KyniemController extends Controller
     }
 
     public function gyazo(Request $request) {
-        $name        = date('Ymd_Hmi') . "_" . time() .".png";
-        $path        = $request->file('imagedata')
-                               ->storeAS('public/images/Gyazo', $name);
-        $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/'. $name,'Gyazo'));
-        echo 'http://family.vihoangson.com/upload?file='.$name;
+        $name = date('Ymd_Hmi') . "_" . time() . ".png";
+        $path = $request->file('imagedata')
+                        ->storeAS('public/images/Gyazo', $name);
+
+        if (file_exists(public_path('/storage/images/Gyazo/' . $name))) {
+            $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/' . $name, 'Gyazo'));
+            echo 'http://family.vihoangson.com/upload?file=' . $name;
+        }else{
+            echo "Can't update file";
+        }
+
         die;
     }
 
