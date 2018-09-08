@@ -51,9 +51,10 @@ Route::post('register', [
     'as'   => '',
     'uses' => 'Auth\RegisterController@register'
 ]);
-Route::post('register', function(){
-    return 'mo di cung';
-});
+Route::post('register', [
+    'as'   => '',
+    'uses' => 'Auth\RegisterController@register'
+]);
 
 Route::middleware('auth')
      ->group(function () {
