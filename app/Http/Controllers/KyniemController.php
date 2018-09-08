@@ -39,10 +39,6 @@ class KyniemController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function overview() {
-        $m = new Carbon();
-        $n = $m->get_all_ky_niem();
-        dd($n);
-
         return view('kyniem.overview');
     }
 
@@ -112,4 +108,6 @@ class KyniemController extends Controller {
         return view('kyniem.calendar');
 
     }
+
+
 }

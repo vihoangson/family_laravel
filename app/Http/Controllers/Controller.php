@@ -7,7 +7,10 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\View;
+
 
 class Controller extends BaseController
 {
@@ -19,13 +22,16 @@ class Controller extends BaseController
      */
     public function __construct()
     {
-        $data_options = Options::where('option_key', 'not like', '"%cache%e"')
-                               ->get()
-                               ->toArray();
-
-        foreach ($data_options as $key => $value) {
-            View::share("options_" . $value['option_key'], $value['option_content']);
+        if (!Cache::has('cache_option')) {
+            $data_options = Options::where('option_key', 'not like', '"%cache%e"')
+                                   ->get()
+                                   ->toArray();
+            foreach ($data_options as $key => $value) {
+                if (!Cache::has("options_" . $value['option_key'])) {
+                    Cache::forever("options_" . $value['option_key'], $value['option_content']);
+                }
+            }
+            Cache::put('cache_option',true);
         }
-        //dd(get_defined_vars());
     }
 }

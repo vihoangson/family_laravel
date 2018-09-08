@@ -16,7 +16,7 @@
             <textarea class="form-control" id="content" name="content" placeholder="Nội dung"></textarea>
 
             <div class="text-left " style="margin-top:10px;" id="box-typing-auto">
-                <a href="" class="typewrite" data-period="5000" data-type='[ "Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào" ]'>
+                <a href="" class="typewrite" data-period="5000" data-type='[{{cache('options_typing_homepage')}}]'>
                     <span class="wrap"></span>
                 </a>
             </div>
@@ -46,7 +46,7 @@
     <button class="loadmore btn btn-primary">Load more</button>
 
 
-    <img src="{{$options_popup}}" class="hidden" id="img-popup">
+    <img src="{{cache('options_popup')}}" class="hidden" id="img-popup">
 @endsection
 
 @section('custom_js')

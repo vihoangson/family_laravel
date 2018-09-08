@@ -17,7 +17,6 @@ class AdminControllerTest extends TestCase
      *
      * @return void
      */
-
     public function test_access_admin_options()
     {
         $user = factory(\App\User::class)->make();

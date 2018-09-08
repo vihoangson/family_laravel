@@ -1,9 +1,15 @@
-@extends('layouts/template2/layout')
+@extends('layouts/admin/layout')
 @section('body')
-    @foreach($array_options as $k => $v)
-        <div>
-            <label>{{$k}}</label>
-            <input type="text" value="{{$v['value']}}">
-        </div>
-    @endforeach
+    <form method="post" action="{{route('admin_options_save')}}">
+        {{csrf_field()}}
+
+        @foreach($array_options as $k => $v)
+            <div>
+                <label>{{$k}}</label>
+                <input type="text" name="{{$k}}" value="{{$v['value']}}">
+            </div>
+        @endforeach
+        <a href="{{route('clear_cache')}}" class="btn btn-default">Clear cache</a>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
 @endsection

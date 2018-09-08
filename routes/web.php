@@ -58,7 +58,6 @@ Route::post('register', [
 ]);
 //</editor-fold>
 
-
 /////////////////////
 // Start group check auth
 Route::middleware('auth')
@@ -76,20 +75,22 @@ Route::middleware('auth')
 
              Route::get('/delete', 'KyniemController@delete')
                   ->name('kyniem_delete');
-             Route::get('/overview', 'KyniemController@overview')
-                  ->name('overview');
+
              Route::post('/store', 'KyniemController@store')
                   ->name('kyniem_store');
          });
 
+         Route::get('/overview', 'KyniemController@overview')
+              ->name('overview');
 
          // Group admin
          Route::group(['prefix' => 'admin'], function () {
              Route::get('/options', 'admin\OptionsController@index')
-                  ->name('option_index');
+                  ->name('admin_options');
+             Route::post('/options', 'admin\OptionsController@store')
+                  ->name('admin_options_save');
 
          });
-
 
          // Group api
          Route::group(['middleware' => 'App\Http\Middleware\CheckApi'], function () {
@@ -102,6 +103,12 @@ Route::middleware('auth')
                      return view('welcome');
                  });
              });
+         });
+
+         Route::group(['prefix' => '/admin/cache'], function () {
+             Route::get('/clear_cache', 'admin\CacheController@clearCache')
+                  ->name('clear_cache');
+
          });
 
          // API upload file
@@ -127,7 +134,6 @@ Route::group(['prefix' => 'api'], function () {
     Route::get('/deploy_done', 'api\AIController@deploy_done')
          ->name('api_deploy_done');
 });
-
 
 //<editor-fold desc="upload gyazo">
 Route::post('/upload', 'KyniemController@gyazo')

@@ -53,19 +53,27 @@ class OptionsController extends Controller
             'size-video'           => [
                 'type' => 'text',
             ],
-
-            'theme_name' => [
+            'theme_name'           => [
                 'type' => 'text',
             ],
-
-            'typing_homepage' => [
-                'type' => 'text',
+            'typing_homepage'      => [
+                'type'    => 'text',
+                'default' => '"Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào"',
+            ],
+            'typing_homepage233'   => [
+                'type'    => 'text',
+                'default' => '"Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào"',
             ],
         ];
         foreach ($array_options as $k => &$v) {
-            $v['value'] = Options::where('option_key', $k)
-                                 ->get()
-                                 ->first()->option_content;
+            $option = Options::where('option_key', $k);
+            if ($option->count() > 0) {
+                $v['value'] = $option->get()
+                                     ->first()->option_content;
+            } else {
+                $v['value'] = $v['default'];
+            }
+
         }
         unset($v);
         View::share('array_options', $array_options);
@@ -73,75 +81,16 @@ class OptionsController extends Controller
         return view('admin.options');
     }
 
-
-    public function draw_grid($data)
+    public function store(Request $request)
     {
-        // $max_value = max($data);
-        // var_dump(end(array_keys($data)));
-        //        die;
-        $m         = new \DateTime(end(array_keys($data)));
-        $date_left = ($m->format("N") % 7) + 6;
-        for ($i = 0; $i < $date_left; $i++) {
-            $data[] = -1;
+        $input = $request->except('_token');
+        foreach ($input as $k => $v) {
+            $m                 = Options::firstOrNew(['option_key' => $k]);
+            $m->option_content = $v;
+            $m->save();
         }
-        $data = array_reverse($data);
-        $html = "";
-        $i    = 0;
-        if ($this->ci->kyniem->history_auth == null) {
-            //$html .= '<h2>All page history wrote blog</h2>';
-        } else {
-            //$html .= '<h2>Your history wrote blog</h2>';
-        }
-        $html .= '
-            
-            <div id="gird_date">
-            <div class="week">';
-        foreach ($data as $key => $item) {
 
-            if ($i % 7 == 0) {
-                $html .= '</div><div class="week">';
-            }
-
-            // Nếu có bài viết
-            if ($item > 0) {
-
-                // Khởi tạo $name_class
-                $name_class = "has";
-
-                // Tính phần trăm của từng ngày
-                $arrange = round(($item / $max_value) * 100);
-                if ($arrange < 25) {
-                    $name_class .= " has_1";
-                } elseif ($arrange <= 25 && $arrange < 50) {
-                    $name_class .= " has_2";
-                } elseif ($arrange <= 50 && $arrange < 75) {
-                    $name_class .= " has_3";
-                } elseif ($arrange > 75) {
-                    $name_class .= " has_4";
-                }
-
-                // Nếu có tình trạng đặc biết thì thêm class màu đỏ vào
-                $status = $this->ci->kyniem->check_status($key);
-                if ($status > 0) {
-                    $name_class .= " ";
-                }
-
-            } // Phần này để không hiện ở những ngày đầu tiên
-            elseif ($item == -1) {
-                $name_class = "no_show";
-            } // Những ngày không có bài viết
-            else {
-                $name_class = "no_has";
-            }
-            $html .= "<div data-date='" . $item . "' id='date-$key' class='date " . $name_class . "' title='" . $key . "'></div>";
-            $i++;
-        }
-        $html .= '</div>
-        </div>
-        <div class="clearfix"></div>
-        <hr>
-        ';
-
-        return $html;
+        return redirect(route('admin_options'));
     }
+
 }

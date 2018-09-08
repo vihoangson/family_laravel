@@ -15,6 +15,12 @@
                 Calendar
             </a>
         </li>
+        <li>
+            <a href="{{route('admin_options')}}">
+                Admin
+            </a>
+        </li>
+
         <li class="dropdown hidden">
             <a class="dropdown-toggle" href="/">
                 Trang chủ
