@@ -21,8 +21,9 @@ class KyNiemControllerTest extends TestCase
 
     public function test_getkyniem()
     {
+        $user = factory(\App\User::class)->make();
         $request['step'] = 1;
-        $response        = $this->get('/api/getkyniem', $request);
+        $response        = $this->actingAs($user)->get('/api/getkyniem', $request);
         $response->assertStatus(200);
     }
 
