@@ -44,7 +44,13 @@ class OptionsController extends Controller
             'custom_banner_bottom' => [
                 'type' => 'text',
             ],
-            'custom_banner_'       => [
+            'custom_banner_left'   => [
+                'type' => 'text',
+            ],
+            'custom_banner_right'  => [
+                'type' => 'text',
+            ],
+            'custom_banner_main'   => [
                 'type' => 'text',
             ],
             'max_size_img'         => [
@@ -60,10 +66,6 @@ class OptionsController extends Controller
                 'type'    => 'text',
                 'default' => '"Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào"',
             ],
-            'typing_homepage233'   => [
-                'type'    => 'text',
-                'default' => '"Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào"',
-            ],
         ];
         foreach ($array_options as $k => &$v) {
             $option = Options::where('option_key', $k);
@@ -71,7 +73,7 @@ class OptionsController extends Controller
                 $v['value'] = $option->get()
                                      ->first()->option_content;
             } else {
-                $v['value'] = $v['default'];
+                $v['value'] = isset($v['default'])?$v['default']:"";
             }
 
         }
@@ -81,6 +83,12 @@ class OptionsController extends Controller
         return view('admin.options');
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @author hoang_son
+     */
     public function store(Request $request)
     {
         $input = $request->except('_token');

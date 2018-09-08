@@ -50,7 +50,7 @@
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.min.js"></script>
 
-
+    @include('layouts/includes/css')
     @yield('custom_css')
 </head>
 <body>
@@ -139,7 +139,7 @@
                 </div>
             </div>
         </section>
-
+        @include('layouts/includes/error_validate')
         <div class="container">
 
             <div class="col-md-12">@yield('body')</div>
@@ -284,6 +284,7 @@
 
 <script src="/assets/js/autoload_homepage.js"></script>
 <script src="master/analytics/analytics.js"></script>
+@include('layouts/includes/javascript')
 
 @yield('custom_js')
 

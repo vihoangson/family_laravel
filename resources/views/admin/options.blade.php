@@ -4,12 +4,17 @@
         {{csrf_field()}}
 
         @foreach($array_options as $k => $v)
-            <div>
+            <div class="form-group">
                 <label>{{$k}}</label>
-                <input type="text" name="{{$k}}" value="{{$v['value']}}">
+                <input type="text" class="form-control" name="{{$k}}" value="{{$v['value']}}">
             </div>
         @endforeach
         <a href="{{route('clear_cache')}}" class="btn btn-default">Clear cache</a>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
+
 @endsection
+@section('custom_js')
+
+@endsection
+

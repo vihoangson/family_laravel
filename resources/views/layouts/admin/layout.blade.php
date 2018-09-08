@@ -47,6 +47,8 @@
     <!-- Theme Custom CSS -->
     <link rel="stylesheet" href="css/custom.css">
 
+    @include('layouts/includes/css')
+
     <!-- Head Libs -->
     <script src="vendor/modernizr/modernizr.min.js"></script>
 
@@ -278,6 +280,9 @@
                     </aside>
                 </div>
                 <div class="col-md-9">
+
+                    @include('layouts/includes/error_validate')
+
                     <h2>@yield('title_content','Admin')</h2>
                     <div class="row">
                         @yield('body')
@@ -425,6 +430,8 @@
 
 <script src="/assets/js/autoload_homepage.js"></script>
 <script src="master/analytics/analytics.js"></script>
+@include('layouts/includes/javascript')
+
 
 @yield('custom_js')
 

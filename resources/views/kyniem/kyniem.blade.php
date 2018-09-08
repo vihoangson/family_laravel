@@ -3,10 +3,6 @@
 @section('title_body','Trang chủ')
 
 @section('body')
-    <form method="post" action="/logout">
-        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-        <button type="submit">logout</button>
-    </form>
     <div id="input-content">
         <form action='/kyniem/store' method="post" id="form-insert-kyniem">
             {{ csrf_field() }}

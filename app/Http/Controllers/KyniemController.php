@@ -88,6 +88,12 @@ class KyniemController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request) {
+
+        // Validate nội dung
+        $this->validate($request, [
+            'content' => 'required',
+        ]);
+
         $id = ($request->input('id'));
         if (!empty($id)) {
             $kyniem                = Kyniem::find($request->input('id'));
@@ -101,7 +107,7 @@ class KyniemController extends Controller {
 
         $kyniem->save();
 
-        return redirect()->route('homepage');
+        return redirect()->route('homepage')->with('msgToast','Đã lưu thành công');
     }
 
     public function calendar() {

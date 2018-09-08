@@ -6,19 +6,34 @@
             </a>
         </li>
         <li class="">
-            <a class="" href="/overview">
-                Gia đình mình
-            </a>
+            @if(Auth::check())
+                <a class="" href="/overview">
+                    Gia đình mình
+                </a>
+            @endif
+
         </li>
         <li>
-            <a href="/kyniem/calendar">
-                Calendar
-            </a>
+            @if(Auth::check())
+                <a href="/kyniem/calendar">
+                    Calendar
+                </a>
+            @endif
         </li>
         <li>
-            <a href="{{route('admin_options')}}">
-                Admin
-            </a>
+            @if(Auth::check())
+                <a href="{{route('admin_options')}}">
+                    Admin
+                </a>
+            @endif
+        </li>
+        <li>
+            @if(Auth::check())
+                <form method="post" action="/logout">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button type="submit" class="btn btn-default">logout</button>
+                </form>
+            @endif
         </li>
 
         <li class="dropdown hidden">
