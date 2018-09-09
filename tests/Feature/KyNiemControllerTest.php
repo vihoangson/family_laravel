@@ -21,9 +21,10 @@ class KyNiemControllerTest extends TestCase
 
     public function test_getkyniem()
     {
-        $user = factory(\App\User::class)->make();
+        $user            = factory(\App\User::class)->make();
         $request['step'] = 1;
-        $response        = $this->actingAs($user)->get('/api/getkyniem', $request);
+        $response        = $this->actingAs($user)
+                                ->get('/api/getkyniem', $request);
         $response->assertStatus(200);
     }
 
@@ -45,6 +46,19 @@ class KyNiemControllerTest extends TestCase
         if (json_decode($s, true)['expirationDate'] == '27-07-2018') {
 
         }
+    }
 
+    public function test_createKyniem()
+    {
+        $user            = factory(\App\User::class)->make();
+        $request = [
+            '_token'=> csrf_token(),
+            'content' => 'Testing create content',
+            'title'   => 'Testing create title',
+        ];
+        $response        = $this->actingAs($user)
+                                ->post(route('kyniem_store'), $request);
+
+        $response->assertStatus(302,$response->content());
     }
 }

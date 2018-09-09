@@ -113,13 +113,6 @@ class DataController extends BaseController
 
     public function get_calendar()
     {
-        // {
-        //     id: 0,
-        //     name: 'Google I/O',
-        //     location: 'San Francisco, CA',
-        //     startDate: new Date(2018, 4, 21),
-        //     endDate: new Date(2018, 4, 28)
-        // }
         $kn = Kyniem::all();
         foreach ($kn as $v) {
             $json[] = [

@@ -110,10 +110,11 @@ class KyniemController extends Controller
         } else {
             $kyniem = new Kyniem();
         }
+
         $kyniem->kyniem_content = $request->input('content');
         $kyniem->kyniem_title   = ($request->input('title') ? $request->input('title') : 'Happy Family');
 
-        $kyniem->save();
+        $this->kyniem_repository->save_kyniem($kyniem);
 
         return redirect()
             ->route('homepage')
