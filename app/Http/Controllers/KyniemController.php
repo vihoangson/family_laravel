@@ -7,6 +7,7 @@ use App\Models\Kyniem;
 
 use App\Models\Options;
 use App\Repositories\KyniemRepository;
+use App\Repositories\TagsRepository;
 use App\Traits\Cloudinary_trait;
 use Carbon\Carbon;
 
@@ -25,10 +26,13 @@ class KyniemController extends Controller
     use Cloudinary_trait;
 
     private $kyniem_repository;
+    private $tags_repository;
 
-    public function __construct(KyniemRepository $kyniem_repository)
+    public function __construct(KyniemRepository $kyniem_repository, TagsRepository $tags_repository)
     {
         $this->kyniem_repository = $kyniem_repository;
+        $this->tags_repository   = $tags_repository;
+
         parent::__construct();
     }
 
@@ -58,6 +62,8 @@ class KyniemController extends Controller
      */
     public function overview()
     {
+        $this->tags_repository->create(['name'=>'tag1']);
+        dd($this->tags_repository->all());
         return view('kyniem.overview');
     }
 

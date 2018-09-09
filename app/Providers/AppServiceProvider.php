@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        \App::bind('App\Repositories\TagsRepository', 'App\Repositories\TagsRepositoryEloquent');
     }
 }
