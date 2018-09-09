@@ -68,4 +68,23 @@ class CloudinaryLib
             }
         }
     }
+
+    public static function uploadFileRaw($path, $folder_name = 'folder_file_raw')
+    {
+
+        \Cloudinary::config([
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+
+        $random_name_folder = $folder_name;
+        \Cloudinary\Uploader::upload($path, [
+            "folder"           => $random_name_folder . "/",
+            "public_id"        => basename($path),
+            "overwrite"        => true,
+            "notification_url" => "https://requestb.in/12345abcd",
+            "resource_type"    => "raw"
+        ]);
+    }
 }

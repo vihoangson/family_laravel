@@ -6,6 +6,12 @@
 
 <script>
     if($('#msg-toast').length>0){
-        $.toast($('#msg-toast').attr('title'));
+
+        $.toast({
+            heading: 'Message',
+            text: $('#msg-toast').attr('title'),
+            position: 'top-right',
+            stack: false
+        });
     }
 </script>
