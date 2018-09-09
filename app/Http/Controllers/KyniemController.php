@@ -19,44 +19,50 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 
-class KyniemController extends Controller {
+class KyniemController extends Controller
+{
 
     use Cloudinary_trait;
 
     private $kyniem_repository;
 
-    public function __construct(KyniemRepository $kyniem_repository) {
+    public function __construct(KyniemRepository $kyniem_repository)
+    {
         $this->kyniem_repository = $kyniem_repository;
         parent::__construct();
     }
 
-    public function index() {
-
+    public function index()
+    {
         return view('kyniem.kyniem');
+    }
+
+    public function search(Request $request)
+    {
+
+        $this->validate($request, [
+            'keyword' => 'required|string|min:3|max:255'
+        ]);
+
+        $keyword = $request->input('keyword');
+
+        $data = Kyniem::search($keyword)
+                      ->paginate();
+        $data->appends(['keyword' => $keyword]);
+
+        return view('kyniem.search', ['data' => $data]);
     }
 
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function overview() {
+    public function overview()
+    {
         return view('kyniem.overview');
     }
 
-    public function gyazo(Request $request) {
-        $name = date('Ymd_Hmi') . "_" . time() . ".png";
-        $path = $request->file('imagedata')
-                        ->storeAS('public/images/Gyazo', $name);
-
-        if (file_exists(public_path('/storage/images/Gyazo/' . $name))) {
-            $this->CloudinaryUploadImg(public_path('/storage/images/Gyazo/' . $name, 'Gyazo'));
-            echo 'http://family.vihoangson.com/upload?file=' . base64_encode($name);
-        } else {
-            echo "Can't update file";
-        }
-        die;
-    }
-
-    public function edit(Request $request) {
+    public function edit(Request $request)
+    {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $data   = $kyniem->find($id);
@@ -70,7 +76,8 @@ class KyniemController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function delete(Request $request) {
+    public function delete(Request $request)
+    {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
@@ -87,7 +94,8 @@ class KyniemController extends Controller {
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
 
         // Validate nội dung
         $this->validate($request, [
@@ -107,10 +115,13 @@ class KyniemController extends Controller {
 
         $kyniem->save();
 
-        return redirect()->route('homepage')->with('msgToast','Đã lưu thành công');
+        return redirect()
+            ->route('homepage')
+            ->with('msgToast', 'Đã lưu thành công');
     }
 
-    public function calendar() {
+    public function calendar()
+    {
         return view('kyniem.calendar');
 
     }

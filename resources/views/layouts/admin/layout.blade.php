@@ -72,14 +72,7 @@
                     <div class="header-column">
                         <div class="header-row">
                             <div class="header-search hidden-xs">
-                                <form id="searchForm" action="page-search-results.html" method="get">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" name="q" id="q" placeholder="Search..." required>
-                                        <span class="input-group-btn">
-													<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-												</span>
-                                    </div>
-                                </form>
+                                @include('layouts/includes/form_search_header')
                             </div>
                             <nav class="header-nav-top">
                                 <ul class="nav nav-pills">

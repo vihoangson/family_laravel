@@ -16,6 +16,11 @@ class Kyniem extends Model
     const CREATED_AT = 'kyniem_create';
     const UPDATED_AT = 'kyniem_modifie';
 
+    public static function search($keyword) {
+        $return = self::orWhere('kyniem_content', 'like', '%'.$keyword.'%')->orWhere('kyniem_title', 'like', '%'.$keyword.'%')->orderByDesc('id')->with('User');
+        return $return;
+    }
+
     public function getKyniemContentAttribute($value)
     {
         return $value;
@@ -25,6 +30,13 @@ class Kyniem extends Model
     {
         return Markdown::defaultTransform($this->kyniem_content);
     }
+
+
+    public function User()
+    {
+        return $this->hasOne('App\User','id','kyniem_auth');
+    }
+
 
     public function getDateFormatAttribute(){
 
