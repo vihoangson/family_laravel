@@ -82,6 +82,10 @@ Route::middleware('auth')
                   ->name('kyniem_search');
          });
 
+         // Controller media
+         Route::resource('/admin/media','admin\MediaController');
+
+         // Overview
          Route::get('/overview', 'KyniemController@overview')
               ->name('overview');
 
