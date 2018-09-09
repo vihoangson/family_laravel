@@ -16,7 +16,7 @@
         <hr>
 
         <div class="row">
-            {{$data->link()}}
+            {{$data->links()}}
             <ul class="image-gallery sort-destination lightbox" data-sort-id="portfolio" data-plugin-options="{&quot;delegate&quot;: &quot;a.lightbox-portfolio&quot;, &quot;type&quot;: &quot;image&quot;, &quot;gallery&quot;: {&quot;enabled&quot;: true}}" style="position: relative; height: 296.5px;">
                 @foreach ($data as $val)
                     <li class="col-md-3 col-sm-6 col-xs-12 isotope-item websites" style="position: absolute; left: 0px; top: 0px;">
@@ -42,7 +42,7 @@
                     </li>
                 @endforeach
             </ul>
-            {{$data->link()}}
+            {{$data->links()}}
         </div>
     </div>
 @endsection
