@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        Commands\Backup_db::class,
     ];
 
     /**
@@ -24,6 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        $schedule->command( 'backup_db' )
+                 ->cron( "0 */3 * * * *" );//3h chạy 1 lần
         // $schedule->command('inspire')
         //          ->hourly();
     }
@@ -35,6 +37,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
+
         require base_path('routes/console.php');
     }
 }
