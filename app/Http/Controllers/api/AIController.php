@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Libraries\BackupDBLib;
 use App\Libraries\Markdown;
 use App\Models\Files_model;
 use App\Models\Kyniem;
@@ -63,6 +64,9 @@ class AIController extends BaseController
                 case "open_chat":
                 break;
                 case "close_chat":
+                break;
+                case "backup data":
+                    BackupDBLib::backupToCloud();
                 break;
                 case "deploy cho tao":
                     $request = new Request();
