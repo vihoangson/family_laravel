@@ -23,16 +23,14 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
-class AIController extends BaseController
-{
+class AIController extends BaseController {
 
     use AI_trait;
 
     /**
      * AIController constructor.
      */
-    public function __construct()
-    {
+    public function __construct() {
         \Debugbar::disable();
     }
 
@@ -41,8 +39,7 @@ class AIController extends BaseController
      *
      * @author hoang_son
      */
-    public function hookchatwork(Request $request)
-    {
+    public function hookchatwork(Request $request) {
         if (!$this->filter_delay_request()) {
             return;
         }
@@ -50,7 +47,7 @@ class AIController extends BaseController
         $post = $request->all();
 
         if ($post == []) {
-            return response('',404);
+            return response('', 404);
         }
         $this->room_id = $post['webhook_event']['room_id'];
 
@@ -66,7 +63,12 @@ class AIController extends BaseController
                 case "close_chat":
                 break;
                 case "backup data":
-                    BackupDBLib::backupToCloud();
+                    if (BackupDBLib::backupToCloud()) {
+                        $this->msg = 'Đã backup thành công';
+                    }else{
+                        $this->msg = 'Chưa backup được';
+                    }
+                    return $this->sendResponseChatWork();
                 break;
                 case "deploy cho tao":
                     $request = new Request();
@@ -74,10 +76,12 @@ class AIController extends BaseController
                     $this->flag_deploy($request);
                     \Cache::put('deploy_frontend', '1', 1440);
                     $this->msg = 'Tuân lệnh xếp';
+
                     return $this->sendResponseChatWork();
                 break;
                 case "status":
                     $this->msg = '[code]' . json_encode($this->config_ai) . '[/code]';
+
                     return $this->sendResponseChatWork();
                 break;
             }
@@ -88,6 +92,7 @@ class AIController extends BaseController
         // Trả lời ngu cho các room không nằm trong danh sách
         if (!in_array($this->room_id, array_values(config('AI.config_ai.list_answer_smarty')))) {
             $this->msg = $this->stupid_answer();
+
             return $this->sendResponseChatWork();
 
             return;
@@ -127,8 +132,7 @@ class AIController extends BaseController
      *
      * @author hoang_son
      */
-    public function chatNham(Request $request)
-    {
+    public function chatNham(Request $request) {
         if (!$this->filter_delay_request()) {
             return;
         }
@@ -140,7 +144,6 @@ class AIController extends BaseController
         // // Hàm khởi tạo ai
         // $this->ai_init();
 
-
     }
 
     /**
@@ -149,9 +152,8 @@ class AIController extends BaseController
      * @return bool
      * @author hoang_son
      */
-    private function filter_delay_request()
-    {
-        if(env('APP_ENV' )== 'testing'){
+    private function filter_delay_request() {
+        if (env('APP_ENV') == 'testing') {
             return true;
         }
 
@@ -165,8 +167,7 @@ class AIController extends BaseController
         }
     }
 
-    public function flag_deploy(Request $request)
-    {
+    public function flag_deploy(Request $request) {
         // Set bật cờ deploy
         if (!$request->input('option')) {
             return response(\Cache::get('deploy_frontend'), 200);
@@ -186,15 +187,13 @@ class AIController extends BaseController
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @author hoang_son
      */
-    public function deploy_done()
-    {
+    public function deploy_done() {
         \Cache::forget('deploy_frontend');
 
         return response('done', 200);
     }
 
-    public function filter_request_ask($ask)
-    {
+    public function filter_request_ask($ask) {
         // Bỏ task to tới gà
         $pattern = '/(\[.+\]) Chicken\n/';
         $ask     = preg_replace($pattern, '', $ask);
