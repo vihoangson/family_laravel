@@ -115,6 +115,8 @@ class AIController extends BaseController {
             // Lấy câu trả lời từ api
             if (config('AI.config_ai.answer_smarty')) {
                 $this->msg = $this->talkToSimsimi($ask);
+                $this->msg = $this->filter_response_ask($this->msg);
+
             } else {
                 $this->msg = $this->stupid_answer();
             }
@@ -173,6 +175,11 @@ class AIController extends BaseController {
         }
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function flag_deploy(Request $request) {
         // Set bật cờ deploy
         if (!$request->input('option')) {
@@ -199,7 +206,12 @@ class AIController extends BaseController {
         return response('done', 200);
     }
 
-    public function filter_request_ask($ask) {
+    /**
+     * @param $ask
+     *
+     * @return null|string|string[]
+     */
+    private function filter_request_ask($ask) {
         // Bỏ task to tới gà
         $pattern = '/(\[.+\]) Chicken\n/';
         $ask     = preg_replace($pattern, '', $ask);
@@ -208,7 +220,24 @@ class AIController extends BaseController {
         $pattern = '/\n/';
         $ask     = preg_replace($pattern, '', $ask);
 
+        // Thay
+        $pattern = '/(gà|Gà)/';
+        $ask     = preg_replace($pattern, 'simsimi', $ask);
+
         return $ask;
+    }
+
+    /**
+     * @param string $msg
+     *
+     * @return null|string|string[]
+     */
+    private function filter_response_ask(string $msg) {
+        // Thay
+        $pattern = '/(Simsimi|simsimi)/';
+        $msg     = preg_replace($pattern, 'gà', $msg);
+
+        return $msg;
     }
 
 }
