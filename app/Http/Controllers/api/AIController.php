@@ -65,9 +65,10 @@ class AIController extends BaseController {
                 case "backup data":
                     if (BackupDBLib::backupToCloud()) {
                         $this->msg = 'Đã backup thành công';
-                    }else{
+                    } else {
                         $this->msg = 'Chưa backup được';
                     }
+
                     return $this->sendResponseChatWork();
                 break;
                 case "deploy cho tao":
@@ -81,6 +82,11 @@ class AIController extends BaseController {
                 break;
                 case "status":
                     $this->msg = '[code]' . json_encode($this->config_ai) . '[/code]';
+
+                    return $this->sendResponseChatWork();
+                break;
+                case 'list':
+                    $this->msg = "[open_chat]" . "[close_chat]" . "[backup data]" . "[deploy cho tao]" . "[status]";
 
                     return $this->sendResponseChatWork();
                 break;
