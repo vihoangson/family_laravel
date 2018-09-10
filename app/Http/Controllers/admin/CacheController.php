@@ -9,11 +9,10 @@ use Illuminate\Support\Facades\Session;
 class CacheController extends Controller
 {
 
-    public function clearCache()
+    public function clearCacheOptions()
     {
         Cache::flush();
 
-        Session::flash('msgToast','Cache đã được xóa');
-        return redirect()->back();
+        return redirect()->back()->with('msgToast','Cache đã được xóa');
     }
 }

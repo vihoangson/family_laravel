@@ -1,1 +1,1 @@
-<link rel="stylesheet" href="/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css">
+<link rel="stylesheet" href="/assets/bower_components/jquery-toast-plugin/dist/jquery.toast.min.css">

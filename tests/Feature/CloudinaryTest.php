@@ -59,14 +59,7 @@ class CloudinaryTest extends TestCase {
     }
 
     public function test_searchallImageinCloud() {
-
-        $searching = new \Cloudinary\Search;
-        $result    = $searching->expression('resource_type:image')
-                               ->sort_by('public_id', 'desc')
-                               ->max_results(30)
-                               ->execute();
-        $links     = $result->getArrayCopy()['resources'];
-        $this->assertArrayHasKey('url', $links[0]);
+        $this->assertGreaterThan(0, count(CloudinaryLib::getAllImage()), 'Không có img trong cloud');
     }
 
     public function test_searchraw() {

@@ -85,6 +85,9 @@ Route::middleware('auth')
          // Controller media
          Route::resource('/admin/media','admin\MediaController');
 
+         // Controller media
+         Route::resource('/admin/cloud','admin\CloudController');
+
          // Overview
          Route::get('/overview', 'KyniemController@overview')
               ->name('overview');
@@ -112,8 +115,8 @@ Route::middleware('auth')
          });
 
          Route::group(['prefix' => '/admin/cache'], function () {
-             Route::get('/clear_cache', 'admin\CacheController@clearCache')
-                  ->name('clear_cache');
+             Route::get('/clear_cache_options', 'admin\CacheController@clearCacheOptions')
+                  ->name('clear_cache_options');
 
          });
 

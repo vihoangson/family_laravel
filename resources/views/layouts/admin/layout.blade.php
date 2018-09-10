@@ -145,6 +145,9 @@
                         <h4 class="heading-primary">Danh mục</h4>
                         <ul class="nav nav-list mb-xlg">
                             <li><a href="{{route('admin_options')}}">Options</a></li>
+                            <li><a href="{{route('media.index')}}">Media</a></li>
+                            <li><a href="{{route('cloud.index')}}">Cloud</a></li>
+
                             <li >
                                 <a href="{{route('admin_options')}}">Photos (4)</a>
                                 <ul>

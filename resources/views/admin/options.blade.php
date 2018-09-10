@@ -9,7 +9,7 @@
                 <input type="text" class="form-control" name="{{$k}}" value="{{$v['value']}}">
             </div>
         @endforeach
-        <a href="{{route('clear_cache')}}" class="btn btn-default">Clear cache</a>
+        <a href="{{route('clear_cache_options')}}" class="btn btn-default">Clear cache</a>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
 

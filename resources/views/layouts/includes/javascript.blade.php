@@ -2,7 +2,7 @@
     <div id="msg-toast" title="{{session('msgToast')}}"></div>
 @endif
 
-<script src="/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
+<script src="/assets/bower_components/jquery-toast-plugin/dist/jquery.toast.min.js"></script>
 
 <script>
     if($('#msg-toast').length>0){

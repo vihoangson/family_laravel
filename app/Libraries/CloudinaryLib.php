@@ -4,8 +4,10 @@ namespace App\Libraries;
 
 use Illuminate\Support\Facades\Storage;
 
-class CloudinaryLib
-{
+class CloudinaryLib {
+
+    public function __construct() {
+    }
 
     /**
      * @param        $path
@@ -69,8 +71,7 @@ class CloudinaryLib
         }
     }
 
-    public static function uploadFileRaw($path, $folder_name = 'folder_file_raw')
-    {
+    public static function uploadFileRaw($path, $folder_name = 'folder_file_raw') {
 
         \Cloudinary::config([
             'api_key'    => env('api_key'),
@@ -86,5 +87,22 @@ class CloudinaryLib
             "notification_url" => "https://requestb.in/12345abcd",
             "resource_type"    => "raw"
         ]);
+    }
+
+    public static function getAllImage(){
+
+        \Cloudinary::config([
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+
+        $searching = new \Cloudinary\Search;
+        $result    = $searching->expression('resource_type:image')
+                               ->sort_by('public_id', 'desc')
+                               ->max_results(100)
+                               ->execute();
+        $links     = $result->getArrayCopy()['resources'];
+        return $links;
     }
 }
