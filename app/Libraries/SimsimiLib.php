@@ -25,7 +25,7 @@ class SimsimiLib
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_HTTPHEADER, []);
             $result = curl_exec($ch);
-            dd($result);
+            return dump($result);
         }
 
         if (false) {
@@ -36,7 +36,7 @@ class SimsimiLib
                 'res' => 'Đẹp hơn Sơn Tùng là cái chắc',
                 'lc'  => 'vn'
             ]);
-            dd($res->getStatusCode());
+            return ($res->getStatusCode());
         }
 
         return '';
