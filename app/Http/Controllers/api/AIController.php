@@ -115,8 +115,6 @@ class AIController extends BaseController {
             // Lấy câu trả lời từ api
             if (config('AI.config_ai.answer_smarty')) {
                 $this->msg = $this->talkToSimsimi($ask);
-                $this->msg = $this->filter_response_ask($this->msg);
-
             } else {
                 $this->msg = $this->stupid_answer();
             }
