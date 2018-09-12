@@ -24,7 +24,11 @@
             </div>
         </form>
     </div>
-
+    <div class="progress" id="process-bm" style="display:none;">
+        <div class="progress-bar progress-bar-striped active" id="progress-b" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+            <span class="sr-only">60% Complete</span>
+        </div>
+    </div>
     <div id='wallmessages'>
         <div class="message-item hidden well" data-step="-1">
             <div class="b-toolb">
