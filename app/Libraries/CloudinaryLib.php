@@ -4,9 +4,11 @@ namespace App\Libraries;
 
 use Illuminate\Support\Facades\Storage;
 
-class CloudinaryLib {
+class CloudinaryLib
+{
 
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
@@ -71,7 +73,8 @@ class CloudinaryLib {
         }
     }
 
-    public static function uploadFileRaw($path, $folder_name = 'folder_file_raw') {
+    public static function uploadFileRaw($path, $folder_name = 'folder_file_raw')
+    {
 
         \Cloudinary::config([
             'api_key'    => env('api_key'),
@@ -89,7 +92,8 @@ class CloudinaryLib {
         ]);
     }
 
-    public static function getAllImage(){
+    public static function getAllImage()
+    {
 
         \Cloudinary::config([
             'api_key'    => env('api_key'),
@@ -103,6 +107,31 @@ class CloudinaryLib {
                                ->max_results(100)
                                ->execute();
         $links     = $result->getArrayCopy()['resources'];
+
         return $links;
+    }
+
+    public static function searchFileInCloud($file_name)
+    {
+
+        \Cloudinary::config([
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+
+        $searching = new \Cloudinary\Search;
+        $result    = $searching->expression('filename="' . $file_name . '"')
+                               ->sort_by('public_id', 'desc')
+                               ->max_results(100)
+                               ->execute();
+        $links     = $result->getArrayCopy()['resources'];
+        if (isset($links[0])) {
+            return $links[0];
+        }
+
+        return false;
+
+
     }
 }
