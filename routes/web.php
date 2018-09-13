@@ -152,8 +152,9 @@ Route::group(['prefix' => 'api'], function () {
 Route::post('/upload', 'GyazoController@gyazo')
      ->name('upload');
 Route::get('/upload', function () {
+    sleep(2);
     $link = \App\Libraries\CloudinaryLib::searchFileInCloud(base64_decode($_GET['file']));
-    echo '<img src="/storage/images/Gyazo/' . $link['url'] . '">';
+    echo '<img src="'.$link['url'].'">';
     die;
 })
      ->name('uploadg');
