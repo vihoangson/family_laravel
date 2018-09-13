@@ -128,6 +128,10 @@ Route::middleware('auth')
               ->name('api_get_calendar');
 
 
+         Route::get('/family_tree', function () {
+             return view('family_tree.index');
+         })->name('family-tree-index');
+
      });
 // End group check auth
 /////////////////////
@@ -153,6 +157,7 @@ Route::get('/upload', function () {
 })
      ->name('uploadg');
 //</editor-fold>
+
 
 
 
