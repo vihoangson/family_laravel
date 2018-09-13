@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command( 'backup_db' )
-                 ->cron( "0 */3 * * * *" );//3h chạy 1 lần
+                 ->cron( "0 * * * * *" );//1 ngày chạy 1 lần
         // $schedule->command('inspire')
         //          ->hourly();
     }

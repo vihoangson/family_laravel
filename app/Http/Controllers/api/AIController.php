@@ -64,7 +64,7 @@ class AIController extends BaseController {
                 break;
                 case "backup data":
                     if (BackupDBLib::backupToCloud()) {
-                        $this->msg = 'Đã backup thành công';
+                        $this->msg = 'Đã backup db thành công';
                     } else {
                         $this->msg = 'Chưa backup được';
                     }

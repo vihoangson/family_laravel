@@ -17,4 +17,10 @@ class BackupDBTest extends TestCase
     {
         $this->assertTrue(BackupDBLib::backupToCloud(),'Không up được file');
     }
+
+    public function testbackup_NG()
+    {
+        $this->assertFalse(BackupDBLib::backupToCloud('foo'),'Không up được file');
+    }
+
 }
