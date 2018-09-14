@@ -108,4 +108,16 @@ class CloudinaryTest extends TestCase {
         $result = CloudinaryLib::uploadImg($path, 'testing');
         $this->assertFalse($result);
     }
+
+    public function test_searchFileInCloud()
+    {
+        $result = CloudinaryLib::searchFileInCloud('foo.jpg');
+        $this->assertFalse($result,'Không up được file');
+    }
+
+    public function test_searchFileInCloud_Ok()
+    {
+        $result = CloudinaryLib::searchFileInCloud('20180908_030955_27913085_2069100933101884_8597121477202297546_o.jpg');
+        $this->assertGreaterThan(0,count($result),'Không up được file');
+    }
 }
