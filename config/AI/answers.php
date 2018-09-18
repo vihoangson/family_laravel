@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'commons' => [
+    'commons'     => [
         'Không trả lời đâu, ahihi đồ ngốc',
         'Đi ra ngoài shopping roài',
         'Lát rảnh nói nghe',
@@ -32,5 +32,6 @@ return [
         'Gà xinh đẹp',
         'Gà biết gà đẹp',
         'Gà chưa có trứng nên đừng có hỏi gà',
-    ]
+    ],
+    'filter_text' => 0.7
 ];

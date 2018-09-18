@@ -97,7 +97,7 @@ class SimsimiLib
             ]
         ];
 
-        $json = $this->curl($config['simsimi']['endpoint'] . "?key=" . $config['simsimi']['token'] . "&lc=" . $config['simsimi']['locale'] . "&ft=0.7&text=" . urlencode($text));
+        $json = $this->curl($config['simsimi']['endpoint'] . "?key=" . $config['simsimi']['token'] . "&lc=" . $config['simsimi']['locale'] . "&ft=".config('AI.answers.filter_text')."&text=" . urlencode($text));
         $arr  = json_decode($json, true);
         if (empty($arr['response'])) {
             // This trial api will have less db. Use paid key for full db. I don't try so I don't know it worth or not?
