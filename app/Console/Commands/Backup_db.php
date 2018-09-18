@@ -30,11 +30,9 @@ class Backup_db extends Command {
      */
     public function handle() {
         if(BackupDBLib::backupToCloud()===true){
-            $sim = new SimsimiLib;
-            $sim->say_in_chatwork(config('AI.define_member.users.me'),'Đã backup database');
+            CommonLib::alert_to_me('Đã backup database');
         }else{
-            $sim = new SimsimiLib;
-            $sim->say_in_chatwork(config('AI.define_member.users.me'),'Backup database thất bại');
+            CommonLib::alert_to_me('Backup database thất bại');
         }
 
     }
