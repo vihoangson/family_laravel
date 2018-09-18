@@ -58,6 +58,16 @@ class CloudinaryTest extends TestCase {
         ]);
     }
 
+    public function test_uploadraw() {
+        \Cloudinary\Uploader::upload(base_path("/sqlite/data_family"), [
+            "folder"           => "backup_db/",
+            "public_id"        => "data_family" . time(),
+            "overwrite"        => true,
+            "notification_url" => "https://requestb.in/12345abcd",
+            "resource_type"    => "raw"
+        ]);
+    }
+
     public function test_searchallImageinCloud() {
         $this->assertGreaterThan(0, count(CloudinaryLib::getAllImage()), 'Không có img trong cloud');
     }
