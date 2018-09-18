@@ -34,8 +34,8 @@ var loadKyniem = function () {
 loadKyniem();
 $(document).ready(function(){
     $('.b-edit').click(function(e){
-        console.log(1234123);
-        e.preventDefault();
+        // console.log(1234123);
+        // e.preventDefault();
     });
 });
 

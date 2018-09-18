@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Kyniem;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Validator\Exceptions\ValidatorException;
 
@@ -18,10 +19,10 @@ class KyniemRepository extends BaseRepository
         return "App\\Models\\Kyniem";
     }
 
-    public function save_kyniem($kyniem)
+    public function save_kyniem(Kyniem $kyniem)
     {
         try {
-            $this->create(['kyniem_title' => $kyniem->kyniem_title, 'kyniem_content' => $kyniem->kyniem_content]);
+            $kyniem->save();
         } catch (ValidatorException $e) {
             echo $e->getMessage();
             die;
