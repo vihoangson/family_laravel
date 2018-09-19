@@ -90,6 +90,12 @@ class AIController extends BaseController {
 
                     return $this->sendResponseChatWork();
                 break;
+                case (preg_match('/ft:(.*)$/', $post['webhook_event']['body']) ? true : false):
+                    preg_match('/ft:(.*)$/', $post['webhook_event']['body'], $match);
+                    if ($match[1] > 0 && $match[1] <= 1) {
+                        $this->set_cache_filter_text($match[1]);
+                    }
+                break;
             }
         }
         //</editor-fold>
@@ -198,7 +204,8 @@ class AIController extends BaseController {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @author hoang_son
      */
-    public function deploy_done() {
+    public function deploy_done()
+    {
         \Cache::forget('deploy_frontend');
 
         return response('done', 200);
@@ -230,7 +237,8 @@ class AIController extends BaseController {
      *
      * @return null|string|string[]
      */
-    private function filter_response_ask(string $msg) {
+    private function filter_response_ask(string $msg)
+    {
         // Thay
         $pattern = '/(Simsimi|simsimi)/';
         $msg     = preg_replace($pattern, 'gà', $msg);
