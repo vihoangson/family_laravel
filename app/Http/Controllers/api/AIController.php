@@ -32,6 +32,7 @@ class AIController extends BaseController {
      * AIController constructor.
      */
     public function __construct() {
+        parent::__construct();
         \Debugbar::disable();
     }
 
