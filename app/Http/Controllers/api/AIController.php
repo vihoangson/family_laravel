@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Libraries\BackupDBLib;
+use App\Libraries\CommonLib;
 use App\Libraries\Markdown;
 use App\Models\Files_model;
 use App\Models\Kyniem;
@@ -94,6 +95,8 @@ class AIController extends BaseController {
                     preg_match('/ft:(.*)$/', $post['webhook_event']['body'], $match);
                     if ($match[1] > 0 && $match[1] <= 1) {
                         $this->set_cache_filter_text($match[1]);
+                        CommonLib::alert_to_me(config('AI.answers.filter_text'));
+                        return;
                     }
                 break;
             }

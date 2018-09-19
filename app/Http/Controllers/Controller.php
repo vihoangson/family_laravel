@@ -48,5 +48,6 @@ class Controller extends BaseController
     protected function set_cache_filter_text($filter_number = 0.6)
     {
         Cache::forever('filter_text', $filter_number);
+        $this->set_cache_filter_text_simsimi();
     }
 }
