@@ -19,6 +19,10 @@ Class GetDBSheet
     {
         $return = [];
         $data = self::getdatasheet(self::$spreadsheet_url);
+        if($assign == 'all'){
+            return $data;
+        }
+
         foreach ($data as $value) {
             if ($value['Assign'] == $assign ) {
                 $return []= $value;

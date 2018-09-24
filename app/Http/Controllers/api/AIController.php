@@ -4,6 +4,7 @@ namespace App\Http\Controllers\api;
 
 use App\Libraries\BackupDBLib;
 use App\Libraries\CommonLib;
+use App\Libraries\GetDBSheet;
 use App\Libraries\Markdown;
 use App\Models\Files_model;
 use App\Models\Kyniem;
@@ -122,24 +123,18 @@ class AIController extends BaseController {
             // Gán câu hỏi
             $ask = $this->filter_request_ask($post['webhook_event']['body']);
 
-            // Nếu tin nhắn từ phòng Hito thì trả lời "Làm việc đi nha"
-            if($this->room_id == config('AI.config_ai.list_answer_smarty')['hito']) {
-
-                $answer = $this->do_command($ask);
-
-                if($answer == false){
-                    $this->msg = 'Làm việc đi nha';
-                }else{
-                    $this->msg = $answer;
-                }
-            }else{
-                // Lấy câu trả lời từ api
-                if (config('AI.config_ai.answer_smarty')) {
+            // Lấy câu trả lời từ api
+            if (config('AI.config_ai.answer_smarty')) {
+                $answer_command = $this->do_command($ask);
+                if($answer_command == false){
                     $this->msg = $this->talkToSimsimi($ask);
-                } else {
-                    $this->msg = $this->stupid_answer();
+                }else{
+                    $this->msg = $answer_command;
                 }
+            } else {
+                $this->msg = $this->stupid_answer();
             }
+
 
             $prefix_msg = "[To:" . $post['webhook_event']['from_account_id'] . "] \n ";
             $this->msg  = $prefix_msg . $this->msg;
@@ -264,9 +259,20 @@ class AIController extends BaseController {
 
     private function do_command($ask){
         switch ($ask){
+            case (preg_match('/task_assign:(.*)$/', $ask) ? true : false):
+                preg_match('/task_assign:(.*)$/', $ask, $match);
+                $data = GetDBSheet::getByAssign($match[1]);
+                $return= [] ;
+                foreach ($data as $key =>$value){
+                    $return[]=($key+1).' '.$value['Redmin ID'].' '.$value['Sprint task'].' '.$value['Sub taks'].' '.$value['Assign'].' ['.$value['Progress'].']';
+                }
+                return implode('
+',$return);
+            break;
             case 'status':
-                return 'List task: [Coming soon]';
-                break;
+                $data = GetDBSheet::getByAssign('Văn Hoài');
+                return json_encode($data);
+            break;
         }
         return false;
     }
