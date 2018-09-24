@@ -122,11 +122,23 @@ class AIController extends BaseController {
             // Gán câu hỏi
             $ask = $this->filter_request_ask($post['webhook_event']['body']);
 
-            // Lấy câu trả lời từ api
-            if (config('AI.config_ai.answer_smarty')) {
-                $this->msg = $this->talkToSimsimi($ask);
-            } else {
-                $this->msg = $this->stupid_answer();
+            // Nếu tin nhắn từ phòng Hito thì trả lời "Làm việc đi nha"
+            if($this->room_id == config('AI.config_ai.list_answer_smarty')['hito']) {
+
+                $answer = $this->do_command($ask);
+
+                if($answer == false){
+                    $this->msg = 'Làm việc đi nha';
+                }else{
+                    $this->msg = $answer;
+                }
+            }else{
+                // Lấy câu trả lời từ api
+                if (config('AI.config_ai.answer_smarty')) {
+                    $this->msg = $this->talkToSimsimi($ask);
+                } else {
+                    $this->msg = $this->stupid_answer();
+                }
             }
 
             $prefix_msg = "[To:" . $post['webhook_event']['from_account_id'] . "] \n ";
@@ -250,4 +262,12 @@ class AIController extends BaseController {
         return $msg;
     }
 
+    private function do_command($ask){
+        switch ($ask){
+            case 'status':
+                return 'List task: [Coming soon]';
+                break;
+        }
+        return false;
+    }
 }

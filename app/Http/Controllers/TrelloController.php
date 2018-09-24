@@ -20,9 +20,11 @@ class TrelloController extends Controller
 
     public function webhook(Request $request)
     {
-        CommonLib::alert_to_me('webhook:trello');
-        echo '4d5ea62fd76aa1136000000c';
-        Log::info($request->all());
+        if(isset($request->all()['action']['display']['translationKey'])){
+            CommonLib::alert_to_me('[webhook:trello] '.$request->all()['action']['display']['translationKey']);            
+        }
+        
+        Log::info(json_encode($request->all()));
     }
 
 
