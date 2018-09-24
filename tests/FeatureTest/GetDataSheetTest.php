@@ -2,12 +2,20 @@
 
 namespace Tests\Unit;
 
+use App\Libraries\GetDBSheet;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class GetDataSheetTest extends TestCase
 {
+
+    public function testlibgetdbsheet(){
+        $spreadsheet_url = "https://docs.google.com/spreadsheets/d/1t5RVjamu-L16f19w27Q-yBCrLtk-sshWevda2ZhlF3U/export?format=csv&gid=0";
+        GetDBSheet::setLinkSheet($spreadsheet_url);
+        $data = GetDBSheet::getByAssign('Văn Hoài');
+        dd($data);
+    }
 
     /**
      * A basic test example.
