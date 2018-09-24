@@ -160,6 +160,15 @@ Route::get('/upload', function () {
      ->name('uploadg');
 //</editor-fold>
 
+// Route::post('/trellowebhook', function(){
+//     echo 123;
+// })
+//      ->name('trellowebhook');
+
+Route::post('/trellowebhook', 'TrelloController@webhook')
+     ->name('trellowebhook');
+Route::get('/trellowebhook', 'TrelloController@webhook')
+     ->name('trellowebhook');
 
 
 

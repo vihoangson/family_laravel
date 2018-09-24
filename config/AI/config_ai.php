@@ -6,7 +6,8 @@ return [
     'list_answer_smarty'        => [
         'thanhlau'  => '78037645',
         'dongbanto' => '120012135',
-        'hoangson'  => '119727315'
+        'hoangson'  => '119727315',
+        'hito'  => '111630022'
     ],
     'answer_smarty'             => true
 ];
