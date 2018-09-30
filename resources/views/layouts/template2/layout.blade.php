@@ -275,7 +275,6 @@
 <!-- Theme Initialization Files -->
 <script src="js/theme.init.js"></script>
 
-<script src="/assets/js/autoload_homepage.js"></script>
 <script src="master/analytics/analytics.js"></script>
 @include('layouts/includes/javascript')
 

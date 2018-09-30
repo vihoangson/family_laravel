@@ -34,6 +34,7 @@ class KyniemController extends Controller
         $this->tags_repository   = $tags_repository;
 
         parent::__construct();
+        \Debugbar::disable();
     }
 
     public function index()

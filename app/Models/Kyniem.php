@@ -12,6 +12,7 @@ class Kyniem extends Model
     protected $table   = 'kyniem';
     protected $guarded = [];
     protected $appends = ['kyniem_content_markdown','date_format'];
+    protected $with = ['Comment'];
 
     const CREATED_AT = 'kyniem_create';
     const UPDATED_AT = 'kyniem_modifie';
@@ -31,12 +32,14 @@ class Kyniem extends Model
         return Markdown::defaultTransform($this->kyniem_content);
     }
 
+    public function Comment(){
+        return $this->hasMany('App\Entities\Comment','kyniem_id','id')->orderByDesc('id');
+    }
 
     public function User()
     {
         return $this->hasOne('App\User','id','kyniem_auth');
     }
-
 
     public function getDateFormatAttribute(){
 

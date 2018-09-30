@@ -41,10 +41,25 @@
             <i class="block-datetime"></i>
             <div class="block-content"></div>
             <hr>
+            <div class="comment-border">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." data-token="{{csrf_token()}}" kyniemid="">
+                    <span class="input-group-btn">
+                    <button class="btn btn-default submit-comment" type="button">Go!</button>
+                    </span>
+                </div><!-- /input-group -->
+                <div class="comment-group" cgid=""></div>
+            </div>
         </div>
     </div>
+
     <button class="loadmore btn btn-primary">Load more</button>
 
+    <div class="comment-block hidden">
+        <div class="comment-arrow"></div>
+        <span class="comment-by"><strong class="name-auth"></strong></span>
+        <div class="comment-content"></div>
+    </div>
 
     <img src="{{cache('options_popup')}}" class="hidden" id="img-popup">
 @endsection
@@ -62,19 +77,28 @@
     <script src="/assets/js/autoload_homepage.js"></script>
     <script src="/assets/js/typing.js"></script>
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
-<script>
-    $(document).ready(function(){
-        if(window.sessionStorage.getItem('flag_popup') != 1){
-            window.sessionStorage.setItem('flag_popup',1);
-            img_popup = $('<img>').attr('src',$("#img-popup").attr('src'));
-            $('.modal-title').html('Popup');
-            $('.modal-body').addClass('text-center');
-            $('.modal-body').html(img_popup);
-            $("#modal-id22").modal();
-        }
-    })
-</script>
+    <script>
+        $(document).ready(function () {
+            if (window.sessionStorage.getItem('flag_popup') != 1) {
+                window.sessionStorage.setItem('flag_popup', 1);
+                img_popup = $('<img>').attr('src', $("#img-popup").attr('src'));
+                $('.modal-title').html('Popup');
+                $('.modal-body').addClass('text-center');
+                $('.modal-body').html(img_popup);
+                $("#modal-id22").modal();
+            }
+        })
+    </script>
 @endsection
 
 @section('custom_css')
+    <style>
+        .comment-block {
+            background: white;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+    </style>
+
 @endsection

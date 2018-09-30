@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Entities\Comment;
 use App\Libraries\Markdown;
 use App\Models\Files_model;
 use App\Models\Img_cloudinary_model;
@@ -19,6 +20,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -39,6 +41,8 @@ class DataController extends BaseController
 
 
     /**
+     * Lấy thông tin kỷ niệm hiện tra trang chủ
+     *
      * @param Request $request
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
@@ -65,13 +69,17 @@ class DataController extends BaseController
     public function ajax_up_files(Request $request)
     {
 
-        $name        = date('Ymd_Hmi') . "_" . ($request->file('userfile')
-                                                        ->getClientOriginalName());
-        $path        = $request->file('userfile')
-                               ->storeAS('public/images', $name);
+        //<editor-fold desc="Upload hình">
+        $name = date('Ymd_Hmi') . "_" . ($request->file('userfile')
+                                                 ->getClientOriginalName());
+        $path = $request->file('userfile')
+                        ->storeAS('public/images', $name);
+        //</editor-fold>
+
+        //<editor-fold desc="Resize img">
+
         $link_public = str_replace('public', 'storage', $path);
 
-        //<editor-fold desc="resize img">
         $manager = new ImageManager();
         $m       = $manager->make(public_path($link_public));
 
@@ -88,12 +96,15 @@ class DataController extends BaseController
         }
         //</editor-fold>
 
-        $link = '/' . $link_public;
-
+        //<editor-fold desc="Save thông tin file vào db">
+        $link             = '/' . $link_public;
         $file             = new Files_model();
         $file->files_name = basename($link);
         $file->files_path = $link;
         $file->save();
+        //</editor-fold>
+
+        //<editor-fold desc="Upload to clound">
         if (file_exists(public_path($link))) {
             if ($response = $this->CloudinaryUploadImg(public_path($link))) {
                 $media_id = Media_model::saveCloud($response);
@@ -104,13 +115,23 @@ class DataController extends BaseController
                 Log::error('Can\'t upload to cloud: ' . public_path($link . "sss"));
             }
         }
+        //</editor-fold>
 
+        //<editor-fold desc="Trả thông tin ra response">
         $markdown = "![Img Family]($link)";
         $return   = ['markdown' => $markdown];
+
+        //</editor-fold>
 
         return $return;
     }
 
+    /**
+     * Lấy thông tin lịch
+     *
+     * @return \Illuminate\Http\JsonResponse
+     * @author hoang_son
+     */
     public function get_calendar()
     {
         $kn = Kyniem::all();
@@ -128,5 +149,20 @@ class DataController extends BaseController
         }
 
         return response()->json($json);
+    }
+
+    public function insert_comment(Request $request)
+    {
+        $comment_kyniem_id  = $request->input('comment_kyniem_id');
+        $comment_content    = $request->input('comment_content');
+        $comment_user          = Auth::id();
+        $c                  = new Comment;
+        $c->kyniem_id       = $comment_kyniem_id;
+        $c->comment_content = $comment_content;
+        $c->comment_user   = $comment_user;
+
+        $c->save();
+
+        return response(Comment::where('kyniem_id',$comment_kyniem_id)->orderByDesc('id')->get()->toArray());
     }
 }

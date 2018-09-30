@@ -111,6 +111,9 @@ Route::middleware('auth')
                  Route::get('/box_add', function () {
                      return view('welcome');
                  });
+                 Route::post('/kyniem/insert_comment', 'api\DataController@insert_comment')
+                      ->name('insert.comment');
+
              });
          });
 
