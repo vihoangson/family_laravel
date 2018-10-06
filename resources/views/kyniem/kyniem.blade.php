@@ -4,25 +4,7 @@
 
 @section('body')
     <div id="input-content">
-        <form action='/kyniem/store' method="post" id="form-insert-kyniem">
-            {{ csrf_field() }}
-
-            <input class="form-control" id="title" name="title" placeholder="Tiêu đề" style="margin-bottom: 5px;">
-
-            <textarea class="form-control" id="content" name="content" placeholder="Nội dung"></textarea>
-
-            <div class="text-left " style="margin-top:10px;" id="box-typing-auto">
-                <a href="" class="typewrite" data-period="5000" data-type='[{{cache('options_typing_homepage')}}]'>
-                    <span class="wrap"></span>
-                </a>
-            </div>
-
-            <div class="text-right " style="margin-top:10px;" id="box-button-submit">
-                <label for="fileupload" class="btn btn-default">Choose a file</label>
-                <input class="hidden" id="fileupload" type="file" name="userfile" multiple="" data-url="/ajax_up_files" accept="image/x-png,image/gif,image/jpeg">
-                <button class="btn btn-primary">Submit</button>
-            </div>
-        </form>
+        @include('layouts.includes.form_create_kyniem')
     </div>
     <div class="progress" id="process-bm" style="display:none;">
         <div class="progress-bar progress-bar-striped active" id="progress-b" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">

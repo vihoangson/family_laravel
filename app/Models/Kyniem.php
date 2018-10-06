@@ -27,6 +27,12 @@ class Kyniem extends Model
         return $value;
     }
 
+    /**
+     * Convert thuoc tinh tu markdown ra html
+     *
+     * @return mixed
+     * @author hoang_son
+     */
     public function getKyniemContentMarkdownAttribute()
     {
         return Markdown::defaultTransform($this->kyniem_content);
