@@ -1,8 +1,9 @@
-.block-background .background{
+.block-background .background {
     width: 10px !important;
     height: 10px !important;
     float: left;
 }
+
 .background {
     background: pink;
     display: table-cell;
@@ -16,12 +17,33 @@
     font-size: 27px;
     line-height: 33px;
 }
+
 .blue {
-    background: #c3c3ff;
+    background-image: linear-gradient(#cacaff, #8e8eff);
 }
+
 .red {
-    background: #ffb9b9;
+    background: linear-gradient(#ffeded, #ffb9b9);
 }
+
 .pink {
-    background: #ff4d4d;
+    background: linear-gradient(#ffb8b8, #ff4d4d);
+}
+
+.rose {
+    background: url(img/rose.png);
+    color: white;
+    text-shadow: 2px 3px 10px #000;
+}
+
+.rose2 {
+    background: url(img/rose2.jpg);
+    color: white;
+    text-shadow: 2px 3px 10px #000;
+}
+
+.candy {
+    background: url(img/candy.jpg);
+    color: white;
+    text-shadow: 2px 3px 10px #000;
 }

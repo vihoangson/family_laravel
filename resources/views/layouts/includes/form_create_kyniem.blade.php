@@ -15,6 +15,9 @@
         <div class="changebg background blue" data-style="blue"></div>
         <div class="changebg background red" data-style="red"></div>
         <div class="changebg background pink" data-style="pink"></div>
+        <div class="changebg background rose" data-style="rose"></div>
+        <div class="changebg background rose2" data-style="rose2"></div>
+        <div class="changebg background candy" data-style="candy"></div>
     </div>
     <div class="clearfix"></div>
 
