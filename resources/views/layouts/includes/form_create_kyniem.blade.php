@@ -11,6 +11,14 @@
 
     <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{isset($data->kyniem_content)?$data->kyniem_content:''}}</textarea>
 
+    <div class="block-background">
+        <div class="changebg background blue" data-style="blue"></div>
+        <div class="changebg background red" data-style="red"></div>
+        <div class="changebg background pink" data-style="pink"></div>
+    </div>
+    <div class="clearfix"></div>
+
+
     <div class="text-left " style="margin-top:10px;" id="box-typing-auto">
         <a href="" class="typewrite" data-period="5000" data-type='[ "Xin chào, Bố Sơn đây", "Kem phải ăn ngoan ngủ ngoan nhé","Thương con và mẹ nhiều lắm","Một ngày bắt đầu bố thấy rất vui và hạnh phúc","Khi nhìn thấy con cười","Mỗi ngày bố chở Kem đi học đều chụp hình cho con để thấy được con lớn từng ngày như thế nào" ]'>
             <span class="wrap"></span>

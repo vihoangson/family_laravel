@@ -39,6 +39,8 @@
     <link rel="stylesheet" href="css/theme-shop.css">
     <link rel="stylesheet" href="css/theme-animate.css">
 
+    <link rel="stylesheet" href="/assets/Library/Background/style.css">
+
 
     <!-- Skin CSS -->
     <link rel="stylesheet" href="css/skins/default.css">
@@ -268,6 +270,8 @@
 
 <!-- Theme Base, Components and Settings -->
 <script src="js/theme.js"></script>
+
+<script src="/assets/js/app.js"></script>
 
 <!-- Theme Custom -->
 <script src="js/custom.js"></script>

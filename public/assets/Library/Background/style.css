@@ -1,0 +1,27 @@
+.block-background .background{
+    width: 10px !important;
+    height: 10px !important;
+    float: left;
+}
+.background {
+    background: pink;
+    display: table-cell;
+    color: white;
+    padding: 10px;
+    width: 500px;
+    height: 300px;
+    border-radius: 8px;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 27px;
+    line-height: 33px;
+}
+.blue {
+    background: #c3c3ff;
+}
+.red {
+    background: #ffb9b9;
+}
+.pink {
+    background: #ff4d4d;
+}

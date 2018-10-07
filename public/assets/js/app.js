@@ -5,3 +5,6 @@ $(".add-kyniem").click(function(){
     })
 })
 
+$(".changebg").click(function(){
+    $("#content").val($("#content").val() + '[background='+$(this).data('style')+'][/background]')
+})
