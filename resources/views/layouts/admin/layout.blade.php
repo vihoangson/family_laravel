@@ -148,7 +148,9 @@
                             <li><a href="{{route('media.index')}}">Media</a></li>
                             <li><a href="{{route('cloud.index')}}">Cloud</a></li>
                             <li><a href="{{route('family-tree-index')}}">Family tree</a></li>
-                            <li >
+                            <li><a href="{{route('do_backup')}}">Do backup</a></li>
+
+                            <li class="hidden">
                                 <a href="{{route('admin_options')}}">Photos (4)</a>
                                 <ul>
                                     <li><a href="{{route('admin_options')}}">Animals</a></li>

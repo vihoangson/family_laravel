@@ -82,11 +82,7 @@ Route::middleware('auth')
                   ->name('kyniem_search');
          });
 
-         // Controller media
-         Route::resource('/admin/media','admin\MediaController');
 
-         // Controller media
-         Route::resource('/admin/cloud','admin\CloudController');
 
          // Overview
          Route::get('/overview', 'KyniemController@overview')
@@ -94,10 +90,27 @@ Route::middleware('auth')
 
          // Group admin
          Route::group(['prefix' => 'admin'], function () {
+
+             // Controller media
+             Route::resource('/media','admin\MediaController');
+
+             // Controller media
+             Route::resource('/cloud','admin\CloudController');
+
              Route::get('/options', 'admin\OptionsController@index')
                   ->name('admin_options');
+
              Route::post('/options', 'admin\OptionsController@store')
                   ->name('admin_options_save');
+
+             Route::group(['prefix' => '/cache'], function () {
+                 Route::get('/clear_cache_options', 'admin\CacheController@clearCacheOptions')
+                      ->name('clear_cache_options');
+             });
+
+             // admin backup
+             Route::get('/do_backup', 'admin\BackupController@do_backup')
+                  ->name('do_backup');
 
          });
 
@@ -117,11 +130,7 @@ Route::middleware('auth')
              });
          });
 
-         Route::group(['prefix' => '/admin/cache'], function () {
-             Route::get('/clear_cache_options', 'admin\CacheController@clearCacheOptions')
-                  ->name('clear_cache_options');
 
-         });
 
          // API upload file
          Route::post('/ajax_up_files', 'api\DataController@ajax_up_files')

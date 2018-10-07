@@ -10,7 +10,7 @@ class BackupDBLib {
         }
 
         try {
-            $new_file = 'data_family.' . date("Y-m-d__H_i_s") . '.bk';
+            $new_file = env('APP_URL').'_data_family.' . date("Y-m-d__H_i_s") . '.bk';
             copy(($file), base_path('sqlite/' . $new_file));
             if(file_exists(base_path('sqlite/' . $new_file))){
                 CloudinaryLib::uploadFileRaw(base_path('sqlite/' . $new_file), 'backup_db');
