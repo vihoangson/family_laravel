@@ -111,6 +111,25 @@ class CloudinaryLib
         return $links;
     }
 
+    public static function getAllRaw()
+    {
+
+        \Cloudinary::config([
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+
+        $searching = new \Cloudinary\Search;
+        $result    = $searching->expression('resource_type:raw')
+                               ->sort_by('public_id', 'desc')
+                               ->max_results(100)
+                               ->execute();
+        $links     = $result->getArrayCopy()['resources'];
+
+        return $links;
+    }
+
     public static function searchFileInCloud($file_name)
     {
 

@@ -97,6 +97,9 @@ Route::middleware('auth')
              // Controller media
              Route::resource('/cloud','admin\CloudController');
 
+             Route::get('/', 'admin\OptionsController@index')
+                  ->name('admin_index');
+
              Route::get('/options', 'admin\OptionsController@index')
                   ->name('admin_options');
 
@@ -108,9 +111,14 @@ Route::middleware('auth')
                       ->name('clear_cache_options');
              });
 
+
              // admin backup
-             Route::get('/do_backup', 'admin\BackupController@do_backup')
-                  ->name('do_backup');
+             Route::group(['prefix' => '/backup'], function () {
+                 Route::get('/do_backup', 'admin\BackupController@do_backup')
+                      ->name('do_backup');
+                 Route::get('/list_file_db_backup', 'admin\BackupController@list_file_db_backup')
+                      ->name('list_file_db_backup');
+             });
 
          });
 
