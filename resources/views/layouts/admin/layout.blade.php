@@ -83,7 +83,7 @@
                                         <a href="#"><i class="fa fa-angle-right"></i> Contact Us</a>
                                     </li>
                                     <li>
-                                        <span class="ws-nowrap"><i class="fa fa-phone"></i> 0121.885.1144</span>
+                                        <span class="ws-nowrap"><i class="fa fa-phone"></i> Gia đình là số một</span>
                                     </li>
                                 </ul>
                             </nav>
@@ -329,11 +329,11 @@
                 </div>
                 <div class="col-md-4">
                     <div class="contact-details">
-                        <h4>Địa chỉ nhà mình</h4>
+                        <h4>Địa chỉ nhà mình - Gia đình là số một</h4>
                         <ul class="contact">
                             <li><p><i class="fa fa-map-marker"></i>
-                                    <strong>Địa chỉ:</strong> 178/7p Hậu Giang F6 Q6 Tp.HCM</p></li>
-                            <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> 0121.885.1144</p></li>
+                                    <strong>Địa chỉ:</strong> </p></li>
+                            <li><p><i class="fa fa-phone"></i> <strong>Phone:</strong> </p></li>
                             <li><p><i class="fa fa-envelope"></i> <strong>Email:</strong>
                                     <a href="mailto:vihoangson@gmail.com">vihoangson@gmail.com</a></p></li>
                         </ul>
