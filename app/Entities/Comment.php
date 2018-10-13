@@ -29,6 +29,9 @@ class Comment extends Model implements Transformable
     public function Usercomment()
     {
         return $this->hasOne('App\User', 'id', 'comment_user');
+    }
 
+    public function Kyniem(){
+        return $this->hasOne('App\Models\Kyniem', 'id', 'kyniem_id');
     }
 }

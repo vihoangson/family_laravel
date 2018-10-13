@@ -21,6 +21,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -162,6 +163,8 @@ class DataController extends BaseController
         $c->comment_user   = $comment_user;
 
         $c->save();
+
+        Cache::forget('cache_comment');
 
         return response(Comment::where('kyniem_id',$comment_kyniem_id)->orderByDesc('id')->get()->toArray());
     }
