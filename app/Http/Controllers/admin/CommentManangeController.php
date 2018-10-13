@@ -44,8 +44,7 @@ class CommentManangeController extends Controller
         $all = Cache::get('cache_comment');
 
         $page    = Input::get('page', 1);
-        $perPage = 40;
-
+        $perPage = config('common.per_page');
 
         $data = new LengthAwarePaginator($all->forPage($page, $perPage), $all->count(), $perPage, $page,
             ['path' => route('comment_manage.index')]);
