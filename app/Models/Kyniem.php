@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Libraries\Backgroud;
+use App\Libraries\CommonLib;
 use App\Libraries\Markdown;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -37,6 +38,7 @@ class Kyniem extends Model
     public function getKyniemContentMarkdownAttribute()
     {
         $this->kyniem_content = Backgroud::filter($this->kyniem_content);
+        $this->kyniem_content = CommonLib::filterSmile($this->kyniem_content);
         return Markdown::defaultTransform($this->kyniem_content);
     }
 
