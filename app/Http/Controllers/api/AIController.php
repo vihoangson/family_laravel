@@ -223,7 +223,7 @@ class AIController extends BaseController {
     }
 
     /**
-     * @param $ask
+     * @param string $ask câu hỏi
      *
      * @return null|string|string[]
      */

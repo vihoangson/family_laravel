@@ -91,6 +91,9 @@ Route::middleware('auth')
          // Group admin
          Route::group(['prefix' => 'admin'], function () {
 
+             // Controller comment manage
+             Route::resource('/comment_manage','admin\CommentManangeController');
+
              // Controller media
              Route::resource('/media','admin\MediaController');
 

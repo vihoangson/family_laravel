@@ -150,6 +150,7 @@
                             <li><a href="{{route('family-tree-index')}}">Family tree</a></li>
                             <li><a href="{{route('do_backup')}}" onclick="return confirm('Chắc là muốn backup không')">Do backup</a></li>
                             <li><a href="{{route('list_file_db_backup')}}">List file db backup</a></li>
+                            <li><a href="{{route('comment_manage.index')}}">Quản lý comment</a></li>
 
                             <li class="hidden">
                                 <a href="{{route('admin_options')}}">Photos (4)</a>
