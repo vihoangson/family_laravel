@@ -18,7 +18,7 @@ class MediaController extends Controller
      */
     public function index()
     {
-        $data = Media::paginate();
+        $data = Media::paginate(config('common.per_page'));
 
         return view('admin/medialist')->with('data', $data);
 

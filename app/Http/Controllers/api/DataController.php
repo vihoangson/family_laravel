@@ -54,7 +54,7 @@ class DataController extends BaseController
         $data   = $kyniem->where('delete_flg', 0)
                          ->where('show_flg', 1)
                          ->orderBy('id', 'desc')
-                         ->limit(10)
+                         ->limit(config('common.per_page',10))
                          ->offset($request->input('step'))
                          ->get();
         $return = $data->toArray();
