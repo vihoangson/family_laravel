@@ -2,6 +2,8 @@
 
 namespace App\Libraries;
 
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class CloudinaryLib
@@ -92,9 +94,12 @@ class CloudinaryLib
         ]);
     }
 
+    /**
+     * @return mixed
+     * @author hoang_son
+     */
     public static function getAllImage()
     {
-
         \Cloudinary::config([
             'api_key'    => env('api_key'),
             'api_secret' => env('api_secret'),
@@ -103,14 +108,18 @@ class CloudinaryLib
 
         $searching = new \Cloudinary\Search;
         $result    = $searching->expression('resource_type:image')
-                               ->sort_by('public_id', 'desc')
-                               ->max_results(100)
+                               ->sort_by('version', 'desc')
+                               ->max_results(config('configfamily.max_result_cloud'))
                                ->execute();
         $links     = $result->getArrayCopy()['resources'];
 
         return $links;
     }
 
+    /**
+     * @return mixed
+     * @author hoang_son
+     */
     public static function getAllRaw()
     {
 
@@ -122,14 +131,45 @@ class CloudinaryLib
 
         $searching = new \Cloudinary\Search;
         $result    = $searching->expression('resource_type:raw')
-                               ->sort_by('public_id', 'desc')
-                               ->max_results(100)
+                               ->sort_by('version', 'desc')
+                               ->max_results(config('configfamily.max_result_cloud'))
                                ->execute();
         $links     = $result->getArrayCopy()['resources'];
 
         return $links;
     }
 
+    /**
+     * Chức năng lấy dữ liệu toàn bộ file backup về
+     *
+     * @return mixed
+     * @author hoang_son
+     */
+    public static function getAllFileBackup()
+    {
+
+        \Cloudinary::config([
+            'api_key'    => env('api_key'),
+            'api_secret' => env('api_secret'),
+            'cloud_name' => env('cloud_name'),
+        ]);
+
+        $searching = new \Cloudinary\Search;
+        $result    = $searching->expression('resource_type:raw and format=bk')
+                               ->sort_by('version', 'desc')
+                               ->max_results(config('configfamily.max_result_cloud'))
+                               ->execute();
+        $links     = $result->getArrayCopy()['resources'];
+
+        return $links;
+    }
+
+    /**
+     * @param $file_name
+     *
+     * @return bool
+     * @author hoang_son
+     */
     public static function searchFileInCloud($file_name)
     {
 
@@ -141,8 +181,8 @@ class CloudinaryLib
 
         $searching = new \Cloudinary\Search;
         $result    = $searching->expression('filename="' . $file_name . '"')
-                               ->sort_by('public_id', 'desc')
-                               ->max_results(100)
+                               ->sort_by('version', 'desc')
+                               ->max_results(config('configfamily.max_result_cloud'))
                                ->execute();
         $links     = $result->getArrayCopy()['resources'];
         if (isset($links[0])) {
@@ -150,7 +190,40 @@ class CloudinaryLib
         }
 
         return false;
-
-
     }
+
+    /**
+     * @param null $data
+     *
+     * @throws \Exception
+     * @author hoang_son
+     */
+    public static function downloadLastFileDBInCloud($data_backup = null)
+    {
+        //<editor-fold desc="Set data backup">
+        if ($data_backup == null) {
+            $data = self::getAllFileBackup();
+            foreach ($data as $value) {
+                if (preg_match('/family\.vihoangson\.com_data_family/', $value['filename'])) {
+                    $data_backup = $value;
+                    break;
+                }
+            }
+        }
+        //</editor-fold>
+
+        $m    = file_get_contents($data_backup['url']);
+        $path = env('DB_DATABASE');
+
+        // Backup before restore
+        // self:self::uploadFileRaw($path,'backup_db');
+
+        if (!file_put_contents($path, $m)) {
+            throw new \Exception("Can't save file db");
+        } else {
+            Log::info('Get db');
+        }
+    }
+
+
 }

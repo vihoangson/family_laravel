@@ -33,13 +33,18 @@ class RestoreController extends Controller
         $this->get_imgs();
     }
 
-    private function get_db() {
-        $data = CloudinaryLib::getAllRaw();
-        dd($data);
-
+    /**
+     * Lấy file mới nhất trên cloud về
+     *
+     * @author hoang_son
+     */
+    private function get_db()
+    {
+        CloudinaryLib::downloadLastFileDBInCloud();
     }
 
-    private function get_imgs() {
+    private function get_imgs()
+    {
 
         $data = CloudinaryLib::getAllImage();
 

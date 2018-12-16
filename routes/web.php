@@ -126,7 +126,7 @@ Route::middleware('auth')
              // admin restore
 
              Route::group(['prefix' => '/restore'], function () {
-                 Route::get('/do_restore', 'admin\BackupController@do_restore')
+                 Route::get('/do_restore', 'admin\RestoreController@do_restore')
                       ->name('do_restore');
              });
          });

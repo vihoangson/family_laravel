@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Libraries\CloudinaryLib;
 use App\Models\Options;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
@@ -22,9 +23,15 @@ class Controller extends BaseController
      */
     public function __construct()
     {
+        //<editor-fold desc="Check nếu không có file db thì lên cloud lấy file db mới nhất về">
+        $this->setupInitDB();
+        //</editor-fold>
 
+        //<editor-fold desc="Set cache filter cho simsimi">
         $this->set_cache_filter_text_simsimi();
+        //</editor-fold>
 
+        //<editor-fold desc="Set cache option nếu chưa có">
         if (!Cache::has('cache_option')) {
             $data_options = Options::where('option_key', 'not like', '"%cache%e"')
                                    ->get()
@@ -36,9 +43,13 @@ class Controller extends BaseController
             }
             Cache::put('cache_option', true);
         }
+        //</editor-fold>
 
     }
 
+    /**
+     * @author hoang_son
+     */
     private function set_cache_filter_text_simsimi()
     {
         $filter_text = Cache::get('filter_text', config('AI.answers.filter_text'));
@@ -49,5 +60,18 @@ class Controller extends BaseController
     {
         Cache::forever('filter_text', $filter_number);
         $this->set_cache_filter_text_simsimi();
+    }
+
+    /**
+     *  Check nếu không có file db thì lên cloud lấy file db mới nhất về
+     *
+     * @author hoang_son
+     */
+    private function setupInitDB()
+    {
+        // Check nếu không có file db thì lên cloud lấy file db mới nhất về
+        if (!file_exists(env('DB_DATABASE'))) {
+            CloudinaryLib::downloadLastFileDBInCloud();
+        }
     }
 }
