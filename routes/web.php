@@ -123,6 +123,12 @@ Route::middleware('auth')
                       ->name('list_file_db_backup');
              });
 
+             // admin restore
+
+             Route::group(['prefix' => '/restore'], function () {
+                 Route::get('/do_restore', 'admin\BackupController@do_restore')
+                      ->name('do_restore');
+             });
          });
 
          // Group api
