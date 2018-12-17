@@ -62,7 +62,6 @@ class CloudinaryLib
 
         //todo: get list image in cloud
         $images_in_cloud = CloudinaryLib::getAllImage();
-        $images_in_cloud = \Cache::get('dataimgcloud');
 
         //todo: compare with local
         //todo: lấy ra những file trên cloud chưa có
@@ -72,7 +71,6 @@ class CloudinaryLib
             $m[$key] = basename($v);
         }
 
-        dump($images_in_local);
         foreach ($images_in_cloud as $value){
 
             $rs = array_search(basename($value['url']),$m);
@@ -83,7 +81,9 @@ class CloudinaryLib
                 unset($images_in_local[$rs]);
             }
         }
-        dd($images_in_local);
+
+        // Chưa cần thực hiện chỉ thực hiện 1 lần lúc set up ban đầu cloud
+        return ;
 
         //todo: upload các file trên kia chưa có
         //<editor-fold desc="Tiến hành up lên cloud">
@@ -113,6 +113,10 @@ class CloudinaryLib
         //</editor-fold>
     }
 
+    /**
+     * @param        $path
+     * @param string $folder_name
+     */
     public static function uploadFileRaw($path, $folder_name = 'folder_file_raw')
     {
 
@@ -281,6 +285,8 @@ class CloudinaryLib
             Log::info('Get db');
         }
     }
+
+
 
 
 }

@@ -43,9 +43,6 @@ class KyNiemControllerTest extends TestCase
     public function test_checkdomain()
     {
         $s = file_get_contents('https://whois.inet.vn/api/whois/domainspecify/asalight.vn');
-        if (json_decode($s, true)['expirationDate'] == '27-07-2018') {
-
-        }
     }
 
     public function test_createKyniem()

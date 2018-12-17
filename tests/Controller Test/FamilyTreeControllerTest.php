@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Libraries\CloudinaryLib;
 use Cloudinary\Api;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -15,4 +17,10 @@ class FamilyTreeControllerTest extends TestCase {
         $response->assertStatus(302);
     }
 
+    public function test_upload_file(){
+        CloudinaryLib::uploadFileRaw(base_path('readme.md'),'testing_upload');
+    }
+    public function test_get_all_file_storage(){
+        dd(Storage::allFiles());
+    }
 }
