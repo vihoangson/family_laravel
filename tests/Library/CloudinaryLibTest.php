@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Unit;
+namespace Tests\Library;
 
 use App\Libraries\Backgroud;
 use App\Libraries\CloudinaryLib;
