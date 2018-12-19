@@ -70,6 +70,7 @@ class Controller extends BaseController
         // Check nếu không có file db thì lên cloud lấy file db mới nhất về
         if (!file_exists(env('DB_DATABASE'))) {
             CloudinaryLib::downloadLastFileDBInCloud();
+            Cache::flush();
         }
     }
 }

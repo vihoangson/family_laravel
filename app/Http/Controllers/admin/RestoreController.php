@@ -32,10 +32,10 @@ class RestoreController extends Controller
     public function process_restore(Request $request)
     {
         //todo: Get db
-        $this->get_db();
+        self::get_db();
 
         //todo: Get images
-        $this->get_imgs();
+        self::get_imgs();
 
 
     }
@@ -45,14 +45,14 @@ class RestoreController extends Controller
      *
      * @author hoang_son
      */
-    private function get_db()
+    public static function get_db()
     {
         if (!file_exists(env('DB_DATABASE'))) {
             CloudinaryLib::downloadLastFileDBInCloud();
         }
     }
 
-    private function get_imgs()
+    public static function get_imgs()
     {
         $data = \Cache::forget('dataimgcloud');
         if (!\Cache::has('dataimgcloud')) {

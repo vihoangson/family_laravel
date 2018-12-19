@@ -16,6 +16,19 @@ class Kyniem extends Model
     protected $appends = ['kyniem_content_markdown','date_format'];
     protected $with = ['Comment'];
 
+    public $fields = [
+        'id',
+        'kyniem_title',
+        'kyniem_content',
+        'kyniem_images',
+        'kyniem_create',
+        'kyniem_modifie',
+        'kyniem_auth',
+        'delete_flg',
+        'status',
+        'show_flg',
+    ];
+
     const CREATED_AT = 'kyniem_create';
     const UPDATED_AT = 'kyniem_modifie';
 

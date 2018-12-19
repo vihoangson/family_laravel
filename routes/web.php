@@ -126,6 +126,7 @@ Route::middleware('auth')
              // admin restore
 
              Route::group(['prefix' => '/restore'], function () {
+                 // admin/restore/do_restore
                  Route::get('/do_restore', 'admin\RestoreController@do_restore')
                       ->name('do_restore');
              });
@@ -138,6 +139,8 @@ Route::middleware('auth')
                       ->name('api_data');
                  Route::get('/getkyniem', 'api\DataController@get_ky_niem')
                       ->name('api_getkyniem');
+                 Route::get('/getkyniem_html', 'api\DataController@get_ky_niem_html')
+                      ->name('api_getkyniem_html');
                  Route::get('/box_add', function () {
                      return view('welcome');
                  });

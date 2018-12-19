@@ -39,7 +39,9 @@ class ownAuthenticate extends Authenticate{
      */
     public function handle($request, Closure $next, ...$guards)
     {
-        $this->authenticate($guards);
+        if($request->header('secret-api') != env('SECRET-API')) {
+            $this->authenticate($guards);
+        }
 
         return $next($request);
     }

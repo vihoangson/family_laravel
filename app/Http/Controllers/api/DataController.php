@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Entities\Comment;
+use App\Http\Controllers\admin\RestoreController;
 use App\Libraries\Markdown;
 use App\Models\Files_model;
 use App\Models\Img_cloudinary_model;
@@ -15,7 +16,8 @@ use Faker\Provider\File;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller as BaseController;
+
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
@@ -30,8 +32,6 @@ class DataController extends BaseController {
 
     use Cloudinary_trait;
 
-    public function __construct() { }
-
     /**
      * @param Request $request
      */
@@ -43,31 +43,39 @@ class DataController extends BaseController {
      * Lấy thông tin kỷ niệm hiện tra trang chủ
      *
      * @param Request $request
+     * @api /api/getkyniem
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
     public function get_ky_niem(Request $request) {
 
         $step         = $request->input('step');
-        $key_of_cache = config('configfamily.namecachedata') . ':' . $step;
 
-
-        if (!Cache::has($key_of_cache)) {
-            $kyniem = new Kyniem();
-            $data   = $kyniem->where('delete_flg', 0)
-                             ->where('show_flg', 1)
-                             ->orderBy('id', 'desc')
-                             ->limit(config('common.per_page', 10))
-                             ->offset($step)
-                             ->get();
-            Cache::forever($key_of_cache, $data);
-        } else {
-            $data = Cache::get($key_of_cache);
-        }
+        $data = $this->get_data_kyniem($step);
 
         $return = $data->toArray();
 
         return response($return);
+    }
+
+    /**
+     * Lấy thông tin kỷ niệm hiện tra trang chủ
+     *
+     * @param Request $request
+     * @api /api/getkyniem
+     *
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
+    public function get_ky_niem_html(Request $request) {
+        $step         = $request->input('step');
+
+        $data = $this->get_data_kyniem($step);
+
+        echo '<base href="'.env('APP_URL').'">';
+
+        foreach ($data as $value){
+            echo Markdown::defaultTransform($value->kyniem_content);
+        }
     }
 
     /**
@@ -195,5 +203,27 @@ class DataController extends BaseController {
             }
         }
         dd($keys);
+    }
+
+    /**
+     * @param int $step Step offset
+     *
+     * @return Kyniem[]|\Illuminate\Database\Eloquent\Collection
+     */
+    private function get_data_kyniem($step) {
+        $key_of_cache = config('configfamily.namecachedata') . ':' . $step;
+
+        if (!Cache::has($key_of_cache)) {
+            $data   = Kyniem::where('delete_flg', 0)
+                             ->where('show_flg', 1)
+                             ->orderBy('id', 'desc')
+                             ->limit(config('common.per_page', 10))
+                             ->offset($step)
+                             ->get();
+            Cache::forever($key_of_cache, $data);
+        } else {
+            $data = Cache::get($key_of_cache);
+        }
+        return $data;
     }
 }
