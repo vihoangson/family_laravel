@@ -26,8 +26,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
-class DataController extends BaseController
-{
+class DataController extends BaseController {
 
     use Cloudinary_trait;
 
@@ -36,8 +35,7 @@ class DataController extends BaseController
     /**
      * @param Request $request
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request) {
     }
 
 
@@ -48,15 +46,24 @@ class DataController extends BaseController
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function get_ky_niem(Request $request)
-    {
-        $kyniem = new Kyniem();
-        $data   = $kyniem->where('delete_flg', 0)
-                         ->where('show_flg', 1)
-                         ->orderBy('id', 'desc')
-                         ->limit(config('common.per_page',10))
-                         ->offset($request->input('step'))
-                         ->get();
+    public function get_ky_niem(Request $request) {
+
+        $step         = $request->input('step');
+        $key_of_cache = config('configfamily.namecachedata') . ':' . $step;
+
+        if (!Cache::has($key_of_cache)) {
+            $kyniem = new Kyniem();
+            $data   = $kyniem->where('delete_flg', 0)
+                             ->where('show_flg', 1)
+                             ->orderBy('id', 'desc')
+                             ->limit(config('common.per_page', 10))
+                             ->offset($step)
+                             ->get();
+            Cache::forever($key_of_cache, $data);
+        } else {
+            $data = Cache::get($key_of_cache);
+        }
+
         $return = $data->toArray();
 
         return response($return);
@@ -67,8 +74,7 @@ class DataController extends BaseController
      *
      * @return array
      */
-    public function ajax_up_files(Request $request)
-    {
+    public function ajax_up_files(Request $request) {
 
         //<editor-fold desc="Upload hình">
         $name = date('Ymd_Hmi') . "_" . ($request->file('userfile')
@@ -133,8 +139,7 @@ class DataController extends BaseController
      * @return \Illuminate\Http\JsonResponse
      * @author hoang_son
      */
-    public function get_calendar()
-    {
+    public function get_calendar() {
         $kn = Kyniem::all();
         foreach ($kn as $v) {
             $json[] = [
@@ -152,20 +157,42 @@ class DataController extends BaseController
         return response()->json($json);
     }
 
-    public function insert_comment(Request $request)
-    {
+    public function insert_comment(Request $request) {
         $comment_kyniem_id  = $request->input('comment_kyniem_id');
         $comment_content    = $request->input('comment_content');
-        $comment_user          = Auth::id();
+        $comment_user       = Auth::id();
         $c                  = new Comment;
         $c->kyniem_id       = $comment_kyniem_id;
         $c->comment_content = $comment_content;
-        $c->comment_user   = $comment_user;
+        $c->comment_user    = $comment_user;
 
         $c->save();
 
         Cache::forget('cache_comment');
 
-        return response(Comment::where('kyniem_id',$comment_kyniem_id)->orderByDesc('id')->get()->toArray());
+        return response(Comment::where('kyniem_id', $comment_kyniem_id)
+                               ->orderByDesc('id')
+                               ->get()
+                               ->toArray());
+    }
+
+    private function get_all_key_cache() {
+
+        $storage    = Cache::getStore(); // will return instance of FileStore
+        $filesystem = $storage->getFilesystem(); // will return instance of Filesystem
+        $dir        = (Cache::getDirectory());
+        $keys       = [];
+        foreach ($filesystem->allFiles($dir) as $file1) {
+
+            if (is_dir($file1->getPath())) {
+
+                foreach ($filesystem->allFiles($file1->getPath()) as $file2) {
+                    $keys = array_merge($keys, [$file2->getRealpath() => unserialize(substr(\File::get($file2->getRealpath()), 10))]);
+                }
+            } else {
+
+            }
+        }
+        dd($keys);
     }
 }
