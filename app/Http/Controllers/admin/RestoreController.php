@@ -47,6 +47,10 @@ class RestoreController extends Controller
      */
     public static function get_db()
     {
+        if(env('APP_ENV') != 'local'){
+            return false;
+        }
+
         if (!file_exists(env('DB_DATABASE'))) {
             CloudinaryLib::downloadLastFileDBInCloud();
         }
@@ -54,6 +58,10 @@ class RestoreController extends Controller
 
     public static function get_imgs()
     {
+        if(env('APP_ENV') != 'local'){
+            return false;
+        }
+
         $data = \Cache::forget('dataimgcloud');
         if (!\Cache::has('dataimgcloud')) {
             $data = CloudinaryLib::getImageInFolder('my_folder/img_family');
