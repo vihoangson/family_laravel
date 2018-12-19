@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Libraries\CommonLib;
-use App\Traits\Cloudinary_trait;
-
 use App\Http\Controllers\Controller as Controller;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 

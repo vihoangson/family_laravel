@@ -17,7 +17,7 @@
                 <h2><a href="blog-post.html">{{$m->kyniem_title}}</a></h2>
                 {!! $m->kyniem_content_markdown !!}
                 <div class="post-meta ">
-                    <span><i class="fa fa-user"></i> By <a href="#">{{$m->user->name}}</a> </span>
+                    <span><i class="fa fa-user"></i> By <a href="#">{{@$m->user->name}}</a> </span>
                     <span><i class="fa fa-tag"></i> <a href="#">Duis</a>, <a href="#">News</a> </span>
                     <span><i class="fa fa-comments"></i> <a href="#">12 Comments</a></span>
                     <a href="blog-post.html" class="btn btn-xs btn-primary pull-right hidden">Read more...</a>

@@ -2,34 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Libraries\Markdown;
 use App\Models\Kyniem;
 
-use App\Models\Options;
 use App\Repositories\KyniemRepository;
 use App\Repositories\TagsRepository;
 use App\Traits\Cloudinary_trait;
 use Carbon\Carbon;
-
-use Illuminate\Foundation\Bus\DispatchesJobs;
 use App\Http\Controllers\Controller as Controller;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use App\Http\Requests;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\View;
 
-class KyniemController extends Controller
-{
+class KyniemController extends Controller {
 
     use Cloudinary_trait;
 
     private $kyniem_repository;
     private $tags_repository;
 
-    public function __construct(KyniemRepository $kyniem_repository, TagsRepository $tags_repository)
-    {
+    public function __construct(KyniemRepository $kyniem_repository, TagsRepository $tags_repository) {
         $this->kyniem_repository = $kyniem_repository;
         $this->tags_repository   = $tags_repository;
 
@@ -37,22 +28,26 @@ class KyniemController extends Controller
         \Debugbar::disable();
     }
 
-    public function index()
-    {
+    public function index() {
         return view('kyniem.kyniem');
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
 
         $this->validate($request, [
             'keyword' => 'required|string|min:3|max:255'
         ]);
 
+        /** @var string $keyword get variable keyword */
         $keyword = $request->input('keyword');
 
-        $data = Kyniem::search($keyword)
-                      ->paginate();
+        //<editor-fold desc="Cache data search">
+        $data = Cache::remember(config('configfamily.cache_search_kyniem') . ':' . $keyword, 9000, function () use ($keyword) {
+            return Kyniem::search($keyword)
+                         ->paginate();
+        });
+        //</editor-fold>
+
         $data->appends(['keyword' => $keyword]);
 
         return view('kyniem.search', ['data' => $data]);
@@ -61,15 +56,14 @@ class KyniemController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function overview()
-    {
-        $this->tags_repository->create(['name'=>'tag1']);
+    public function overview() {
+        $this->tags_repository->create(['name' => 'tag1']);
         dd($this->tags_repository->all());
+
         return view('kyniem.overview');
     }
 
-    public function edit(Request $request)
-    {
+    public function edit(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $data   = $kyniem->find($id);
@@ -83,8 +77,7 @@ class KyniemController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
-    public function delete(Request $request)
-    {
+    public function delete(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
@@ -101,8 +94,7 @@ class KyniemController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
 
         // Validate nội dung
         $this->validate($request, [
@@ -128,8 +120,7 @@ class KyniemController extends Controller
             ->with('msgToast', 'Đã lưu thành công');
     }
 
-    public function calendar()
-    {
+    public function calendar() {
         return view('kyniem.calendar');
 
     }

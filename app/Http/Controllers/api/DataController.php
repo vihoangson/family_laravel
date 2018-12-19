@@ -51,6 +51,7 @@ class DataController extends BaseController {
         $step         = $request->input('step');
         $key_of_cache = config('configfamily.namecachedata') . ':' . $step;
 
+
         if (!Cache::has($key_of_cache)) {
             $kyniem = new Kyniem();
             $data   = $kyniem->where('delete_flg', 0)
