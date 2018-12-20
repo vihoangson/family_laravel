@@ -28,6 +28,7 @@ class KyniemService {
      * @param $request
      *
      * @return bool
+     * @throws \Exception
      */
     public function save($request) {
 
@@ -38,23 +39,30 @@ class KyniemService {
 
         $id = ($request->input('id'));
         if (!empty($id)) {
-            $kyniem                = Kyniem::find($request->input('id'));
+
+            // Update kyniem
+            $kyniem = Kyniem::find($request->input('id'));
+
+            // Check exist content
+            if ($kyniem == null) {
+                throw new \Exception('Don\'t have content');
+            }
+
             $kyniem->kyniem_create = Carbon::createFromFormat('d/m/Y', $request->input('date_create'))
                                            ->format('Y-m-d H:i:s');
         } else {
+            // Insert kyniem
             $kyniem = new Kyniem();
         }
 
-        if(false){
-            $kyniem->setAttribute('kyniem_content',$request->input('content'));
-            $kyniem->setAttribute('kyniem_title',($request->input('title') ? $request->input('title') : 'Happy Family'));
-        }else{
+        if (true) {
+            $kyniem->setAttribute('kyniem_content', $request->input('content'));
+            $kyniem->setAttribute('kyniem_title', ($request->input('title') ? $request->input('title') :
+                'Happy Family'));
+        } else {
             // Không dùng cách này
             $kyniem->kyniem_content = $request->input('content');
             $kyniem->kyniem_title   = ($request->input('title') ? $request->input('title') : 'Happy Family');
-            echo $kyniem->getAttribute('kyniem_content');
-            dd(Kyniem::all()[0]);
-            dump($kyniem->getGuarded());
             die;
         }
 
