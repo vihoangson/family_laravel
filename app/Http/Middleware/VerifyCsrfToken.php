@@ -15,6 +15,7 @@ class VerifyCsrfToken extends BaseVerifier
         //
         '/api/*',
         '/upload',
+        '/kyniem/*',
         '/get_calendar',
         '/trellowebhook',
         '/ajax_up_files'
