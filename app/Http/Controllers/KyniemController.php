@@ -99,10 +99,19 @@ class KyniemController extends Controller {
         $KyniemService = new KyniemService($this->kyniem_repository);
 
         if($KyniemService->save($request)){
+
+            if($request->ajax()){
+                return response(['status' => true],200);
+            }
+
             return redirect()
                 ->route('homepage')
                 ->with('msgToast', 'Đã lưu thành công');
         }else{
+            if($request->ajax()){
+                return response(['status' => false],400);
+            }
+
             return redirect()
                 ->route('homepage')
                 ->with('msgToast', 'Có lỗi xảy ra');
