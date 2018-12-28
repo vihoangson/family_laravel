@@ -96,28 +96,30 @@ class KyniemController extends Controller {
      */
     public function store(Request $request) {
 
-        // Validate nội dung
-        $this->validate($request, [
-            'content' => 'required',
-        ]);
+        $KyniemService = new KyniemService($this->kyniem_repository);
 
-        $id = ($request->input('id'));
-        if (!empty($id)) {
-            $kyniem                = Kyniem::find($request->input('id'));
-            $kyniem->kyniem_create = Carbon::createFromFormat('d/m/Y', $request->input('date_create'))
-                                           ->format('Y-m-d H:i:s');
-        } else {
-            $kyniem = new Kyniem();
+        if($KyniemService->save($request)){
+
+            if($request->ajax()){
+                return response(['status' => true],200);
+            }
+
+            return redirect()
+                ->route('homepage')
+                ->with('msgToast', 'Đã lưu thành công');
+        }else{
+            if($request->ajax()){
+                return response(['status' => false],400);
+            }
+
+            return redirect()
+                ->route('homepage')
+                ->with('msgToast', 'Có lỗi xảy ra');
         }
 
-        $kyniem->kyniem_content = $request->input('content');
-        $kyniem->kyniem_title   = ($request->input('title') ? $request->input('title') : 'Happy Family');
 
-        $this->kyniem_repository->save_kyniem($kyniem);
 
-        return redirect()
-            ->route('homepage')
-            ->with('msgToast', 'Đã lưu thành công');
+
     }
 
     public function calendar() {

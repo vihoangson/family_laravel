@@ -20,6 +20,11 @@ class KyniemRepository extends BaseRepository
         return "App\\Models\\Kyniem";
     }
 
+    /**
+     * @param Kyniem $kyniem
+     *
+     * @return bool
+     */
     public function save_kyniem(Kyniem $kyniem)
     {
         try {
@@ -32,5 +37,7 @@ class KyniemRepository extends BaseRepository
             echo $e->getMessage();
             die;
         }
+
+        return true;
     }
 }
