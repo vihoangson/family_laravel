@@ -28,14 +28,16 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 
-class DataController extends BaseController {
+class DataController extends BaseController
+{
 
     use Cloudinary_trait;
 
     /**
      * @param Request $request
      */
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
     }
 
 
@@ -43,13 +45,15 @@ class DataController extends BaseController {
      * Lấy thông tin kỷ niệm hiện tra trang chủ
      *
      * @param Request $request
+     *
      * @api /api/getkyniem
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function get_ky_niem(Request $request) {
+    public function get_ky_niem(Request $request)
+    {
 
-        $step         = $request->input('step');
+        $step = $request->input('step');
 
         $data = $this->get_data_kyniem($step);
 
@@ -62,20 +66,28 @@ class DataController extends BaseController {
      * Lấy thông tin kỷ niệm hiện tra trang chủ
      *
      * @param Request $request
+     *
      * @api /api/getkyniem
      *
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      */
-    public function get_ky_niem_html(Request $request) {
-        $step         = $request->input('step');
+    public function get_ky_niem_html(Request $request)
+    {
+        $step = $request->input('step');
 
         $data = $this->get_data_kyniem($step);
 
-        echo '<base href="'.env('APP_URL').'">';
+        echo '<base href="' . env('APP_URL') . '">';
 
-        foreach ($data as $value){
+        foreach ($data as $value) {
             echo Markdown::defaultTransform($value->kyniem_content);
         }
+    }
+
+    public function ajax_up_many_files(Request $request){
+        $request_one = new Request();
+        $request_one->initialize(['userfile'=>$request->input('')]);
+        $this->ajax_up_files($request_one);
     }
 
     /**
@@ -83,12 +95,14 @@ class DataController extends BaseController {
      *
      * @return array
      */
-    public function ajax_up_files(Request $request) {
+    public function ajax_up_files(Request $request)
+    {
+        $file_input = $request->file('userfile');
 
         //<editor-fold desc="Upload hình">
-        $name = date('Ymd_Hmi') . "_" . ($request->file('userfile')
+        $name = date('Ymd_Hmi') . "_" . ($file_input
                                                  ->getClientOriginalName());
-        $path = $request->file('userfile')
+        $path = $file_input
                         ->storeAS('public/images', $name);
         //</editor-fold>
 
@@ -122,7 +136,16 @@ class DataController extends BaseController {
 
         //<editor-fold desc="Upload to clound">
         if (file_exists(public_path($link))) {
-            if ($response = $this->CloudinaryUploadImg(public_path($link))) {
+
+            //<editor-fold desc="Set path in cloud">
+            if ($request->input('path') == null) {
+                $path_in_cloud = config('configfamily.folder_in_cloud');
+            } else {
+                $path_in_cloud = $request->input('path');
+            }
+            //</editor-fold>
+
+            if ($response = $this->CloudinaryUploadImg(public_path($link), $path_in_cloud )) {
                 $media_id = Media_model::saveCloud($response);
                 Img_cloudinary_model::saveCloud(['media_id' => $media_id, 'data' => json_encode($response)]);
 
@@ -148,7 +171,8 @@ class DataController extends BaseController {
      * @return \Illuminate\Http\JsonResponse
      * @author hoang_son
      */
-    public function get_calendar() {
+    public function get_calendar()
+    {
         $kn = Kyniem::all();
         foreach ($kn as $v) {
             $json[] = [
@@ -166,7 +190,8 @@ class DataController extends BaseController {
         return response()->json($json);
     }
 
-    public function insert_comment(Request $request) {
+    public function insert_comment(Request $request)
+    {
         $comment_kyniem_id  = $request->input('comment_kyniem_id');
         $comment_content    = $request->input('comment_content');
         $comment_user       = Auth::id();
@@ -185,7 +210,8 @@ class DataController extends BaseController {
                                ->toArray());
     }
 
-    private function get_all_key_cache() {
+    private function get_all_key_cache()
+    {
 
         $storage    = Cache::getStore(); // will return instance of FileStore
         $filesystem = $storage->getFilesystem(); // will return instance of Filesystem
@@ -196,7 +222,8 @@ class DataController extends BaseController {
             if (is_dir($file1->getPath())) {
 
                 foreach ($filesystem->allFiles($file1->getPath()) as $file2) {
-                    $keys = array_merge($keys, [$file2->getRealpath() => unserialize(substr(\File::get($file2->getRealpath()), 10))]);
+                    $keys = array_merge($keys,
+                        [$file2->getRealpath() => unserialize(substr(\File::get($file2->getRealpath()), 10))]);
                 }
             } else {
 
@@ -210,20 +237,22 @@ class DataController extends BaseController {
      *
      * @return Kyniem[]|\Illuminate\Database\Eloquent\Collection
      */
-    private function get_data_kyniem($step) {
+    private function get_data_kyniem($step)
+    {
         $key_of_cache = config('configfamily.namecachedata') . ':' . $step;
 
         if (!Cache::has($key_of_cache)) {
-            $data   = Kyniem::where('delete_flg', 0)
-                             ->where('show_flg', 1)
-                             ->orderBy('id', 'desc')
-                             ->limit(config('common.per_page', 10))
-                             ->offset($step)
-                             ->get();
+            $data = Kyniem::where('delete_flg', 0)
+                          ->where('show_flg', 1)
+                          ->orderBy('id', 'desc')
+                          ->limit(config('common.per_page', 10))
+                          ->offset($step)
+                          ->get();
             Cache::forever($key_of_cache, $data);
         } else {
             $data = Cache::get($key_of_cache);
         }
+
         return $data;
     }
 }
