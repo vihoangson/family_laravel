@@ -58,7 +58,6 @@ class AIController extends BaseController {
         $this->ai_init();
 
         //<editor-fold desc="Define command for chick">
-        // todo: Nếu là mình thì sẽ ra lệnh cho gà
         if ($this->room_id == config('AI.define_member.users.me')) {
             switch ($post['webhook_event']['body']) {
                 case "open_chat":
