@@ -31,10 +31,10 @@ class RestoreController extends Controller
      */
     public function process_restore(Request $request)
     {
-        //todo: Get db
+
         self::get_db();
 
-        //todo: Get images
+
         self::get_imgs();
 
 

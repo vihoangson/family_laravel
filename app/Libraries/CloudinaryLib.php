@@ -60,11 +60,8 @@ class CloudinaryLib
 
         $set_folder_cloud = 'upload_img_'.time();
 
-        //todo: get list image in cloud
         $images_in_cloud = CloudinaryLib::getAllImage();
 
-        //todo: compare with local
-        //todo: lấy ra những file trên cloud chưa có
 
         $m=[];
         foreach ($images_in_local as $key => $v){
@@ -85,7 +82,6 @@ class CloudinaryLib
         // Chưa cần thực hiện chỉ thực hiện 1 lần lúc set up ban đầu cloud
         return ;
 
-        //todo: upload các file trên kia chưa có
         //<editor-fold desc="Tiến hành up lên cloud">
         foreach ($images_in_local as $k => $v) {
 
