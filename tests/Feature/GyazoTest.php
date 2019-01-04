@@ -19,8 +19,7 @@ class GyazoTest extends TestCase
      */
     public function testGyazo()
     {
-        $data= new Request();
-        $data->initialize();
+        $data=['imagedata'=>['']];
         $response = $this->post('/upload',$data);
         $response->assertStatus(200);
     }
