@@ -21,6 +21,7 @@ Class ImportContent {
             CloudinaryLib::downloadLastFileDBInCloud();
         }
 
+        DB::beginTransaction();
         try {
             $db     = $this->GetDBSheet();
             $string = ("'" . implode("','", array_column($db, 'date')) . "'");
@@ -36,8 +37,10 @@ Class ImportContent {
                     Cache::flush();
                 }
             }
+            DB::commit();
             CommonLib::alert_to_me('Imported content from sheet: Success');
         } catch (\Exception $e) {
+            DB::roolback();
             CommonLib::alert_to_me('Imported content from sheet: Error');
         }
 
