@@ -3,6 +3,7 @@
 namespace App\Libraries;
 
 use App\Models\Kyniem;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 Class ImportContent {
@@ -32,6 +33,7 @@ Class ImportContent {
                     $kn->kyniem_create  = $value['date'];
                     $kn->kyniem_modifie = $value['date'];
                     $kn->save();
+                    Cache::flush();
                 }
             }
             CommonLib::alert_to_me('Imported content from sheet: Success');
