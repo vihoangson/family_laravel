@@ -88,7 +88,7 @@ class AIControllerTest extends TestCase
         $data['webhook_event_type']               = 1;
         $data['webhook_event']['from_account_id'] = 1;
 
-        $response = $this->post('/api/hookchatwork', $data);
+        $response = $this->post('/api/hookchatworkss', $data);
         $response->assertStatus(404);
     }
 

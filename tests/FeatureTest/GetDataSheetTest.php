@@ -11,7 +11,7 @@ class GetDataSheetTest extends TestCase
 {
 
     public function testlibgetdbsheet(){
-        $spreadsheet_url = "https://docs.google.com/spreadsheets/d/1t5RVjamu-L16f19w27Q-yBCrLtk-sshWevda2ZhlF3U/export?format=csv&gid=0";
+        $spreadsheet_url = "1t5RVjamu-L16f19w27Q-yBCrLtk-sshWevda2ZhlF3U";
         GetDBSheet::setLinkSheet($spreadsheet_url);
         $data = GetDBSheet::getByAssign('Văn Hoài');
     }

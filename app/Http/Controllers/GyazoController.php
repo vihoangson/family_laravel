@@ -15,6 +15,10 @@ class GyazoController extends Controller
 
     public function gyazo(Request $request)
     {
+        if(!$request->file('imagedata')){
+            return;
+        }
+
         $name      = date('Ymd_Hmi') . "_" . time() . ".png";
         $path      = $request->file('imagedata')
                              ->storeAS('public/images/Gyazo', $name);
@@ -26,7 +30,7 @@ class GyazoController extends Controller
         } else {
             echo "Can't update file";
         }
-        die;
+        return;
     }
 
 }

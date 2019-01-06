@@ -2,39 +2,39 @@
 
 namespace App\Libraries;
 
-Class GetDBSheet
-{
+Class GetDBSheet {
 
     //const spreadsheet_url = '';
 
     public static $spreadsheet_url = '';
 
 
-
-    public static function setLinkSheet($spreadsheet_url){
+    public static function setLinkSheet($spreadsheet_url) {
         self::$spreadsheet_url = $spreadsheet_url;
     }
 
-    public static function getByAssign($assign)
-    {
+    public static function getByAssign($assign) {
         $return = [];
-        $data = self::getdatasheet(self::$spreadsheet_url);
-        if($assign == 'all'){
+        $data   = self::getdatasheet(self::$spreadsheet_url);
+        if ($assign == 'all') {
             return $data;
         }
 
         foreach ($data as $value) {
-            if ($value['Assign'] == $assign ) {
-                $return []= $value;
+            if ($value['Assign'] == $assign) {
+                $return [] = $value;
             }
         }
+
         return $return;
     }
 
-    public static function getdatasheet($spreadsheet_url = null)
-    {
+    public static function getdatasheet($spreadsheet_url = null) {
         if ($spreadsheet_url == null) {
             $spreadsheet_url = "https://docs.google.com/spreadsheets/d/1t5RVjamu-L16f19w27Q-yBCrLtk-sshWevda2ZhlF3U/export?format=csv&gid=0";
+        } else {
+            $spreadsheet_url = "https://docs.google.com/spreadsheets/d/" . $spreadsheet_url . "/export?format=csv&gid=0";
+
         }
         if (!ini_set('default_socket_timeout', 15)) {
             echo "<!-- unable to change socket timeout -->";
@@ -58,8 +58,6 @@ Class GetDBSheet
                     $return[$key][$name_column[$k]] = $v;
                 }
             }
-
-
         } else {
             die("Problem reading csv");
         }

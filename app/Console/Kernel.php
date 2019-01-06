@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\Backup_db::class,
+        Commands\ImportContent::class,
     ];
 
     /**
@@ -26,6 +27,10 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command( 'backup_db' )
                  ->cron( "0 0 * * * *" );//1 ngày chạy 1 lần
+
+        $schedule->command( 'import_content' )
+                 ->cron( "0 0 */4 * * *" );//1 ngày chạy 1 lần lúc 4h
+
         // $schedule->command('inspire')
         //          ->hourly();
     }

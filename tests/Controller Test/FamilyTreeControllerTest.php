@@ -17,10 +17,11 @@ class FamilyTreeControllerTest extends TestCase {
         $response->assertStatus(302);
     }
 
-    public function test_upload_file(){
-        CloudinaryLib::uploadFileRaw(base_path('readme.md'),'testing_upload');
+    public function test_upload_file() {
+        CloudinaryLib::uploadFileRaw(base_path('readme.md'), 'testing_upload');
     }
-    public function test_get_all_file_storage(){
-        dd(Storage::allFiles());
+
+    public function test_get_all_file_storage() {
+        $this->assertTrue(is_array(Storage::allFiles()));
     }
 }
