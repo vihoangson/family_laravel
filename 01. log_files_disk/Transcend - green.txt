@@ -3,6 +3,8 @@
 ./$RECYCLE.BIN/S-1-5-21-1446976602-1750219800-2146106186-500
 ./$RECYCLE.BIN/S-1-5-21-1446976602-1750219800-2146106186-500/desktop.ini
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$IQQYG5H.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RQQYG5H.txt
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/desktop.ini
 ./=== Archive ===
 ./=== Archive ===/===DamTangBaNgoai===
@@ -6101,6 +6103,8 @@
 ./===Kem===/2018/11/tonghop-Clip2.5/tonghop-Clip2.5.mp4
 ./===Kem===/2018/12
 ./===Kem===/2019
+./===Kem===/2019/tonghop-Clip2.10
+./===Kem===/2019/tonghop-Clip2.10/tonghop-Clip2.10.mp4
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130/DCIM
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130/DCIM/100CANON
@@ -10987,8 +10991,8 @@
 ./Du Lịch/2018/Vũng tàu cùng team Đôn
 ./Du Lịch/2019
 ./filename_20181006_125731.txt
-./filename_20190106_115950.txt
 ./filename_20190106_120133.txt
+./filename_20190106_162704.txt
 ./filename_OCungDiDong_20180709.rar
 ./filename_OCungDiDong_20180709.txt
 ./get_file_name.sh
