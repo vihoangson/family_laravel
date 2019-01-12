@@ -3,7 +3,15 @@
 ./$RECYCLE.BIN/S-1-5-21-1446976602-1750219800-2146106186-500
 ./$RECYCLE.BIN/S-1-5-21-1446976602-1750219800-2146106186-500/desktop.ini
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$I25YOPF.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$I5K2CYO.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$ILHLNYK.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$IMFR90P.rar
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$IQQYG5H.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$R25YOPF.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$R5K2CYO.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RLHLNYK.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RMFR90P.rar
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RQQYG5H.txt
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/desktop.ini
 ./=== Archive ===
@@ -6105,6 +6113,10 @@
 ./===Kem===/2019
 ./===Kem===/2019/tonghop-Clip2.10
 ./===Kem===/2019/tonghop-Clip2.10/tonghop-Clip2.10.mp4
+./===Kem===/2019/tonghop-Clip2.11
+./===Kem===/2019/tonghop-Clip2.11/tonghop_2.11.mp4
+./===Kem===/2019/tonghop-Clip2.12
+./===Kem===/2019/tonghop-Clip2.12/tonghop-Clip2.12.mp4
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130/DCIM
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130/DCIM/100CANON
@@ -10990,17 +11002,20 @@
 ./Du Lịch/2018/Thăm thiền viện viên không
 ./Du Lịch/2018/Vũng tàu cùng team Đôn
 ./Du Lịch/2019
-./filename_20181006_125731.txt
-./filename_20190106_120133.txt
-./filename_20190106_162704.txt
-./filename_OCungDiDong_20180709.rar
-./filename_OCungDiDong_20180709.txt
 ./get_file_name.sh
+./Logs
+./Logs/filename_20181006_125731.txt
+./Logs/filename_20190106_120133.txt
+./Logs/filename_20190106_162704.txt
+./Logs/filename_20190106_163427.txt
+./Logs/filename_20190112_102442.txt
+./Logs/filename_OCungDiDong_20180709.txt
 ./README.md
 ./System Volume Information
 ./System Volume Information/IndexerVolumeGuid
 ./System Volume Information/tracking.log
 ./System Volume Information/WPSettings.dat
+./Transcend - green.txt
 ./Udemy
 ./Udemy/php-with-laravel-for-beginners-become-a-master-in-laravel.rar
 ./Udemy/vuejs-2-the-complete-guide - sub.rar
