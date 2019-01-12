@@ -10,8 +10,13 @@ class BackupDBLib {
         }
 
         try {
-            $url_page = explode("//", env('APP_URL'));
-            $new_file = $url_page[1] . '_data_family.' . date("Y-m-d__H_i_s") . '.bk';
+            if (preg_match("/:\/\//", env('APP_URL'))) {
+                $url_page = explode("//", env('APP_URL'))[1];
+            } else {
+                $url_page = env('APP_URL');
+            }
+
+            $new_file = $url_page . '_data_family.' . date("Y-m-d__H_i_s") . '.bk';
 
             copy(($file), base_path('sqlite/' . $new_file));
             if (file_exists(base_path('sqlite/' . $new_file))) {
