@@ -131,6 +131,7 @@ class DataController extends BaseController
         $file             = new Files_model();
         $file->files_name = basename($link);
         $file->files_path = $link;
+        $file->created_at = date('Y-m-d H:i:s');
         $file->save();
         //</editor-fold>
 
