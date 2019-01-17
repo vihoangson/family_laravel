@@ -21,13 +21,13 @@ class SmsLib {
 
         if (strlen(trim($text)) < 20) {
             CommonLib::alert_to_me('Gửi không được vì chuỗi nhỏ hơn 20');
+
             return;
         }
 
-        $text = rawurlencode($text);
-        echo "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phonenumber&Content=$text&ApiKey=$ApiKey&SecretKey=$SecretKey&IsUnicode=true&SmsType=3";
-        die;
-        file_get_contents("http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phonenumber&Content=$text&ApiKey=$ApiKey&SecretKey=$SecretKey&IsUnicode=true&SmsType=3");
+        $text         = rawurlencode($text);
+        $request_link = "http://rest.esms.vn/MainService.svc/json/SendMultipleMessage_V4_get?Phone=$phonenumber&Content=$text&ApiKey=$ApiKey&SecretKey=$SecretKey&IsUnicode=true&SmsType=3";
+        file_get_contents($request_link);
     }
 
     public function sentMe($text) {
