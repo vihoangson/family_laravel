@@ -6,6 +6,7 @@ use App\Models\Kyniem;
 
 use App\Repositories\KyniemRepository;
 use App\Repositories\TagsRepository;
+use App\Services\OverviewService;
 use App\Traits\Cloudinary_trait;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller as Controller;
@@ -57,10 +58,11 @@ class KyniemController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function overview() {
-        $this->tags_repository->create(['name' => 'tag1']);
-        dd($this->tags_repository->all());
 
-        return view('kyniem.overview');
+        $data   = new OverviewService();
+        $render = $data->getDataYear();
+
+        return view('kyniem.overview', $render);
     }
 
     public function edit(Request $request) {
@@ -98,26 +100,24 @@ class KyniemController extends Controller {
 
         $KyniemService = new KyniemService($this->kyniem_repository);
 
-        if($KyniemService->save($request)){
+        if ($KyniemService->save($request)) {
 
-            if($request->ajax()){
-                return response(['status' => true],200);
+            if ($request->ajax()) {
+                return response(['status' => true], 200);
             }
 
             return redirect()
                 ->route('homepage')
                 ->with('msgToast', 'Đã lưu thành công');
-        }else{
-            if($request->ajax()){
-                return response(['status' => false],400);
+        } else {
+            if ($request->ajax()) {
+                return response(['status' => false], 400);
             }
 
             return redirect()
                 ->route('homepage')
                 ->with('msgToast', 'Có lỗi xảy ra');
         }
-
-
 
 
     }
