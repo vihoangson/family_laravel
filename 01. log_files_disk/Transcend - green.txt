@@ -3,7 +3,15 @@
 ./$RECYCLE.BIN/S-1-5-21-1446976602-1750219800-2146106186-500
 ./$RECYCLE.BIN/S-1-5-21-1446976602-1750219800-2146106186-500/desktop.ini
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$I25YOPF.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$I5K2CYO.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$ILHLNYK.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$IMFR90P.rar
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$IQQYG5H.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$R25YOPF.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$R5K2CYO.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RLHLNYK.txt
+./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RMFR90P.rar
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/$RQQYG5H.txt
 ./$RECYCLE.BIN/S-1-5-21-654650700-2875635452-2325335561-500/desktop.ini
 ./=== Archive ===
@@ -225,6 +233,151 @@
 ./=== Backup ===/Backup Page Family/20181013_120904.backup_full_folder_myfamily/myfamily_backup_full_20181013_032217.zip
 ./=== Backup ===/Backup Page Family/20190106_111700.backup_full_folder_myfamily
 ./=== Backup ===/Backup Page Family/20190106_111700.backup_full_folder_myfamily/myfamily_backup_full_20190106_005857.zip
+./=== Backup ===/Backup Scan Hinh Cu
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_104840.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_104845.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_104849.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_104922.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_104953.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_105024.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_105258.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_105300.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_110025.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111058.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111114.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111430.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111450.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111500.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111509.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111518.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111526.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111533.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111544.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111551.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111558.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111604.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111609.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111617.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111626.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111633.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111640.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111655.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111706.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111721.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111735.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111749.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111801.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111810.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111817.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111832.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111833.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111844.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111858.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111905.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111914.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111922.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111928.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111939.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111948.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_111958.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112007.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112015.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112033.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112046.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112055.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112108.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112119.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112129.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112141.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112148.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112203.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112213.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112222.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112229.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112237.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112250.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112306.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112319.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112326.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112337.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112345.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112349.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112354.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112401.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112408.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112415.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112422.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112431.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112449.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112457.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112510.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112518.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112526.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112554.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112603.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112611.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112621.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112901.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112910.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112920.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112929.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112943.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_112952.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113002.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113033.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113055.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113311.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113330.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113346.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113401.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113418.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113431.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113447.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113518.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113523.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113537.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113552.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113612.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113622.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113634.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113651.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113703.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113720.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113732.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113745.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113756.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113835.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113843.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113852.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113912.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113928.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_113951.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114000.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114028.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114037.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114046.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114103.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114115.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114125.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114135.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114143.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114151.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114158.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114206.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114228.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114242.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114254.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114305.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114317.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114328.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114338.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114350.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114406.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114454.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114516.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114520.jpg
+./=== Backup ===/Backup Scan Hinh Cu/Chụp hình cũ/20190112_114527.jpg
 ./=== Backup ===/Hinh Dien Thoai Son 20180703_061908 - 20181101_134446
 ./=== Backup ===/Hinh Dien Thoai Son 20180703_061908 - 20181101_134446/1.rar
 ./=== Backup ===/Hinh Dien Thoai Son 20180703_061908 - 20181101_134446/2.rar
@@ -6105,6 +6258,10 @@
 ./===Kem===/2019
 ./===Kem===/2019/tonghop-Clip2.10
 ./===Kem===/2019/tonghop-Clip2.10/tonghop-Clip2.10.mp4
+./===Kem===/2019/tonghop-Clip2.11
+./===Kem===/2019/tonghop-Clip2.11/tonghop_2.11.mp4
+./===Kem===/2019/tonghop-Clip2.12
+./===Kem===/2019/tonghop-Clip2.12/tonghop-Clip2.12.mp4
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130/DCIM
 ./===Kem===/Backup_The_8G_MayChupAnh_v1_201512_20170130/DCIM/100CANON
@@ -10990,17 +11147,21 @@
 ./Du Lịch/2018/Thăm thiền viện viên không
 ./Du Lịch/2018/Vũng tàu cùng team Đôn
 ./Du Lịch/2019
-./filename_20181006_125731.txt
-./filename_20190106_120133.txt
-./filename_20190106_162704.txt
-./filename_OCungDiDong_20180709.rar
-./filename_OCungDiDong_20180709.txt
 ./get_file_name.sh
+./Logs
+./Logs/filename_20181006_125731.txt
+./Logs/filename_20190106_120133.txt
+./Logs/filename_20190106_162704.txt
+./Logs/filename_20190106_163427.txt
+./Logs/filename_20190112_102442.txt
+./Logs/filename_20190112_131934.txt
+./Logs/filename_OCungDiDong_20180709.txt
 ./README.md
 ./System Volume Information
 ./System Volume Information/IndexerVolumeGuid
 ./System Volume Information/tracking.log
 ./System Volume Information/WPSettings.dat
+./Transcend - green.txt
 ./Udemy
 ./Udemy/php-with-laravel-for-beginners-become-a-master-in-laravel.rar
 ./Udemy/vuejs-2-the-complete-guide - sub.rar
