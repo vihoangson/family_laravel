@@ -14,7 +14,31 @@ class OverviewService {
      * OverviewService constructor.
      */
     public function __construct() {
-        $this->img_year = [
+        $this->img_year = $this->getData();
+    }
+
+    public function getDataYear() {
+
+        $data = ['img_year'=>$this->img_year];
+
+        return $data;
+    }
+
+    private function getData() {
+
+        // todo: load data from database
+
+        return [
+            2019=>[
+                [
+                    'title'=>'Em thích đi học trường mới',
+                    'desc'=>'',
+                    'time'=>'',
+                    'url'=>'http://family.vihoangson.com/storage/images/20190114_050145_2019-01-14__12_44_25.png',
+                ],
+
+
+            ],
             2018=>[
                 [
                     'title'=>'Buổi chiều tại Phan Rang',
@@ -61,12 +85,5 @@ class OverviewService {
 
             ],
         ];
-    }
-
-    public function getDataYear() {
-
-        $data = ['img_year'=>$this->img_year];
-
-        return $data;
     }
 }
