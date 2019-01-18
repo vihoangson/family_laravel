@@ -8,6 +8,19 @@ use App\Libraries\Markdown;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property mixed id
+ * @property string kyniem_title
+ * @property string kyniem_content
+ * @property string kyniem_content_markdown
+ * @property string kyniem_images
+ * @property Carbon kyniem_create
+ * @property Carbon kyniem_modifie
+ * @property string kyniem_auth
+ * @property int delete_flg
+ * @property int status
+ * @property int show_flg
+ */
 class Kyniem extends Model
 {
 

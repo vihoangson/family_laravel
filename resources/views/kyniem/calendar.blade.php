@@ -6,10 +6,15 @@
 @endsection
 
 @section('custom_js')
+
     <script src="/assets/bower_components/bootstrap-year-calendar/js/bootstrap-year-calendar.js"></script>
+
     <script>
+
         if($('#calendar').length == 1){
+
             var currentYear = new Date().getFullYear();
+
             $('#calendar').calendar({
                 enableContextMenu: true,
                 enableRangeSelection: true,
@@ -28,7 +33,7 @@
                         for (var i in e.events) {
                             content += '<div class="event-tooltip-content">'
                                 + '<div class="event-name" style="color:' + e.events[i].color + '">' + e.events[i].name + '</div>'
-                                + '<div class="event-location">' + e.events[i].location + '</div>'
+                                + '<div class="event-conten_markdown">' + e.events[i].conten_markdown + '</div>'
                                 + '</div>';
                         }
 
@@ -44,6 +49,8 @@
                 },
                 dataSource: []
             })
+
+            // Lấy dữ liệu từ server
             $.post('/get_calendar', function (data) {
                 var data_d = [];
                 $.each(data,function(k,v){
@@ -51,7 +58,7 @@
                         {
                             id: k,
                             name: v.name,
-                            location: v.location,
+                            conten_markdown: v.conten_markdown,
                             startDate: new Date(v.year, v.month-1, v.date),
                             endDate: new Date(v.year, v.month-1, v.date)
                         };
@@ -60,11 +67,14 @@
             })
         }
 
-
-
     </script>
 @endsection
 
 @section('custom_css')
     <link rel="stylesheet" href="/assets/bower_components/bootstrap-year-calendar/css/bootstrap-year-calendar.css">
+    <style>
+        .event-conten_markdown img{
+            width:100%;
+        }
+    </style>
 @endsection

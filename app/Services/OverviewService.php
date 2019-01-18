@@ -97,7 +97,7 @@ class OverviewService {
 
         $data = [];
         foreach ($db as $v) {
-            $file = $this->adapFormat($v);
+            $file = $this->adaptationFormat($v);
             $data[$file['year']][] = $file['data'];
         }
 
@@ -106,12 +106,9 @@ class OverviewService {
 
     }
 
-    private function adapFormat(Files_model $v) {
+    private function adaptationFormat(Files_model $v) {
         $year = (Carbon::createFromTimestamp(strtotime($v->created_at))
                        ->format('Y'));
-        // if(!in_array($year,$list_year)){
-        //     $list_year[]= $year;
-        // }
         $data = [
             'year' => $year,
             "data" => [

@@ -174,14 +174,15 @@ class DataController extends BaseController
      */
     public function get_calendar()
     {
+        /** @var Kyniem[] $kn */
         $kn = Kyniem::all();
         foreach ($kn as $v) {
             $json[] = [
+
+                $v->kyniem_title,
                 'id'       => $v->id,
                 'name'     => $v->kyniem_title,
-                'location' => $v->kyniem_content,
-                // 'name'     => "1",
-                // 'location' => "1",
+                'conten_markdown' => $v->kyniem_content_markdown,
                 'year'     => $v->kyniem_create->format('Y'),
                 'month'    => $v->kyniem_create->format('m'),
                 'date'     => $v->kyniem_create->format('d'),

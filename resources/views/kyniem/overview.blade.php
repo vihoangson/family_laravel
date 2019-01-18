@@ -28,9 +28,16 @@
                 }).get();
 
             $colClass.height(Math.max.apply(null, heights));
+
+            $('.img-boxer img').hide();
+            onImgLoad('.img-boxer img', function(){
+                $(this).fadeIn(700);
+            });
         }
 
-        equalHeight();
+        $(document).ready(function(){
+            equalHeight();
+        });
     </script>
 
 @endsection
