@@ -149,10 +149,10 @@ class KyniemController extends Controller {
         //<editor-fold desc="Xu ly next">
         if ($kyniem_detail['data'] == null) {
             if ($request->input('op') == 'next') {
-                if ($id  > (int) $kyniem_detail['max']) {
+                if ($id > (int) $kyniem_detail['max']) {
                     $id = $kyniem_detail['max'];
-                }else{
-                    $id = $id +1;
+                } else {
+                    $id = $id + 1;
                 }
             } else {
                 $id = ($id - 1);
@@ -164,8 +164,7 @@ class KyniemController extends Controller {
         }
         //</editor-fold>
 
-
-        $dataRender = $this->adaptationDBRender($kyniem_detail['data']);
+        $dataRender = $this->adaptationDBRender($kyniem_detail);
 
         return view('kyniem.detail', $dataRender);
 
@@ -173,7 +172,10 @@ class KyniemController extends Controller {
     }
 
     private function adaptationDBRender($data) {
-        return ['data' => $data];
+        return [
+            'data'  => $data['data'],
+            'other' => $data['other']
+        ];
     }
 
 }

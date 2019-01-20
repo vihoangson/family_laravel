@@ -14,7 +14,7 @@
             </div>
 
             <div class="post-content">
-                <h2><a href="blog-post.html">{{$m->kyniem_title}}</a></h2>
+                <h2><a href="{{route('kyniem_detail_id',$m->id)}}">{{$m->kyniem_title}}</a></h2>
                 {!! $m->kyniem_content_markdown !!}
                 <div class="post-meta ">
                     <span><i class="fa fa-user"></i> By <a href="#">{{@$m->user->name}}</a> </span>
