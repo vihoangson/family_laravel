@@ -29,10 +29,18 @@ class KyniemController extends Controller {
         \Debugbar::disable();
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index() {
         return view('kyniem.kyniem');
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function search(Request $request) {
 
         $this->validate($request, [
@@ -65,6 +73,11 @@ class KyniemController extends Controller {
         return view('kyniem.overview', $render);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(Request $request) {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
@@ -122,10 +135,45 @@ class KyniemController extends Controller {
 
     }
 
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function calendar() {
         return view('kyniem.calendar');
 
     }
 
+    public function detail($id, Request $request) {
+        $kyniem_detail = $this->kyniem_repository->get_detail($id);
+
+        //<editor-fold desc="Xu ly next">
+        if ($kyniem_detail['data'] == null) {
+            if ($request->input('op') == 'next') {
+                if ($id  > (int) $kyniem_detail['max']) {
+                    $id = $kyniem_detail['max'];
+                }else{
+                    $id = $id +1;
+                }
+            } else {
+                $id = ($id - 1);
+                // if ($id > 0) {
+                // }
+            }
+
+            return redirect(route('kyniem_detail_id', $id) . "?op=" . $request->input('op'));
+        }
+        //</editor-fold>
+
+
+        $dataRender = $this->adaptationDBRender($kyniem_detail['data']);
+
+        return view('kyniem.detail', $dataRender);
+
+
+    }
+
+    private function adaptationDBRender($data) {
+        return ['data' => $data];
+    }
 
 }

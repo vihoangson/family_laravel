@@ -22,6 +22,7 @@
             <h2 class="block-title"></h2>
             <i class="block-datetime"></i>
             <div class="block-content"></div>
+            <div class="block-button-detail"><a href='#' class="btn btn-default btn-sm">Chi tiết »</a></div>
             <hr>
             <div class="comment-border">
                 <div class="input-group">

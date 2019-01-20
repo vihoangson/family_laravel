@@ -80,6 +80,10 @@ Route::middleware('auth')
                   ->name('kyniem_store');
              Route::get('/search', 'KyniemController@search')
                   ->name('kyniem_search');
+             Route::get('/detail', 'KyniemController@detail')
+                  ->name('kyniem_detail');
+             Route::get('/detail/{id}', 'KyniemController@detail')
+                  ->name('kyniem_detail_id');
          });
 
 
