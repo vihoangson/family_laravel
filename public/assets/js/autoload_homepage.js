@@ -21,6 +21,7 @@ var loadKyniem = function () {
 
                     mmm.find('.block-datetime').html(v.kyniem_create);
                     mmm.find('.block-content').html(v.kyniem_content_markdown);
+                    mmm.find('.block-button-detail a').attr('href','/kyniem/detail/'+v.id);
                     mmm.find('input').attr('kyniemid', v.id);
                     mmm.find('.comment-group').attr('cgid', v.id);
 
