@@ -178,10 +178,9 @@
 												</span>
                                         @if($v->kyniem_title)
                                             {{$v->kyniem_title}}
-                                        @else
-                                            {{$v->kyniem_create->format('d-m-Y H:i:s')}}
+                                            <div class="wbreak">{{$v->kyniem_content}}</div>
                                         @endif
-
+                                        <div>{{$v->kyniem_create->format('d-m-Y H:i:s')}}</div>
                                     </a>
                                 </div>
                             </li>
@@ -236,6 +235,11 @@
         .thumb-info-wrapper div img {
             max-height: 250px;
             width: 100%;
+        }
+        .wbreak {
+            height: 67px;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
     </style>
 
