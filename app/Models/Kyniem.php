@@ -98,4 +98,8 @@ class Kyniem extends Model {
                     ->get();
     }
 
+    public function tags() {
+        return $this->morphToMany('App\Entities\Tag', 'taggable');
+    }
+
 }
