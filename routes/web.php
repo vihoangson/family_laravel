@@ -84,6 +84,13 @@ Route::middleware('auth')
                   ->name('kyniem_detail');
              Route::get('/detail/{id}', 'KyniemController@detail')
                   ->name('kyniem_detail_id');
+
+             Route::get('/tag/{tag}', 'KyniemController@showTag')
+                  ->name('showTag');
+             Route::get('/403', function (){
+                 return view('error/403');
+             })
+                  ->name('403');
          });
 
 

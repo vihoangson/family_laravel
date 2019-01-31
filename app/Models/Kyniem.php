@@ -46,6 +46,11 @@ class Kyniem extends Model {
     const CREATED_AT = 'kyniem_create';
     const UPDATED_AT = 'kyniem_modifie';
 
+    /**
+     * @param $keyword
+     *
+     * @return Kyniem|\Illuminate\Database\Eloquent\Builder
+     */
     public static function search($keyword) {
         $return = self::orWhere('kyniem_content', 'like', '%' . $keyword . '%')
                       ->orWhere('kyniem_title', 'like', '%' . $keyword . '%')
@@ -55,10 +60,18 @@ class Kyniem extends Model {
         return $return;
     }
 
+    /**
+     * @param $value
+     *
+     * @return mixed
+     */
     public function getKyniemContentAttribute($value) {
         return $value;
     }
 
+    /**
+     * @return mixed
+     */
     public function getKyniemImgThumbAttribute() {
         preg_match('/\((.+\.(png|jpg))\)/', $this->kyniem_content, $match);
 
@@ -74,30 +87,46 @@ class Kyniem extends Model {
     public function getKyniemContentMarkdownAttribute() {
         $this->kyniem_content = Backgroud::filter($this->kyniem_content);
         $this->kyniem_content = CommonLib::filterSmile($this->kyniem_content);
+        $this->kyniem_content = CommonLib::replaceTag($this->kyniem_content);
 
         return Markdown::defaultTransform($this->kyniem_content);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
     public function Comment() {
         return $this->hasMany('App\Entities\Comment', 'kyniem_id', 'id')
                     ->orderByDesc('id');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
     public function User() {
         return $this->hasOne('App\User', 'id', 'kyniem_auth');
     }
 
+    /**
+     * @return Carbon
+     */
     public function getDateFormatAttribute() {
 
         return Carbon::createFromTimeString($this->kyniem_create);
     }
 
+    /**
+     * @return Kyniem[]|\Illuminate\Database\Eloquent\Collection
+     */
     public function getHomepage() {
         return $this->orderBy('id', 'desc')
                     ->limit(10)
                     ->get();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
     public function tags() {
         return $this->morphToMany('App\Entities\Tag', 'taggable');
     }

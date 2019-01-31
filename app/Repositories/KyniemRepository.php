@@ -24,7 +24,7 @@ class KyniemRepository extends BaseRepository {
      *
      * @return bool
      */
-    public function save_kyniem(Kyniem $kyniem) {
+    public function save_kyniem(Kyniem &$kyniem) {
         try {
             $kyniem->save();
 
@@ -65,5 +65,18 @@ class KyniemRepository extends BaseRepository {
                          ->max('id'),
         ];
 
+    }
+
+    /**
+     * @param Kyniem $kyniem
+     *
+     * @return |null
+     */
+    public function getTagsInContent(Kyniem $kyniem) {
+        //<editor-fold desc="Match tag in content">
+        // Format: [#tag][#tag] [#tag] [#tag]
+        preg_match_all('/'.config('app.pattern_tag').'/',$kyniem->kyniem_content,$match);
+        //</editor-fold>
+        return ($match[1] ?? null);
     }
 }

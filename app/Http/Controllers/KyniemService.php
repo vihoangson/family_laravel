@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Tag;
 use App\Models\Kyniem;
 use App\Repositories\KyniemRepository;
 use Carbon\Carbon;
@@ -38,8 +39,10 @@ class KyniemService {
         ]);
 
         $id = ($request->input('id'));
-        if (!empty($id)) {
 
+        //<editor-fold desc="Kiểm tra có tồn tại thực thể hay không">
+        if (!empty($id)) {
+            //<editor-fold desc="Có thực thể">
             // Update kyniem
             $kyniem = Kyniem::find($request->input('id'));
 
@@ -50,23 +53,39 @@ class KyniemService {
 
             $kyniem->kyniem_create = Carbon::createFromFormat('d/m/Y', $request->input('date_create'))
                                            ->format('Y-m-d H:i:s');
+            //</editor-fold>
         } else {
+            //<editor-fold desc="Không có sắn thực thể phải tạo mới">
             // Insert kyniem
             $kyniem = new Kyniem();
+            //</editor-fold>
         }
+        //</editor-fold>
 
-        if (true) {
-            $kyniem->setAttribute('kyniem_content', $request->input('content'));
-            $kyniem->setAttribute('kyniem_title', ($request->input('title') ? $request->input('title') :
-                'Happy Family'));
-        } else {
-            // Không dùng cách này
-            $kyniem->kyniem_content = $request->input('content');
-            $kyniem->kyniem_title   = ($request->input('title') ? $request->input('title') : 'Happy Family');
-            die;
+        //<editor-fold desc="Set attribute for object">
+        $kyniem->setAttribute('kyniem_content', $request->input('content'));
+        $kyniem->setAttribute('kyniem_title', ($request->input('title') ? $request->input('title') :
+            'Happy Family'));
+        //</editor-fold>
+
+        //<editor-fold desc="Save entity">
+        $this->kyniem_repository->save_kyniem($kyniem);
+        //</editor-fold>
+
+        //<editor-fold desc="Add tag for entity">
+        $tagsName = $this->kyniem_repository->getTagsInContent($kyniem);
+        //dd($tagsName);
+        if (isset($tagsName) && count($tagsName) > 0) {
+            foreach ((array) $tagsName as $v) {
+                if($v != ''){
+                    $t  = Tag::firstOrCreate(['name'=>$v]);
+                    $kyniem->tags()->attach($t);
+                }
+            }
         }
+        //</editor-fold>
 
-        return $this->kyniem_repository->save_kyniem($kyniem);
+        return ;
 
 
     }

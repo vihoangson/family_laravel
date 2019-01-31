@@ -19,5 +19,18 @@ Class CommonLib{
         return $array;
     }
 
+    public static function replaceTag($kyniem_content) {
+        // $kyniem_content =  preg_march('/[#(.+)]/',$kyniem_content,'222');
+        //
+        // $kyniem_content = str_replace('[#','<a href="">',$kyniem_content);
+        // $kyniem_content = str_replace(']','</a>',$kyniem_content);
+        // //dd($kyniem_content);
+
+        // preg_replace('/<span.+class="(.+)">(.+)</span>/', '{$1}$2{/$1}', $kyniem_content);
+
+        $kyniem_content = preg_replace('/\[#(.+)\]/', '<a href="/kyniem/tag/$1">$1</a>', $kyniem_content);
+        return $kyniem_content;
+    }
+
 
 }

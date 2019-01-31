@@ -27,7 +27,7 @@
         </article>
         <hr>
     @endforeach
-    {{ $data->links() }}
+    {{ $data->links()??null }}
 
 @endsection
 

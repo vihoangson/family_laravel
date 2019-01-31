@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Tag;
 use App\Models\Kyniem;
 
 use App\Repositories\KyniemRepository;
@@ -10,7 +11,10 @@ use App\Services\OverviewService;
 use App\Traits\Cloudinary_trait;
 use Carbon\Carbon;
 use App\Http\Controllers\Controller as Controller;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
@@ -178,4 +182,32 @@ class KyniemController extends Controller {
         ];
     }
 
+    public function showTag($tag){
+        $tag = Tag::where('name',$tag)->first();
+        if (!isset($tag->kyniems)) {
+            //dd(isset($tag->kyniems));
+            return redirect(route('403'));
+        }
+        $data = $tag->kyniems;
+
+        $data = $this->paginate($data);
+        return view('kyniem.search', ['data' => $data]);
+    }
+
+    public function paginate($items, $perPage = 15, $page = null)
+    {
+        $pageName = 'page';
+        $page     = $page ?: (Paginator::resolveCurrentPage($pageName) ?: 1);
+        $items    = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator(
+            $items->forPage($page, $perPage)->values(),
+            $items->count(),
+            $perPage,
+            $page,
+            [
+                'path'     => Paginator::resolveCurrentPath(),
+                'pageName' => $pageName,
+            ]
+        );
+    }
 }

@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+    protected $fillable = ['name'];
     /**
      * Get all of the posts that are assigned this tag.
      */
-    public function kyniem()
+    public function kyniems()
     {
         return $this->morphedByMany('App\Models\Kyniem', 'taggable');
     }
