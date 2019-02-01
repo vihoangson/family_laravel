@@ -75,7 +75,7 @@ class KyniemRepository extends BaseRepository {
     public function getTagsInContent(Kyniem $kyniem) {
         //<editor-fold desc="Match tag in content">
         // Format: [#tag][#tag] [#tag] [#tag]
-        preg_match_all('/'.config('app.pattern_tag').'/',$kyniem->kyniem_content,$match);
+        preg_match_all(config('app.pattern_tag'),$kyniem->kyniem_content,$match);
         //</editor-fold>
         return ($match[1] ?? null);
     }

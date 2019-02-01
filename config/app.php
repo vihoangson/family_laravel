@@ -27,6 +27,8 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'pattern_tag' => '/\[#(.+)\]/',
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode

@@ -185,7 +185,6 @@ class KyniemController extends Controller {
     public function showTag($tag){
         $tag = Tag::where('name',$tag)->first();
         if (!isset($tag->kyniems)) {
-            //dd(isset($tag->kyniems));
             return redirect(route('403'));
         }
         $data = $tag->kyniems;

@@ -74,7 +74,6 @@ class KyniemService {
 
         //<editor-fold desc="Add tag for entity">
         $tagsName = $this->kyniem_repository->getTagsInContent($kyniem);
-        //dd($tagsName);
         if (isset($tagsName) && count($tagsName) > 0) {
             foreach ((array) $tagsName as $v) {
                 if($v != ''){
@@ -85,7 +84,7 @@ class KyniemService {
         }
         //</editor-fold>
 
-        return ;
+        return true ;
 
 
     }
