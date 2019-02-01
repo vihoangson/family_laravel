@@ -68,7 +68,7 @@ class Controller extends BaseController
     private function setupInitDB()
     {
         // Check nếu không có file db thì lên cloud lấy file db mới nhất về
-        if (!file_exists(env('DB_DATABASE'))) {
+        if (!file_exists(config('database.connections.sqlite.database'))) {
             CloudinaryLib::downloadLastFileDBInCloud();
             Cache::flush();
         }
