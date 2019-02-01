@@ -181,6 +181,9 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Prettus\Repository\Providers\RepositoryServiceProvider::class,
+
+        Ixudra\Curl\CurlServiceProvider::class,
+
     ],
 
     /*
