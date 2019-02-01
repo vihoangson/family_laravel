@@ -67,6 +67,7 @@ Route::middleware('auth')
               ->name('homepage');
 
          // Group kyniem
+         //<editor-fold desc="prefix kyniem">
          Route::group(['prefix' => 'kyniem'], function () {
              Route::get('/calendar', 'KyniemController@calendar')
                   ->name('kyniem_calendar');
@@ -78,20 +79,24 @@ Route::middleware('auth')
 
              Route::post('/store', 'KyniemController@store')
                   ->name('kyniem_store');
+
              Route::get('/search', 'KyniemController@search')
                   ->name('kyniem_search');
+
              Route::get('/detail', 'KyniemController@detail')
                   ->name('kyniem_detail');
+
              Route::get('/detail/{id}', 'KyniemController@detail')
                   ->name('kyniem_detail_id');
 
              Route::get('/tag/{tag}', 'KyniemController@showTag')
                   ->name('showTag');
+
              Route::get('/403', function (){
                  return view('error/403');
-             })
-                  ->name('403');
+             })->name('403');
          });
+         //</editor-fold>
 
 
 
@@ -146,22 +151,28 @@ Route::middleware('auth')
          // Group api
          Route::group(['middleware' => 'App\Http\Middleware\CheckApi'], function () {
              Route::group(['prefix' => 'api'], function () {
+
                  Route::get('/data', 'api\DataController@index')
                       ->name('api_data');
+
                  Route::get('/getkyniem', 'api\DataController@get_ky_niem')
                       ->name('api_getkyniem');
+
                  Route::get('/getkyniem_html', 'api\DataController@get_ky_niem_html')
                       ->name('api_getkyniem_html');
+
                  Route::get('/box_add', function () {
                      return view('welcome');
                  });
                  Route::post('/kyniem/insert_comment', 'api\DataController@insert_comment')
                       ->name('insert.comment');
 
+                 Route::resource('tag','api\TagController');
+                 // Route::post('/tag', 'api\TagController@insert_comment')
+                 //      ->name('insert.comment');
+
              });
          });
-
-
 
          // API upload file
          Route::post('/ajax_up_files', 'api\DataController@ajax_up_files')
