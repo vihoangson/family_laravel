@@ -19,7 +19,7 @@ class CheckMyProjectTest extends TestCase {
             Artisan::call('check_my_project');
             $this->assertTrue(true);
         } catch (\Exception $e) {
-            $this->assertTrue(false);
+            $this->assertTrue(false,$e->getMessage());
         }
     }
 
