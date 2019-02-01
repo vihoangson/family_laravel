@@ -62,6 +62,22 @@
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
     <script>
         $(document).ready(function () {
+
+            // <!--<editor-fold desc="Get tag and push to text area">-->
+            $.get('/api/tag',function($e){
+                $.each($e,function($k,$v){
+                    console.log($v);
+                    $("#content").after(' <a href="#" class="push-tag" data-tag="'+$v.name+'">[#'+$v.name+']</a> ')
+                });
+
+                $('.push-tag').click(function($e){
+                    $("#content").val($("#content").val() + '\n [#'+$(this).attr('data-tag')+'] \n');
+                    $e.preventDefault();
+                });
+
+            });
+            //<!--</editor-fold>-->
+
             if (window.sessionStorage.getItem('flag_popup') != 1) {
                 window.sessionStorage.setItem('flag_popup', 1);
                 img_popup = $('<img>').attr('src', $("#img-popup").attr('src'));
@@ -71,6 +87,7 @@
                 $("#modal-id22").modal();
             }
         })
+
     </script>
 @endsection
 

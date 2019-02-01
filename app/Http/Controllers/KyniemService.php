@@ -74,6 +74,8 @@ class KyniemService {
 
         //<editor-fold desc="Add tag for entity">
         $tagsName = $this->kyniem_repository->getTagsInContent($kyniem);
+        $tagsName = array_unique($tagsName);
+
         if (isset($tagsName) && count($tagsName) > 0) {
             foreach ((array) $tagsName as $v) {
                 if($v != ''){
