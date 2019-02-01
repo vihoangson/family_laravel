@@ -25,7 +25,7 @@ class RefreshDB extends Command {
      *
      * @var string
      */
-    protected $description = 'refresh_db';
+    protected $description = 'Dùng cho môi trường local refresh lại db và hình ảnh';
 
     /**
      * Execute the console command.
