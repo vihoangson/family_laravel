@@ -47,8 +47,7 @@ class CheckMyProject extends Command {
             $status_page = $this->checkPage($url);
             $stt         = ($status_page == 200 ? 'OK' : 'NG') . ': '.$status_page.'';
             //$str = $url .'__' .$stt;
-            $str .= "$url __ [$stt]
-";
+            $str .= "$url __ [$stt]".PHP_EOL;
         }
         CommonLib::alert_to_me($str);
     }

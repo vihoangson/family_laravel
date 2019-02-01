@@ -12,7 +12,7 @@ class SimsimiLib
     public function teachSimsimi($string, $string1)
     {
 
-        if (true) {
+        if (false) {
             $data = [
                 "key" => env('key_simsimi'),
                 'req' => 'Sơn có đẹp trai không',
