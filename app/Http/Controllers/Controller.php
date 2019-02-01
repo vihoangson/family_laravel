@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 
@@ -69,8 +70,7 @@ class Controller extends BaseController
     {
         // Check nếu không có file db thì lên cloud lấy file db mới nhất về
         if (!file_exists(config('database.connections.sqlite.database'))) {
-            CloudinaryLib::downloadLastFileDBInCloud();
-            Cache::flush();
+            Artisan::call('refresh_db');
         }
     }
 }

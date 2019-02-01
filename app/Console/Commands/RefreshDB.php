@@ -33,12 +33,15 @@ class RefreshDB extends Command {
      * @return mixed
      */
     public function handle() {
-        if(file_exists(config('database.connections.sqlite.database'))){
-            if(unlink(config('database.connections.sqlite.database'))){
+        if (env('APP_URL') != 'http://family.vn') {
+            return;
+        }
+        if (file_exists(config('database.connections.sqlite.database'))) {
+            if (unlink(config('database.connections.sqlite.database'))) {
                 $this->warn('Deleted file db');
             }
         }
-        if(!file_exists(config('database.connections.sqlite.database'))) {
+        if (!file_exists(config('database.connections.sqlite.database'))) {
             try {
                 CloudinaryLib::downloadLastFileDBInCloud();
                 $this->warn('Download file new');
@@ -50,8 +53,6 @@ class RefreshDB extends Command {
                 $this->warn('Can\'t download file new');
             }
         }
-
-
 
 
     }
