@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        \Illuminate\Support\Facades\Artisan::call('refresh_db');
         // $this->call(UsersTableSeeder::class);
     }
 }

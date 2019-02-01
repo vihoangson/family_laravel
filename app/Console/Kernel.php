@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\Backup_db::class,
         Commands\ImportContent::class,
+        Commands\RefreshDB::class,
     ];
 
     /**

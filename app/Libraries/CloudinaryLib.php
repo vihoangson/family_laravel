@@ -2,6 +2,7 @@
 
 namespace App\Libraries;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -282,7 +283,35 @@ class CloudinaryLib
         }
     }
 
+    public static function do_restore() {
 
+        if (true) {
+            if (env('APP_ENV') != 'local') {
+                return false;
+            }
+            $data = Cache::forget('dataimgcloud');
+            if (!Cache::has('dataimgcloud')) {
+                $data = CloudinaryLib::getImageInFolder('my_folder/img_family');
+                Cache::forever('dataimgcloud', $data);
+            }
+            $data = Cache::get('dataimgcloud');//Set time out 120s
+            set_time_limit(1200);
+            $path = storage_path('app/public/images/');
+            @mkdir($path);
+            foreach ($data as $value) {
+                $file_path = $path . basename($value['url']);
+
+                // Nếu file không tồn tại thì down về
+                if (!file_exists($file_path)) {
+                    $data_img = file_get_contents($value['url']);
+                    if (!file_put_contents($file_path, $data_img)) {
+                        throw new \Exception('Can\'t wirte file');
+                    }
+                }
+            }
+            Cache::forget('dataimgcloud');
+        }
+    }
 
 
 }
