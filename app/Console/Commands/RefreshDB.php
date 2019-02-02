@@ -33,7 +33,7 @@ class RefreshDB extends Command {
      * @return mixed
      */
     public function handle() {
-        if (env('APP_URL') != 'http://family.vn') {
+        if (config('app.env') != 'local') {
             return;
         }
         if (file_exists(config('database.connections.sqlite.database'))) {

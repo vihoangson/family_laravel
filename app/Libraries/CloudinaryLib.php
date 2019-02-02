@@ -286,7 +286,7 @@ class CloudinaryLib
     public static function do_restore() {
 
         if (true) {
-            if (env('APP_ENV') != 'local') {
+            if (config('app.env') != 'local') {
                 return false;
             }
             $data = Cache::forget('dataimgcloud');
