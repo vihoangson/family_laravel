@@ -80,7 +80,7 @@ class KyniemService {
             foreach ((array) $tagsName as $v) {
                 if($v != ''){
                     $t  = Tag::firstOrCreate(['name'=>$v]);
-                    $kyniem->tags()->attach($t);
+                    $kyniem->tags()->syncWithoutDetaching($t);
                 }
             }
         }
