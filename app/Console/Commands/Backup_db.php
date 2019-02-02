@@ -31,8 +31,10 @@ class Backup_db extends Command {
      */
     public function handle() {
         if(BackupDBLib::backupToCloud()===true){
+            echo 'Done';
             CommonLib::alert_to_me('Đã backup database');
         }else{
+            echo 'NG';
             CommonLib::alert_to_me('Backup database thất bại');
         }
 
