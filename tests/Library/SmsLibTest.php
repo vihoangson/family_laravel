@@ -30,9 +30,8 @@ class SmsLibTest extends TestCase {
 
     public function testSentNG_lower20() {
         $m = new SmsLib();
-
         try {
-            $m->sent(env('MY_PHONE_NUMBER'), 'test_sms');
+            $m->sent(config('family.info.my_phone_number'), 'test_sms');
         } catch (\Exception $e) {
             $this->assertTrue(true);
         }
@@ -40,7 +39,7 @@ class SmsLibTest extends TestCase {
 
     public function testSentOK() {
         $m = new SmsLib();
-        $m->sent(env('MY_PHONE_NUMBER'),'Bố Sơn về chơi với Kem');
+        $m->sent(config('family.info.my_phone_number'),'Bố Sơn về chơi với Kem');
     }
 
     public function testSentMe() {

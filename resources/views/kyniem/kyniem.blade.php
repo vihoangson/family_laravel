@@ -26,7 +26,7 @@
             <hr>
             <div class="comment-border">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." data-token="{{csrf_token()}}" kyniemid="">
+                    <input type="text" class="form-control" placeholder="Comment ..." data-token="{{csrf_token()}}" kyniemid="">
                     <span class="input-group-btn">
                     <button class="btn btn-default submit-comment" type="button">Go!</button>
                     </span>
