@@ -17,7 +17,7 @@ class Kernel extends ConsoleKernel
         Commands\ImportContent::class,
         Commands\RefreshDB::class,
         Commands\CheckMyProject::class,
-
+        Commands\ReportGeneral::class,
     ];
 
     /**
