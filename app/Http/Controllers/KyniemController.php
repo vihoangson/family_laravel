@@ -100,10 +100,11 @@ class KyniemController extends Controller {
         $id     = $request->input('id');
         $kyniem = new Kyniem();
         $kyniem->find($id)
-               ->update(['delete_flg' => 0]);
+               ->update(['delete_flg' => 1]);
 
         // Log lại nếu có access
         Log::info('[My Log] Delete kyniem ' . $id);
+        Cache::flush();
 
         return redirect()->route('homepage');
     }
