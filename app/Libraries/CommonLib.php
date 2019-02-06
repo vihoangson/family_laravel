@@ -32,5 +32,17 @@ Class CommonLib{
         return $kyniem_content;
     }
 
+    /**
+     * Lấy số tuổi của Kem
+     *
+     * @return string
+     */
+    public static function tuoiKem(){
+        $datetime1 = date_create('2016-05-09');
+        $datetime2 = date_create();
+        $interval = date_diff($datetime1, $datetime2);
+        return $interval->format('%Y years %M months %D days') . "\n";
+    }
+
 
 }

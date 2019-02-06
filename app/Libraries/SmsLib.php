@@ -36,6 +36,9 @@ class SmsLib {
 
         $xmlString = file_get_contents($request_link);
         $array = json_decode($xmlString);
+        if($array->ErrorMessage){
+            throw new \Exception('Cant send sms');
+        }
 
         return $array;
     }
@@ -44,7 +47,7 @@ class SmsLib {
         try {
             $this->sent(config('family.info.my_phone_number'), $text);
         } catch (\Exception $e) {
-            CommonLib::alert_to_me('Không gửi được sms cho tôi');
+            CommonLib::alert_to_me('Không gửi được sms cho tôi: '.$text);
         }
     }
 

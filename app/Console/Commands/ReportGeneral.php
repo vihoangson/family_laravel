@@ -6,6 +6,7 @@ use App\Libraries\BackupDBLib;
 use App\Libraries\CommonLib;
 use App\Libraries\SimsimiLib;
 use App\Libraries\SmsLib;
+use App\Models\Kyniem;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 
@@ -31,13 +32,24 @@ class ReportGeneral extends Command {
      * @return mixed
      */
     public function handle() {
-
-
         $sms = new SmsLib;
-        // todo: get number of post
-        // todo: sent to my phone
-        // todo: set 1 time a week
-        dd($sms->getMoney());
 
+        // get number of post
+        $all_content = Kyniem::all()->count();
+        $getmoney = $sms->getMoney();
+        $Balance = $getmoney['Balance'];
+        // todo: sent to my phone
+        $string = 'Report general'.PHP_EOL;
+        $string .= "Tổng số bài viết: $all_content".PHP_EOL;
+        $string .= "Số tiền sms còn lại: $Balance".PHP_EOL;
+
+
+        // todo: set 1 time a week
+        try {
+            CommonLib::alert_to_me($string);
+        } catch (\Exception $e) {
+        }
+        // Không gửi vào sms
+        //$sms->sentMe($string);
     }
 }
