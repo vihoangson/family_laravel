@@ -16,7 +16,6 @@ class ReportGeneralTest extends TestCase {
     public function testCommand() {
         try {
             Artisan::call('report_general');
-            die;
             $this->assertTrue(true);
         } catch (\Exception $e) {
             $this->assertTrue(false,$e->getMessage());

@@ -1,6 +1,8 @@
 <?php
 namespace App\Libraries;
 
+use App\Models\Kyniem;
+
 Class CommonLib{
     public static function alert_to_me ($msg){
         $sim = new SimsimiLib;
@@ -42,6 +44,23 @@ Class CommonLib{
         $datetime2 = date_create();
         $interval = date_diff($datetime1, $datetime2);
         return $interval->format('%Y years %M months %D days') . "\n";
+    }
+
+    public static function report() {
+        $sms = new SmsLib;
+
+        // get number of post
+        $all_content = Kyniem::all()->count();
+        $getmoney = $sms->getMoney();
+        $Balance = $getmoney['Balance'];
+        $number_img = 'Đang cập nhật';
+
+        // Sent to my phone
+        $string = 'Report general'.PHP_EOL;
+        $string .= "Tổng số bài viết: $all_content".PHP_EOL;
+        $string .= "Số tiền sms còn lại: $Balance".PHP_EOL;
+        $string .= "Số hình ảnh: $number_img".PHP_EOL;
+        return $string;
     }
 
 

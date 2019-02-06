@@ -32,19 +32,8 @@ class ReportGeneral extends Command {
      * @return mixed
      */
     public function handle() {
-        $sms = new SmsLib;
 
-        // get number of post
-        $all_content = Kyniem::all()->count();
-        $getmoney = $sms->getMoney();
-        $Balance = $getmoney['Balance'];
-        $number_img = 'Đang cập nhật';
-
-        // Sent to my phone
-        $string = 'Report general'.PHP_EOL;
-        $string .= "Tổng số bài viết: $all_content".PHP_EOL;
-        $string .= "Số tiền sms còn lại: $Balance".PHP_EOL;
-        $string .= "Số hình ảnh: $number_img".PHP_EOL;
+        $string = CommonLib::report();
 
         // todo: set 1 time a week
         try {

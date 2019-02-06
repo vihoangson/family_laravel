@@ -110,6 +110,10 @@ Route::middleware('auth')
              // Controller comment manage
              Route::resource('/comment_manage','admin\CommentManangeController');
 
+
+             Route::get('/report_system', 'admin\ReportController@index')
+                  ->name('report_system');
+
              // Controller media
              Route::resource('/media','admin\MediaController');
 
