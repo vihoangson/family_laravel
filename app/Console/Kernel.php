@@ -37,6 +37,9 @@ class Kernel extends ConsoleKernel
         $schedule->command( 'check_my_project' )
                  ->cron( "0 */12 * * * *" );//1 ngày chạy 1 lần lúc 4h
 
+        $schedule->command( 'report_general' )
+                 ->cron( "0 0 */5 * * *" );//5 ngày chạy 1 lần lúc 0 0
+
         // $schedule->command('inspire')
         //          ->hourly();
     }
