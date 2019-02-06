@@ -16,7 +16,7 @@
             <div class="b-toolb">
                 <ul class="toolb">
                     <li><a class="b-edit" href="">Edit</a></li>
-                    <li><a class="b-delete" href="">Delete</a></li>
+                    <li><a class="b-delete" onclick="return confirm('Are you sure?')" href="">Delete</a></li>
                 </ul>
             </div>
             <h2 class="block-title"></h2>
