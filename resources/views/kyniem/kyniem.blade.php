@@ -19,6 +19,7 @@
                     <li><a class="b-delete" onclick="return confirm('Are you sure?')" href="">Delete</a></li>
                 </ul>
             </div>
+            <img class="img-avatar" src="http://placehold.it/200x200">
             <h2 class="block-title"></h2>
             <i class="block-datetime"></i>
             <div class="block-content"></div>
@@ -98,6 +99,13 @@
             padding: 10px;
             margin: 10px 0;
             border-radius: 10px;
+        }
+        img.img-avatar {
+            width: 100px;
+            /* position: absolute; */
+            float: left;
+            /* left: -108px; */
+            padding-right: 13px;
         }
     </style>
 

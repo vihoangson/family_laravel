@@ -28,7 +28,7 @@ class Kyniem extends Model {
     protected $table   = 'kyniem';
     protected $guarded = ['kyniem_content'];
     protected $appends = ['kyniem_content_markdown', 'date_format'];
-    protected $with    = ['Comment'];
+    protected $with    = ['Comment','User'];
 
     public $fields = [
         'id',

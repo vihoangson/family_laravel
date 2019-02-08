@@ -16,6 +16,10 @@ var loadKyniem = function () {
                         mmm.find('.block-title').html('Happy Family');
                     }
 
+                    if(v.user.avatar){
+                        mmm.find('.img-avatar').attr('src', v.user.avatar);
+                    }
+
                     mmm.find('.toolb .b-edit').attr('href', '/kyniem/edit?id=' + v.id);
                     mmm.find('.toolb .b-delete').attr('href', '/kyniem/delete?id=' + v.id);
 
