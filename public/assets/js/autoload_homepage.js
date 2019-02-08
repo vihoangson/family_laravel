@@ -16,7 +16,7 @@ var loadKyniem = function () {
                         mmm.find('.block-title').html('Happy Family');
                     }
 
-                    if((typeof v.user.avatar !== 'undefined')){
+                    if((v.user.hasOwnProperty('avatar'))){
                         mmm.find('.img-avatar').attr('src', v.user.avatar);
                     }
 
