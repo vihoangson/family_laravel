@@ -1855,73 +1855,10 @@ window.theme = {};
 
 	var instanceName = '__tweets';
 
-	var PluginTweets = function($el, opts) {
-		return this.initialize($el, opts);
-	};
 
-	PluginTweets.defaults = {
-		username: null,
-		count: 2,
-		URL: 'php/twitter-feed.php'
-	};
 
-	PluginTweets.prototype = {
-		initialize: function($el, opts) {
-			if ($el.data(instanceName)) {
-				return this;
-			}
 
-			this.$el = $el;
 
-			this
-				.setData()
-				.setOptions(opts)
-				.build();
-
-			return this;
-		},
-
-		setData: function() {
-			this.$el.data(instanceName, this);
-
-			return this;
-		},
-
-		setOptions: function(opts) {
-			this.options = $.extend(true, {}, PluginTweets.defaults, opts, {
-				wrapper: this.$el
-			});
-
-			return this;
-		},
-
-		build: function() {
-			if (this.options.username == null || this.options.username == '') {
-				return this;
-			}
-
-			var self = this,
-				$wrapper = this.options.wrapper;
-
-			$.ajax({
-				type: 'GET',
-				data: {
-					twitter_screen_name: self.options.username,
-					tweets_to_display: self.options.count
-				},
-				url: self.options.URL,
-			}).done(function(html) {
-				$wrapper.html(html);
-			});
-
-			return this;
-		}
-	};
-
-	// expose to scope
-	$.extend(theme, {
-		PluginTweets: PluginTweets
-	});
 
 	// jquery plugin
 	$.fn.themePluginTweets = function(opts) {
@@ -1931,7 +1868,7 @@ window.theme = {};
 			if ($this.data(instanceName)) {
 				return $this.data(instanceName);
 			} else {
-				return new PluginTweets($this, opts);
+				//return new PluginTweets($this, opts);
 			}
 
 		});
