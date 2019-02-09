@@ -25,6 +25,7 @@
             <div class="block-content"></div>
             <div class="block-button-detail"><a href='#' class="btn btn-default btn-sm">Chi tiết »</a></div>
             <hr>
+            <div class="clearfix"></div>
             <div class="comment-border">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Comment ..." data-token="{{csrf_token()}}" kyniemid="">
