@@ -123,6 +123,8 @@ Route::middleware('auth')
              Route::get('/', 'admin\OptionsController@index')
                   ->name('admin_index');
 
+             Route::resource('/setting', 'admin\SettingUserController');
+
              Route::get('/options', 'admin\OptionsController@index')
                   ->name('admin_options');
 

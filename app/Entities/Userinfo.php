@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Userinfo extends Model
 {
-    protected $fillable = ['avatar'];
+    protected $fillable = ['info_value','info_key'];
 
     public function getAvatarAttribute(){
         return $this->where('info_key','avatar')->first()->info_value;

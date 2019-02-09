@@ -46,9 +46,9 @@ class RefreshDB extends Command {
                 CloudinaryLib::downloadLastFileDBInCloud();
                 $this->warn('Download file new');
                 CloudinaryLib::do_restore();
-                $this->warn('Cập nhật hình mới về local');
+                $this->warn('Cap Nhat Hinh Moi Ve Local');
                 Cache::flush();
-                $this->warn('Xóa cache');
+                $this->warn('Xoa cache');
             } catch (\Exception $e) {
                 $this->warn('Can\'t download file new');
             }

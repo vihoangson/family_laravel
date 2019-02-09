@@ -1,4 +1,7 @@
 @extends('layouts/admin/layout')
+@section('title_content')
+Options admin
+@endsection
 @section('body')
     <form method="post" action="{{route('admin_options_save')}}">
         {{csrf_field()}}
