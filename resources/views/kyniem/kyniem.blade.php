@@ -19,13 +19,13 @@
                     <li><a class="b-delete" onclick="return confirm('Are you sure?')" href="">Delete</a></li>
                 </ul>
             </div>
-            <img class="img-avatar" src="http://placehold.it/200x200">
+            <img class="thumbnail text-center img-avatar" src="http://placehold.it/200x200">
             <h2 class="block-title"></h2>
             <i class="block-datetime"></i>
+            <div class="clearfix"></div>
             <div class="block-content"></div>
             <div class="block-button-detail"><a href='#' class="btn btn-default btn-sm">Chi tiết »</a></div>
             <hr>
-            <div class="clearfix"></div>
             <div class="comment-border">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Comment ..." data-token="{{csrf_token()}}" kyniemid="">
@@ -106,7 +106,7 @@
             /* position: absolute; */
             float: left;
             /* left: -108px; */
-            padding-right: 13px;
+            margin-right: 13px;
         }
     </style>
 

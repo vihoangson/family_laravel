@@ -32,6 +32,9 @@
                 <a href="{{route('setting.index')}}" class="">Setting</a>
             @endif
         </li>
+        @if(Auth::check() && @isset(Auth::User()->avatar))
+            <li><img class="thumbnail" src="{{Auth::User()->avatar}}" style="height:34px"></li>
+        @endif
 
         <li>
             @if(Auth::check())
@@ -41,6 +44,7 @@
                 </form>
             @endif
         </li>
+
 
 
         <li class="dropdown hidden">
