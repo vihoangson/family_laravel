@@ -67,6 +67,8 @@ function reloadComment(comment) {
         nn.show();
         nn.find('.comment-content').html(v1.comment_content);
         nn.find('.comment-by strong.name-auth').html(v1.usercomment.name);
+        nn.find('img.thumbnail').attr('src',v1.usercomment.avatar);
+        nn.find('.comment-created-at').html(v1.comment_create);
         nn.removeClass('hidden')
         div_border.append(nn)
     })

@@ -41,9 +41,12 @@
     <button class="loadmore btn btn-primary">Load more</button>
 
     <div class="comment-block hidden">
+        <img src="http://placehold.it/100x100" class="thumbnail mr-sm mb-none ">
         <div class="comment-arrow"></div>
         <span class="comment-by"><strong class="name-auth"></strong></span>
+        <div class="comment-created-at"><small>2019-02-01 11:00:00</small></div>
         <div class="comment-content"></div>
+        <div class="clearfix"></div>
     </div>
 
     <img src="{{cache('options_popup')}}" class="hidden" id="img-popup">
@@ -107,6 +110,10 @@
             float: left;
             /* left: -108px; */
             margin-right: 13px;
+        }
+        .comment-block >img {
+            width:50px;
+            float: left;
         }
     </style>
 
