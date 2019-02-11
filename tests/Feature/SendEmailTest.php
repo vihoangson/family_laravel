@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Libraries\CloudinaryLib;
+use App\Libraries\CommonLib;
 use App\Libraries\SimsimiLib;
 use App\Mail\ToMeEmail;
 use Cloudinary\Api;
@@ -17,6 +18,12 @@ class SendEmailTest extends TestCase
 {
     public function test_send_email()
     {
-        Mail::to('vihoangson@gmail.com')->send(new ToMeEmail());
+        try {
+            Mail::to(config('mail.my_email'))
+                ->send(new ToMeEmail('Content for test'));
+            $this->assertTrue(true);
+        } catch (\Exception $e) {
+            $this->assertTrue(false);
+        }
     }
 }

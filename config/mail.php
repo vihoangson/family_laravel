@@ -120,4 +120,5 @@ return [
         ],
     ],
 
+    'my_email' => env('MY_EMAIL'),
 ];

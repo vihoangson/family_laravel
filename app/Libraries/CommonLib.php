@@ -1,10 +1,17 @@
 <?php
 namespace App\Libraries;
 
+use App\Mail\ToMeEmail;
+use Illuminate\Support\Facades\Mail;
+
 Class CommonLib{
     public static function alert_to_me ($msg){
         $sim = new SimsimiLib;
-        $sim->say_in_chatwork(config('AI.define_member.users.me'),config('configfamily.prefixMessage').$msg);
+        $msg = config('configfamily.prefixMessage').$msg;
+        $sim->say_in_chatwork(config('AI.define_member.users.me'),$msg);
+
+        Mail::to(config('mail.my_email'))
+            ->send(new ToMeEmail($msg));
     }
 
     public static function filterSmile($kyniem_content) {
