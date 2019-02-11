@@ -205,6 +205,7 @@ class DataController extends BaseController
         $c->save();
 
         Cache::forget('cache_comment');
+        Cache::flush();
 
         return response(Comment::where('kyniem_id', $comment_kyniem_id)
                                ->orderByDesc('id')
@@ -242,13 +243,13 @@ class DataController extends BaseController
     private function get_data_kyniem($step)
     {
         $key_of_cache = config('configfamily.namecachedata') . ':' . $step;
-
         if (!Cache::has($key_of_cache)) {
             $data = Kyniem::where('delete_flg', 0)
                           ->where('show_flg', 1)
                           ->orderBy('id', 'desc')
                           ->limit(config('common.per_page', 10))
                           ->offset($step)
+                          ->with('comment')
                           ->get();
             Cache::forever($key_of_cache, $data);
         } else {

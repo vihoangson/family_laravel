@@ -16,17 +16,19 @@
             <div class="b-toolb">
                 <ul class="toolb">
                     <li><a class="b-edit" href="">Edit</a></li>
-                    <li><a class="b-delete" href="">Delete</a></li>
+                    <li><a class="b-delete" onclick="return confirm('Are you sure?')" href="">Delete</a></li>
                 </ul>
             </div>
+            <img class="thumbnail text-center img-avatar" src="http://placehold.it/200x200">
             <h2 class="block-title"></h2>
             <i class="block-datetime"></i>
+            <div class="clearfix"></div>
             <div class="block-content"></div>
             <div class="block-button-detail"><a href='#' class="btn btn-default btn-sm">Chi tiết »</a></div>
             <hr>
             <div class="comment-border">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for..." data-token="{{csrf_token()}}" kyniemid="">
+                    <input type="text" class="form-control" placeholder="Comment ..." data-token="{{csrf_token()}}" kyniemid="">
                     <span class="input-group-btn">
                     <button class="btn btn-default submit-comment" type="button">Go!</button>
                     </span>
@@ -39,9 +41,12 @@
     <button class="loadmore btn btn-primary">Load more</button>
 
     <div class="comment-block hidden">
+        <img src="http://placehold.it/100x100" class="thumbnail mr-sm mb-none ">
         <div class="comment-arrow"></div>
         <span class="comment-by"><strong class="name-auth"></strong></span>
+        <div class="comment-created-at"><small>2019-02-01 11:00:00</small></div>
         <div class="comment-content"></div>
+        <div class="clearfix"></div>
     </div>
 
     <img src="{{cache('options_popup')}}" class="hidden" id="img-popup">
@@ -98,6 +103,17 @@
             padding: 10px;
             margin: 10px 0;
             border-radius: 10px;
+        }
+        img.img-avatar {
+            width: 100px;
+            /* position: absolute; */
+            float: left;
+            /* left: -108px; */
+            margin-right: 13px;
+        }
+        .comment-block >img {
+            width:50px;
+            float: left;
         }
     </style>
 

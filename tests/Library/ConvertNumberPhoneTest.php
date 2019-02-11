@@ -17,7 +17,11 @@ class ConvertNumberPhoneTest extends TestCase {
         $m = new ConvertNumberPhone();
         $m->setPhone11('01218851144');
         $m->run();
-        dd($m->getPhone10());
-
+        $expect = [
+            "telco"   => "mobifone",
+            "new"     => "0798851144",
+            "current" => "01218851144",
+        ];
+        $this->assertEquals($m->getPhone10(),$expect);
     }
 }

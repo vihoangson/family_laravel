@@ -29,12 +29,23 @@
         </li>
         <li>
             @if(Auth::check())
+                <a href="{{route('setting.index')}}" class="">Setting</a>
+            @endif
+        </li>
+        @if(Auth::check() && @isset(Auth::User()->avatar))
+            <li><img class="thumbnail" src="{{Auth::User()->avatar}}" style="height:34px"></li>
+        @endif
+
+        <li>
+            @if(Auth::check())
                 <form method="post" action="/logout">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button type="submit" class="btn btn-default">logout</button>
                 </form>
             @endif
         </li>
+
+
 
         <li class="dropdown hidden">
             <a class="dropdown-toggle" href="/">

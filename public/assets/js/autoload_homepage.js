@@ -16,6 +16,10 @@ var loadKyniem = function () {
                         mmm.find('.block-title').html('Happy Family');
                     }
 
+                    if(v.user != null && v.user.hasOwnProperty('avatar')){
+                        mmm.find('.img-avatar').attr('src', v.user.avatar);
+                    }
+
                     mmm.find('.toolb .b-edit').attr('href', '/kyniem/edit?id=' + v.id);
                     mmm.find('.toolb .b-delete').attr('href', '/kyniem/delete?id=' + v.id);
 
@@ -63,6 +67,8 @@ function reloadComment(comment) {
         nn.show();
         nn.find('.comment-content').html(v1.comment_content);
         nn.find('.comment-by strong.name-auth').html(v1.usercomment.name);
+        nn.find('img.thumbnail').attr('src',v1.usercomment.avatar);
+        nn.find('.comment-created-at').html(v1.comment_create);
         nn.removeClass('hidden')
         div_border.append(nn)
     })

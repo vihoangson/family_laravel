@@ -6,14 +6,14 @@ class BackupDBLib {
 
     public static function backupToCloud($file = null) {
         if ($file == null) {
-            $file = env('DB_DATABASE');
+            $file = config('database.connections.sqlite.database');
         }
 
         try {
-            if (preg_match("/:\/\//", env('APP_URL'))) {
-                $url_page = explode("//", env('APP_URL'))[1];
+            if (preg_match("/:\/\//", config('app.url'))) {
+                $url_page = explode("//", config('app.url'))[1];
             } else {
-                $url_page = env('APP_URL');
+                $url_page = config('app.url');
             }
 
             $new_file = $url_page . '_data_family.' . date("Y-m-d__H_i_s") . '.bk';

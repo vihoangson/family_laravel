@@ -28,7 +28,7 @@ class Kyniem extends Model {
     protected $table   = 'kyniem';
     protected $guarded = ['kyniem_content'];
     protected $appends = ['kyniem_content_markdown', 'date_format'];
-    protected $with    = ['Comment'];
+    protected $with    = ['Comment','User'];
 
     public $fields = [
         'id',
@@ -46,6 +46,7 @@ class Kyniem extends Model {
     const CREATED_AT = 'kyniem_create';
     const UPDATED_AT = 'kyniem_modifie';
 
+
     /**
      * @param $keyword
      *
@@ -54,6 +55,7 @@ class Kyniem extends Model {
     public static function search($keyword) {
         $return = self::orWhere('kyniem_content', 'like', '%' . $keyword . '%')
                       ->orWhere('kyniem_title', 'like', '%' . $keyword . '%')
+                      ->where('delete_flg',0)
                       ->orderByDesc('id')
                       ->with('User');
 

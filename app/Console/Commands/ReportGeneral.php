@@ -5,24 +5,26 @@ namespace App\Console\Commands;
 use App\Libraries\BackupDBLib;
 use App\Libraries\CommonLib;
 use App\Libraries\SimsimiLib;
+use App\Libraries\SmsLib;
+use App\Models\Kyniem;
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;
 
 
-class Backup_db extends Command {
+class ReportGeneral extends Command {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'backup_db';
+    protected $signature = 'report_general';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Update_extra_text';
+    protected $description = 'report_general by sms';
 
     /**
      * Execute the console command.
@@ -30,13 +32,15 @@ class Backup_db extends Command {
      * @return mixed
      */
     public function handle() {
-        if(BackupDBLib::backupToCloud()===true){
-            echo 'Done';
-            CommonLib::alert_to_me('Đã backup database');
-        }else{
-            echo 'NG';
-            CommonLib::alert_to_me('Backup database thất bại');
-        }
 
+        $string = CommonLib::report();
+
+        // todo: set 1 time a week
+        try {
+            CommonLib::alert_to_me($string);
+        } catch (\Exception $e) {
+        }
+        // Không gửi vào sms
+        //$sms->sentMe($string);
     }
 }

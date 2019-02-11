@@ -14,6 +14,7 @@ use App\Repositories\KyniemRepository;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Auth;
 
 class KyniemService {
 
@@ -63,6 +64,7 @@ class KyniemService {
         //</editor-fold>
 
         //<editor-fold desc="Set attribute for object">
+        $kyniem->setAttribute('kyniem_auth', Auth::id());
         $kyniem->setAttribute('kyniem_content', $request->input('content'));
         $kyniem->setAttribute('kyniem_title', ($request->input('title') ? $request->input('title') :
             'Happy Family'));
@@ -80,7 +82,7 @@ class KyniemService {
             foreach ((array) $tagsName as $v) {
                 if($v != ''){
                     $t  = Tag::firstOrCreate(['name'=>$v]);
-                    $kyniem->tags()->attach($t);
+                    $kyniem->tags()->syncWithoutDetaching($t);
                 }
             }
         }
