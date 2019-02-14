@@ -43,110 +43,121 @@ class AIController extends BaseController {
      * @author hoang_son
      */
     public function hookchatwork(Request $request) {
-        if (!$this->filter_delay_request()) {
-            return;
-        }
+        $this->chatConGa($request->all());
+    }
 
-        $post = $request->all();
-
-        if ($post == []) {
-            return response('', 404);
-        }
-        $this->room_id = $post['webhook_event']['room_id'];
-
-        // Hàm khởi tạo ai
-        $this->ai_init();
-
-        //<editor-fold desc="Define command for chick">
-        if ($this->room_id == config('AI.define_member.users.me')) {
-            switch ($post['webhook_event']['body']) {
-                case "open_chat":
-                break;
-                case "close_chat":
-                break;
-                case "backup data":
-                    if (BackupDBLib::backupToCloud()) {
-                        $this->msg = 'Đã backup db thành công';
-                    } else {
-                        $this->msg = 'Chưa backup được';
-                    }
-
-                    return $this->sendResponseChatWork();
-                break;
-                case "deploy cho tao":
-                    $request = new Request();
-                    $request->initialize(['option' => 'deploy']);
-                    $this->flag_deploy($request);
-                    \Cache::put('deploy_frontend', '1', 1440);
-                    $this->msg = 'Tuân lệnh xếp';
-
-                    return $this->sendResponseChatWork();
-                break;
-                case "status":
-                    $this->msg = '[code]' . json_encode($this->config_ai) . '[/code]';
-
-                    return $this->sendResponseChatWork();
-                break;
-                case 'list':
-                    $this->msg = "[open_chat]" . "[close_chat]" . "[backup data]" . "[deploy cho tao]" . "[status]";
-
-                    return $this->sendResponseChatWork();
-                break;
-                case (preg_match('/ft:(.*)$/', $post['webhook_event']['body']) ? true : false):
-                    preg_match('/ft:(.*)$/', $post['webhook_event']['body'], $match);
-                    if ($match[1] > 0 && $match[1] <= 1) {
-                        $this->set_cache_filter_text($match[1]);
-                        CommonLib::alert_to_me(config('AI.answers.filter_text'));
-                        return;
-                    }
-                break;
-            }
-        }
-        //</editor-fold>
-
-        //<editor-fold desc="Trả lời ngu cho các room không nằm trong danh sách">
-        // Trả lời ngu cho các room không nằm trong danh sách
-        if (!in_array($this->room_id, array_values(config('AI.config_ai.list_answer_smarty')))) {
-            $this->msg = $this->stupid_answer();
-
-            return $this->sendResponseChatWork();
-
-            return;
-        }
-        //</editor-fold>
-
-        //<editor-fold desc="Xử lý khi có người nói chuyện với gà">
-        // Xử lý khi có người nói chuyện với gà
-        if ($post['webhook_event_type'] == 'mention_to_me') {
-
-            // Gán câu hỏi
-            $ask = $this->filter_request_ask($post['webhook_event']['body']);
-
-            // Lấy câu trả lời từ api
-            if (config('AI.config_ai.answer_smarty')) {
-                $answer_command = $this->do_command($ask);
-                if($answer_command == false){
-                    $this->msg = $this->talkToSimsimi($ask);
-                }else{
-                    $this->msg = $answer_command;
-                }
-            } else {
-                $this->msg = $this->stupid_answer();
+    public function chatConGa($post) {
+        $conditionRunChat = true;
+        if ($conditionRunChat) {
+            if (!$this->filter_delay_request()) {
+                return;
             }
 
-
-            $prefix_msg = "[To:" . $post['webhook_event']['from_account_id'] . "] \n ";
-            $this->msg  = $prefix_msg . $this->msg;
-
-            // Gửi lên chatwork theo giá trị room
+            if ($post == []) {
+                return response('', 404);
+            }
             $this->room_id = $post['webhook_event']['room_id'];
 
-            return $this->sendResponseChatWork();
+            // Hàm khởi tạo ai
+            $this->ai_init();
 
-            return;
+            //<editor-fold desc="Define command for chick">
+            if ($this->room_id == config('AI.define_member.users.me')) {
+                switch ($post['webhook_event']['body']) {
+                    case "open_chat":
+                    break;
+                    case "close_chat":
+                    break;
+                    case "backup data":
+                        if (BackupDBLib::backupToCloud()) {
+                            $this->msg = 'Đã backup db thành công';
+                        } else {
+                            $this->msg = 'Chưa backup được';
+                        }
+
+                        return $this->sendResponseChatWork();
+                    break;
+                    case "deploy cho tao":
+                        $request = new Request();
+                        $request->initialize(['option' => 'deploy']);
+                        $this->flag_deploy($request);
+                        \Cache::put('deploy_frontend', '1', 1440);
+                        $this->msg = 'Tuân lệnh xếp';
+
+                        return $this->sendResponseChatWork();
+                    break;
+                    case "status":
+                        $this->msg = '[code]' . json_encode($this->config_ai) . '[/code]';
+
+                        return $this->sendResponseChatWork();
+                    break;
+                    case 'list':
+                        $this->msg = "[open_chat]" . "[close_chat]" . "[backup data]" . "[deploy cho tao]" . "[status]";
+
+                        return $this->sendResponseChatWork();
+                    break;
+                    case (preg_match('/ft:(.*)$/', $post['webhook_event']['body']) ? true : false):
+                        preg_match('/ft:(.*)$/', $post['webhook_event']['body'], $match);
+                        if ($match[1] > 0 && $match[1] <= 1) {
+                            $this->set_cache_filter_text($match[1]);
+                            CommonLib::alert_to_me(config('AI.answers.filter_text'));
+
+                            return;
+                        }
+                    break;
+                }
+            }
+            //</editor-fold>
+
+            //<editor-fold desc="Trả lời ngu cho các room không nằm trong danh sách">
+            // Trả lời ngu cho các room không nằm trong danh sách
+            if (!in_array($this->room_id, array_values(config('AI.config_ai.list_answer_smarty')))) {
+                $this->msg = $this->stupid_answer();
+
+                return $this->sendResponseChatWork();
+
+                return;
+            }
+            //</editor-fold>
+
+            //<editor-fold desc="Xử lý khi có người nói chuyện với gà">
+            // Xử lý khi có người nói chuyện với gà
+            if ($post['webhook_event_type'] == 'mention_to_me') {
+
+                // Gán câu hỏi
+                $ask = $this->filter_request_ask($post['webhook_event']['body']);
+
+                //<editor-fold desc="Lọc các điều kiện không trả lời">
+                if (!$this->checkRequestDontResponse($ask)) {
+                    return;
+                }
+                //</editor-fold>
+
+                // Lấy câu trả lời từ api
+                if (config('AI.config_ai.answer_smarty')) {
+                    $answer_command = $this->do_command($ask);
+                    if ($answer_command == false) {
+                        $this->msg = $this->talkToSimsimi($ask);
+                    } else {
+                        $this->msg = $answer_command;
+                    }
+                } else {
+                    $this->msg = $this->stupid_answer();
+                }
+
+                $prefix_msg = "[To:" . $post['webhook_event']['from_account_id'] . "] \n ";
+                $this->msg  = $prefix_msg . $this->msg;
+
+                // Gửi lên chatwork theo giá trị room
+                $this->room_id = $post['webhook_event']['room_id'];
+
+                return $this->sendResponseChatWork();
+
+                return;
+            }
+            //</editor-fold>
+
         }
-        //</editor-fold>
-
     }
 
     /**
@@ -214,8 +225,7 @@ class AIController extends BaseController {
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
      * @author hoang_son
      */
-    public function deploy_done()
-    {
+    public function deploy_done() {
         \Cache::forget('deploy_frontend');
 
         return response('done', 200);
@@ -247,8 +257,7 @@ class AIController extends BaseController {
      *
      * @return null|string|string[]
      */
-    private function filter_response_ask(string $msg)
-    {
+    private function filter_response_ask(string $msg) {
         // Thay
         $pattern = '/(Simsimi|simsimi)/';
         $msg     = preg_replace($pattern, 'gà', $msg);
@@ -256,23 +265,42 @@ class AIController extends BaseController {
         return $msg;
     }
 
-    private function do_command($ask){
-        switch ($ask){
+    private function do_command($ask) {
+        switch ($ask) {
             case (preg_match('/task_assign:(.*)$/', $ask) ? true : false):
                 preg_match('/task_assign:(.*)$/', $ask, $match);
-                $data = GetDBSheet::getByAssign($match[1]);
-                $return= [] ;
-                foreach ($data as $key =>$value){
-                    $return[]=($key+1).' '.$value['Redmin ID'].' '.$value['Sprint task'].' '.$value['Sub taks'].' '.$value['Assign'].' ['.$value['Progress'].']';
+                $data   = GetDBSheet::getByAssign($match[1]);
+                $return = [];
+                foreach ($data as $key => $value) {
+                    $return[] = ($key + 1) . ' ' . $value['Redmin ID'] . ' ' . $value['Sprint task'] . ' ' . $value['Sub taks'] . ' ' . $value['Assign'] . ' [' . $value['Progress'] . ']';
                 }
+
                 return implode('
-',$return);
+', $return);
             break;
             case 'status':
                 $data = GetDBSheet::getByAssign('Văn Hoài');
+
                 return json_encode($data);
             break;
         }
+
         return false;
+    }
+
+    /**
+     * @param string $ask
+     *
+     * @return bool
+     */
+    private function checkRequestDontResponse($ask) {
+        //<editor-fold desc="Không trả lời khi được toall">
+        if (preg_match('/\[toall\]/', $ask)) {
+            return false;
+        }
+
+        //</editor-fold>
+
+        return true;
     }
 }
