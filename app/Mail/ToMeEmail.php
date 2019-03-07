@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\View;
 
 class ToMeEmail extends Mailable
 {
@@ -16,9 +17,10 @@ class ToMeEmail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($msg)
     {
-        //
+        $this->msg = $msg;
+        $this->subject = 'Alert to me';
     }
 
     /**
@@ -28,6 +30,7 @@ class ToMeEmail extends Mailable
      */
     public function build()
     {
+        View::share('body', $this->msg);
         return $this->view('email.sample');
     }
 }

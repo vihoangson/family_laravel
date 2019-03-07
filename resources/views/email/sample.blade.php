@@ -1,1 +1,1 @@
-Xin chào tôi là Sơn
+{{$body}}

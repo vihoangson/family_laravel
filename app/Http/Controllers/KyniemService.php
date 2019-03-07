@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Entities\Tag;
 use App\Models\Kyniem;
 use App\Repositories\KyniemRepository;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -64,7 +65,11 @@ class KyniemService {
         //</editor-fold>
 
         //<editor-fold desc="Set attribute for object">
-        $kyniem->setAttribute('kyniem_auth', Auth::id());
+        if(config('app.env') != 'testing' ){
+            $kyniem->setAttribute('kyniem_auth', Auth::id());
+        }else{
+            $kyniem->setAttribute('kyniem_auth', User::first()->id);
+        }
         $kyniem->setAttribute('kyniem_content', $request->input('content'));
         $kyniem->setAttribute('kyniem_title', ($request->input('title') ? $request->input('title') :
             'Happy Family'));
