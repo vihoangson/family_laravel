@@ -271,7 +271,7 @@ class CloudinaryLib
         //</editor-fold>
 
         $m    = file_get_contents($data_backup['url']);
-        $path = public_path(env('DB_DATABASE'));
+        $path = env('DB_DATABASE');
 
         // Backup before restore
         // self:self::uploadFileRaw($path,'backup_db');
