@@ -64,6 +64,9 @@ class KyniemService {
         }
         //</editor-fold>
 
+        $kyniem->kyniem_create = Carbon::createFromFormat('d/m/Y', $request->input('date_create'))
+                                       ->format('Y-m-d H:i:s');
+
         //<editor-fold desc="Set attribute for object">
         if(config('app.env') != 'testing' ){
             $kyniem->setAttribute('kyniem_auth', Auth::id());
