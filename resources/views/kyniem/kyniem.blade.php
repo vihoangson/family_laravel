@@ -100,6 +100,23 @@
             }
         })
 
+        const form = document.getElementById("form-insert-kyniem");
+        const fileInput = document.getElementById("fileupload");
+
+        window.addEventListener('paste', e => {
+            console.log(e.clipboardData.files);
+            fileInput.files = e.clipboardData.files;
+            sondeptrai(111);
+        });
+
+        function sondeptrai(e){
+            alert(e);
+        }
+
+        // $(document).on('change','#input-file',function(){
+        //     console.log('in');
+        // })
+        //$('#input-file').on('change', function(){  });
     </script>
 @endsection
 

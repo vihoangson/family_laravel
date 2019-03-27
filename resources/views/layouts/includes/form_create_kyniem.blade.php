@@ -11,12 +11,13 @@
     <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{isset($data->kyniem_content)?$data->kyniem_content:''}}</textarea>
 
     <div class="clearfix"></div>
+    <hr>
     @if(isset($data->date_format))
         <input class="datepicker" name="date_create" value="{{isset($data->date_format)?$data->date_format->format('d/m/Y'):''}}"/>
     @else
         <input class="datepicker" name="date_create" value="{{date('d/m/Y')}}"/>
     @endif
-
+    <hr>
     <div class="block-background">
         <div class="changebg background blue" data-style="blue"></div>
         <div class="changebg background red" data-style="red"></div>
