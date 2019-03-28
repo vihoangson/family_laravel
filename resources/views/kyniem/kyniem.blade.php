@@ -66,6 +66,13 @@
     <script src="/assets/js/typing.js"></script>
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
     <script>
+
+        $(document).ready(function(){
+            $('.datepicker').datepicker({
+                format: 'dd/mm/yyyy',
+            });
+        });
+
         $(document).ready(function () {
 
             // <!--<editor-fold desc="Get tag and push to text area">-->
@@ -116,5 +123,6 @@
             float: left;
         }
     </style>
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
 @endsection

@@ -3,13 +3,19 @@
     @if(isset($data->id))
         <input type="hidden" name="id" value="{{isset($data->id)?$data->id:''}}"/>
     @endif
-    @if(isset($data->date_format))
-        <input class="datepicker" name="date_create" value="{{isset($data->date_format)?$data->date_format->format('d/m/Y'):''}}"/>
-    @endif
+
+
 
     <input class="form-control" id="title" name="title" placeholder="Tiêu đề" style="margin-bottom: 5px;" value="{{isset($data->kyniem_title)?$data->kyniem_title:''}}">
 
     <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{isset($data->kyniem_content)?$data->kyniem_content:''}}</textarea>
+
+    <div class="clearfix"></div>
+    @if(isset($data->date_format))
+        <input class="datepicker" name="date_create" value="{{isset($data->date_format)?$data->date_format->format('d/m/Y'):''}}"/>
+    @else
+        <input class="datepicker" name="date_create" value="{{date('d/m/Y')}}"/>
+    @endif
 
     <div class="block-background">
         <div class="changebg background blue" data-style="blue"></div>

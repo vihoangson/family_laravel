@@ -50,7 +50,7 @@ class RefreshDB extends Command {
                 Cache::flush();
                 $this->warn('Xoa cache');
             } catch (\Exception $e) {
-                $this->warn('Can\'t download file new');
+                $this->warn('Can\'t download file new '.$e->getMessage());
             }
         }
 
