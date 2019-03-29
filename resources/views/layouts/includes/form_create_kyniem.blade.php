@@ -35,9 +35,13 @@
         </a>
     </div>
 
+
     <div class="text-right " style="margin-top:10px;" id="box-button-submit">
         <label for="fileupload" class="btn btn-default">Choose a file</label>
         <input class="hidden" id="fileupload" type="file" name="userfile" multiple="" data-url="/ajax_up_files" accept="image/x-png,image/gif,image/jpeg">
         <button class="btn btn-primary">Submit</button>
     </div>
+</form>
+<form action="/ajax_up_files" id="autouploadss" method="post"  enctype="multipart/form-data">
+    <input class="" id="fileupload2" type="file" name="userfile" >
 </form>

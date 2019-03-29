@@ -65,6 +65,7 @@
     <script src="/assets/js/autoload_homepage.js"></script>
     <script src="/assets/js/typing.js"></script>
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
     <script>
 
         $(document).ready(function(){
@@ -101,17 +102,47 @@
         })
 
         const form = document.getElementById("form-insert-kyniem");
-        const fileInput = document.getElementById("fileupload");
+        const fileInput = document.getElementById("fileupload2");
+
+        // $('textarea').on('paste', function(e) {
+        //         console.log(e.clipboardData);
+        // }
+        // );
 
         window.addEventListener('paste', e => {
             console.log(e.clipboardData.files);
             fileInput.files = e.clipboardData.files;
-            sondeptrai(111);
+            //$("#autoupload").submit();
+            //todo:ajax
+            console.log($("#autoupload").serialize());
+
+            m = $("#autouploadss").ajaxSubmit(function(e){
+                // Gan vao text area
+                console.log(e);
+            });
+
+
+
+            if(false)
+                $.ajax({
+                    type:'POST',
+                    url: $("#autoupload").attr('action'),
+                    data:fd,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    success:function(data){
+                        console.log("success");
+                        console.log(data);
+                    },
+                    error: function(data){
+                        console.log("error");
+                        console.log(data);
+                    }
+                });
         });
 
-        function sondeptrai(e){
-            alert(e);
-        }
+
 
         // $(document).on('change','#input-file',function(){
         //     console.log('in');
