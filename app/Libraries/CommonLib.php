@@ -11,8 +11,12 @@ Class CommonLib{
         $msg = config('configfamily.prefixMessage').$msg;
         $sim->say_in_chatwork(config('AI.define_member.users.me'),$msg);
 
-        Mail::to(config('mail.my_email'))
-            ->send(new ToMeEmail($msg));
+        $is_send_mail_to_me = true;
+
+        if($is_send_mail_to_me){
+            Mail::to(config('mail.my_email'))
+                ->send(new ToMeEmail($msg));
+        }
     }
 
     public static function filterSmile($kyniem_content) {

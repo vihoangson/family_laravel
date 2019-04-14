@@ -206,6 +206,8 @@ Route::group(['prefix' => 'api'], function () {
          ->name('api_flag_deploy');
     Route::get('/deploy_done', 'api\AIController@deploy_done')
          ->name('api_deploy_done');
+    Route::get('/testing', 'api\TestingController@run')
+         ->name('api_testing');
 });
 
 //<editor-fold desc="upload gyazo">
