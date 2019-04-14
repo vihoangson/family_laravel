@@ -51,7 +51,7 @@ class TestingController extends BaseController {
     }
 
     private function check_upload_to_cloud() {
-        $rs = CloudinaryLib::uploadImg(storage_path('app/image_testing/testing_img.png','testing'));
+        $rs = CloudinaryLib::uploadImg(storage_path('image_testing/testing_img.png','testing'));
         if($rs === false){
             $this->checker += ['upload_to_cloud' => [
                 'real_value' => $rs,
