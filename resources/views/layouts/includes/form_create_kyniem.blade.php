@@ -11,12 +11,13 @@
     <textarea class="form-control" id="content" name="content" placeholder="Nội dung">{{isset($data->kyniem_content)?$data->kyniem_content:''}}</textarea>
 
     <div class="clearfix"></div>
+    <hr>
     @if(isset($data->date_format))
         <input class="datepicker" name="date_create" value="{{isset($data->date_format)?$data->date_format->format('d/m/Y'):''}}"/>
     @else
         <input class="datepicker" name="date_create" value="{{date('d/m/Y')}}"/>
     @endif
-
+    <hr>
     <div class="block-background">
         <div class="changebg background blue" data-style="blue"></div>
         <div class="changebg background red" data-style="red"></div>
@@ -34,9 +35,13 @@
         </a>
     </div>
 
+
     <div class="text-right " style="margin-top:10px;" id="box-button-submit">
         <label for="fileupload" class="btn btn-default">Choose a file</label>
         <input class="hidden" id="fileupload" type="file" name="userfile" multiple="" data-url="/ajax_up_files" accept="image/x-png,image/gif,image/jpeg">
         <button class="btn btn-primary">Submit</button>
     </div>
+</form>
+<form action="/ajax_up_files" id="autouploadss" method="post"  enctype="multipart/form-data">
+    <input class="" id="fileupload2" type="file" name="userfile" >
 </form>

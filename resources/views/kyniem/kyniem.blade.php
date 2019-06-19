@@ -65,6 +65,7 @@
     <script src="/assets/js/autoload_homepage.js"></script>
     <script src="/assets/js/typing.js"></script>
     <script src="/assets/js/script_box_insert_kyniem.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.2.2/jquery.form.min.js" integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i" crossorigin="anonymous"></script>
     <script>
 
         $(document).ready(function(){
@@ -100,6 +101,25 @@
             }
         })
 
+
+        const form = document.getElementById("form-insert-kyniem");
+        const fileInput = document.getElementById("fileupload2");
+
+        // Gọi phương thức lắng nghe hành động paste
+
+        window.addEventListener('paste', e => {
+            fileInput.files = e.clipboardData.files;
+            m = $("#autouploadss").ajaxSubmit(function(e){
+                console.log(e);
+            });
+        });
+
+
+
+        // $(document).on('change','#input-file',function(){
+        //     console.log('in');
+        // })
+        //$('#input-file').on('change', function(){  });
     </script>
 @endsection
 

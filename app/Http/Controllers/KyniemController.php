@@ -30,7 +30,6 @@ class KyniemController extends Controller {
         $this->tags_repository   = $tags_repository;
 
         parent::__construct();
-        \Debugbar::disable();
     }
 
     /**
@@ -53,11 +52,13 @@ class KyniemController extends Controller {
 
         /** @var string $keyword get variable keyword */
         $keyword = $request->input('keyword');
+        $page = $request->input('page');
 
+        Cache::flush();
         //<editor-fold desc="Cache data search">
-        $data = Cache::remember(config('configfamily.cache_search_kyniem') . ':' . $keyword, 9000, function () use ($keyword) {
+         $data = Cache::remember(config('configfamily.cache_search_kyniem') . ':' . $keyword, 9000, function () use ($keyword,$page) {
             return Kyniem::search($keyword)
-                         ->paginate();
+                          ->paginate(null, null, 'page', $page);
         });
         //</editor-fold>
 

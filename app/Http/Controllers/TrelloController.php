@@ -12,7 +12,6 @@ class TrelloController extends Controller
 
     public function __construct() {
         parent::__construct();
-        \Debugbar::disable();
     }
 
     public function webhook(Request $request)

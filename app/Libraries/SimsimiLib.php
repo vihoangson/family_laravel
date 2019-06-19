@@ -135,6 +135,15 @@ class SimsimiLib
         curl_setopt($ch, CURLOPT_HTTPHEADER, ["X-ChatWorkToken: " . env('key_chatwork')]);
         $result = curl_exec($ch);
 
+        //<editor-fold desc="Check fail case">
+        if(isset(json_decode($result)->errors)){
+            if(count(json_decode($result)->errors) >0){
+                throw new \Exception($result);
+            }
+        }
+        //</editor-fold>
+
+
         return $result;
 
 
