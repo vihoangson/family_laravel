@@ -17,3 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+//Route::middleware('auth:api')->get('/login', "Restful\RestuserController@login")->name('rest.login');
+Route::get('/login', "Restful\RestuserController@login")->name('rest.login');
+

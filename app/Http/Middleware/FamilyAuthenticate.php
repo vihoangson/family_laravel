@@ -7,7 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Contracts\Auth\Factory as Auth;
 
-class ownAuthenticate extends Authenticate{
+class FamilyAuthenticate extends Authenticate{
 
     /**
      * The authentication factory instance.
@@ -40,9 +40,8 @@ class ownAuthenticate extends Authenticate{
     public function handle($request, Closure $next, ...$guards)
     {
         if($request->header('secret-api') != env('SECRET-API')) {
-            throw new AuthenticationException('Unauthenticated.', $guards);
+            $this->authenticate($guards);
         }
-        throw new AuthenticationException('Unauthenticated.', $guards);
 
 
         return $next($request);
@@ -58,6 +57,10 @@ class ownAuthenticate extends Authenticate{
      */
     protected function authenticate(array $guards)
     {
+
+        throw new AuthenticationException('Unauthenticated.', $guards);
+
+
         if (empty($guards)) {
             return $this->auth->authenticate();
         }

@@ -221,16 +221,13 @@ Route::get('/upload', function () {
 })
      ->name('uploadg');
 //</editor-fold>
+Route::get('/chat', function(){
+    return view('tools/chat2');
+})
+     ->name('trellowebhook');
 
-// Route::post('/trellowebhook', function(){
-//     echo 123;
-// })
-//      ->name('trellowebhook');
 
 Route::post('/trellowebhook', 'TrelloController@webhook')
      ->name('trellowebhook');
 Route::get('/trellowebhook', 'TrelloController@webhook')
      ->name('trellowebhook');
-
-
-
